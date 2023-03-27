@@ -191,12 +191,12 @@ Let's explore the vegetation data.
 print(veg_data)
 
 # plot a map of the 36th vegetation class
-plot(veg_data[[36]])
+plot(veg_data[[32]])
 ```
 
 ```{r, eval = FALSE}
 # plot an interactive map of the 36th vegetation class
-mapview(veg_data[[36]])
+mapview(veg_data[[32]])
 ```
 
 ```{r}

@@ -98,7 +98,7 @@ Next, let's lock out highly degraded areas. Similar to before, this data is pres
 # make prioritization problem
 p4 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_min_set_objective() %>%
-      add_relative_targets(0.2) %>%
+      add_relative_targets(0.1) %>%
       add_locked_in_constraints("locked_in") %>%
       add_locked_out_constraints("locked_out") %>%
       add_binary_decisions() %>%
@@ -147,7 +147,7 @@ Plans for protected area systems should facilitate gene flow and dispersal betwe
 p5 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_min_set_objective() %>%
       add_boundary_penalties(penalty = 0.0005) %>%
-      add_relative_targets(0.2) %>%
+      add_relative_targets(0.1) %>%
       add_locked_in_constraints("locked_in") %>%
       add_locked_out_constraints("locked_out") %>%
       add_binary_decisions() %>%
@@ -198,7 +198,7 @@ print(budget)
 # make prioritization problem
 p6 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_max_features_objective(budget) %>%
-      add_relative_targets(0.2) %>%
+      add_relative_targets(0.1) %>%
       add_locked_in_constraints("locked_in") %>%
       add_locked_out_constraints("locked_out") %>%
       add_binary_decisions() %>%
@@ -214,7 +214,7 @@ s6 <- solve(p6)
 spplot(s6, "solution_1", col.regions = c("white", "darkgreen"), main = "s6")
 
 # calculate feature representation
-r6 <- feature_representation(p6, s6[, "solution_1"])
+r6 <- eval_feature_representation_summary(p6, s6[, "solution_1"])
 
 # calculate number of features with targets met
 sum(r6$relative_held >= 0.2, na.rm = TRUE)
@@ -244,7 +244,7 @@ hist(wts, main = "feature weights")
 # make prioritization problem with weights
 p7 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_max_features_objective(budget) %>%
-      add_relative_targets(0.2) %>%
+      add_relative_targets(0.1) %>%
       add_feature_weights(wts) %>%
       add_locked_in_constraints("locked_in") %>%
       add_locked_out_constraints("locked_out") %>%
@@ -261,7 +261,7 @@ s7 <- solve(p7)
 spplot(s7, "solution_1", col.regions = c("white", "darkgreen"), main = "s7")
 
 # calculate feature representation
-r7 <- feature_representation(p7, s7[, "solution_1"])
+r7 <- eval_feature_representation_summary(p7, s7[, "solution_1"])
 
 # calculate number of features with targets met
 sum(r7$relative_held >= 0.2, na.rm = TRUE)

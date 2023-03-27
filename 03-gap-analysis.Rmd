@@ -85,7 +85,7 @@ After calculating the total amount of each feature in the planning units (i.e. t
 pu_data$pa_status <- as.numeric(pu_data$locked_in)
 
 # calculate feature representation by protected areas
-repr_data <- feature_representation(p0, pu_data[, "pa_status"])
+repr_data <- eval_feature_representation_summary(p0, pu_data[, "pa_status"])
 
 # print feature representation data
 print(repr_data)
