@@ -23,7 +23,7 @@
 <meta name="author" content="Jeffrey O. Hanson" />
 
 
-<meta name="date" content="2023-03-27" />
+<meta name="date" content="2023-03-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -727,11 +727,11 @@ div.csl-indent {
 <pre><code>## [1] 1188.274</code></pre>
 <div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="spatial-prioritizations.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the cost of the second solution</span></span>
 <span id="cb378-2"><a href="spatial-prioritizations.html#cb378-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(s8<span class="sc">$</span>solution_2 <span class="sc">*</span> s8<span class="sc">$</span>cost)</span></code></pre></div>
-<pre><code>## [1] 1206.307</code></pre>
+<pre><code>## [1] 1198.589</code></pre>
 <div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="spatial-prioritizations.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the proportion of planning units with the same solution values</span></span>
 <span id="cb380-2"><a href="spatial-prioritizations.html#cb380-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in the first and second solutions</span></span>
 <span id="cb380-3"><a href="spatial-prioritizations.html#cb380-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(s8<span class="sc">$</span>solution_1 <span class="sc">==</span> s8<span class="sc">$</span>solution_2)</span></code></pre></div>
-<pre><code>## [1] 0.9631783</code></pre>
+<pre><code>## [1] 0.9728682</code></pre>
 <div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="spatial-prioritizations.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot first solution</span></span>
 <span id="cb382-2"><a href="spatial-prioritizations.html#cb382-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(s8, <span class="st">&quot;solution_1&quot;</span>, <span class="at">col.regions =</span> <span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>),</span>
 <span id="cb382-3"><a href="spatial-prioritizations.html#cb382-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">&quot;s8 (solution 1)&quot;</span>)</span></code></pre></div>
