@@ -243,40 +243,39 @@ div.csl-indent {
 <div id="feature-abundance" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Feature abundance<a href="gap-analysis.html#feature-abundance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now we will perform some preliminary calculations to explore the data. First, we will calculate how much of each vegetation feature occurs inside each planning unit (i.e. the abundance of the features). To achieve this, we will use the <code>problem</code> function to create an empty conservation planning problem that only contains the planning unit and biodiversity data. We will then use the <code>feature_abundances</code> function to calculate the total amount of each feature in each planning unit.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="gap-analysis.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create prioritizr problem with only the data</span></span>
-<span id="cb104-2"><a href="gap-analysis.html#cb104-2" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">problem</span>(pu_data, veg_data, <span class="at">cost_column =</span> <span class="st">&quot;cost&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="gap-analysis.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create prioritizr problem with only the data</span></span>
+<span id="cb83-2"><a href="gap-analysis.html#cb83-2" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">problem</span>(pu_data, veg_data, <span class="at">cost_column =</span> <span class="st">&quot;cost&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.</code></pre>
+## ℹ Use `sf::st_as_sf()` to convert data for future compatibility.</code></pre>
 <pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="gap-analysis.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print empty problem,</span></span>
-<span id="cb108-2"><a href="gap-analysis.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we can see that only the cost and feature data are defined</span></span>
-<span id="cb108-3"><a href="gap-analysis.html#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p0)</span></code></pre></div>
+## ℹ Use `terra::rast()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="gap-analysis.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print empty problem,</span></span>
+<span id="cb86-2"><a href="gap-analysis.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we can see that only the cost and feature data are defined</span></span>
+<span id="cb86-3"><a href="gap-analysis.html#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p0)</span></code></pre></div>
 <pre><code>## A conservation problem (&lt;ConservationProblem&gt;)</code></pre>
-<pre><code>## +@data</code></pre>
-<pre><code>## |+@features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot;, &quot;vegetation_5&quot; , ... (32 total)</code></pre>
-<pre><code>## |\@planning units:</code></pre>
-<pre><code>## | +@data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
-<pre><code>## | +@costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
-<pre><code>## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
-<pre><code>## | \@CRS:        WGS 84 / UTM zone 55S</code></pre>
-<pre><code>## \@formulation</code></pre>
-<pre><code>##  +@objective:   none specified</code></pre>
-<pre><code>##  +@penalties:   none specified</code></pre>
-<pre><code>##  +@targets:     none specified</code></pre>
-<pre><code>##  +@constraints: none specified</code></pre>
-<pre><code>##  +@decisions:   binary decision</code></pre>
-<pre><code>##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)</code></pre>
-<pre><code>##  \@solver:      gurobi solver (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)</code></pre>
-<pre><code>## # i Use `summary(...)` to see complete formulation.</code></pre>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="gap-analysis.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate amount of each feature in each planning unit</span></span>
-<span id="cb126-2"><a href="gap-analysis.html#cb126-2" aria-hidden="true" tabindex="-1"></a>abundance_data <span class="ot">&lt;-</span> <span class="fu">feature_abundances</span>(p0)</span>
-<span id="cb126-3"><a href="gap-analysis.html#cb126-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb126-4"><a href="gap-analysis.html#cb126-4" aria-hidden="true" tabindex="-1"></a><span class="co"># print abundance data</span></span>
-<span id="cb126-5"><a href="gap-analysis.html#cb126-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(abundance_data)</span></code></pre></div>
-<pre><code>## # A tibble: 32 x 3
+<pre><code>## ├•data</code></pre>
+<pre><code>## │├•features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot; , … (32 total)</code></pre>
+<pre><code>## │└•planning units:</code></pre>
+<pre><code>## │ ├•data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
+<pre><code>## │ ├•costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
+<pre><code>## │ ├•extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
+<pre><code>## │ └•CRS:        WGS 84 / UTM zone 55S</code></pre>
+<pre><code>## ├•formulation</code></pre>
+<pre><code>## │├•objective:   none specified</code></pre>
+<pre><code>## │├•penalties:   none specified</code></pre>
+<pre><code>## │├•targets:     none specified</code></pre>
+<pre><code>## │├•constraints: none specified</code></pre>
+<pre><code>## │└•decisions:   binary decision</code></pre>
+<pre><code>## └•optimization</code></pre>
+<pre><code>##  ├•portfolio:   shuffle portfolio (`number_solutions` = 1, …)</code></pre>
+<pre><code>##  └•solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, …)</code></pre>
+<pre><code>## # ℹ Use `summary(...)` to see complete formulation.</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="gap-analysis.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate amount of each feature in each planning unit</span></span>
+<span id="cb105-2"><a href="gap-analysis.html#cb105-2" aria-hidden="true" tabindex="-1"></a>abundance_data <span class="ot">&lt;-</span> <span class="fu">feature_abundances</span>(p0)</span>
+<span id="cb105-3"><a href="gap-analysis.html#cb105-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-4"><a href="gap-analysis.html#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="co"># print abundance data</span></span>
+<span id="cb105-5"><a href="gap-analysis.html#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(abundance_data)</span></code></pre></div>
+<pre><code>## # A tibble: 32 × 3
 ##    feature       absolute_abundance relative_abundance
 ##    &lt;chr&gt;                      &lt;dbl&gt;              &lt;dbl&gt;
 ##  1 vegetation_1                16.0                  1
@@ -289,15 +288,15 @@ div.csl-indent {
 ##  8 vegetation_8                14.0                  1
 ##  9 vegetation_9                18.0                  1
 ## 10 vegetation_10               20.0                  1
-## # ... with 22 more rows</code></pre>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="gap-analysis.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note that only the first ten rows are printed,</span></span>
-<span id="cb128-2"><a href="gap-analysis.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this is because the abundance_data object is a tibble (i.e. tbl_df) object</span></span>
-<span id="cb128-3"><a href="gap-analysis.html#cb128-3" aria-hidden="true" tabindex="-1"></a><span class="co"># and not a standard data.frame object</span></span>
-<span id="cb128-4"><a href="gap-analysis.html#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">class</span>(abundance_data))</span></code></pre></div>
+## # ℹ 22 more rows</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="gap-analysis.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note that only the first ten rows are printed,</span></span>
+<span id="cb107-2"><a href="gap-analysis.html#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this is because the abundance_data object is a tibble (i.e. tbl_df) object</span></span>
+<span id="cb107-3"><a href="gap-analysis.html#cb107-3" aria-hidden="true" tabindex="-1"></a><span class="co"># and not a standard data.frame object</span></span>
+<span id="cb107-4"><a href="gap-analysis.html#cb107-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">class</span>(abundance_data))</span></code></pre></div>
 <pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="gap-analysis.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we can print all of the rows in abundance_data like this</span></span>
-<span id="cb130-2"><a href="gap-analysis.html#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(abundance_data, <span class="at">n =</span> <span class="cn">Inf</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 32 x 3
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="gap-analysis.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we can print all of the rows in abundance_data like this</span></span>
+<span id="cb109-2"><a href="gap-analysis.html#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(abundance_data, <span class="at">n =</span> <span class="cn">Inf</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 32 × 3
 ##    feature       absolute_abundance relative_abundance
 ##    &lt;chr&gt;                      &lt;dbl&gt;              &lt;dbl&gt;
 ##  1 vegetation_1                16.0                  1
@@ -333,15 +332,15 @@ div.csl-indent {
 ## 31 vegetation_31               60.0                  1
 ## 32 vegetation_32               32.0                  1</code></pre>
 <p>The <code>abundance_data</code> object contains three columns. The <code>feature</code> column contains the name of each feature (derived from <code>names(veg_data</code>)), the <code>absolute_abundance</code> column contains the total amount of each feature in all the planning units, and the <code>relative_abundance</code> column contains the total amount of each feature in the planning units expressed as a proportion of the total amount in the underlying raster data. Since all the raster cells containing vegetation overlap with the planning units, all of the values in the <code>relative_abundance</code> column are equal to one (meaning 100%)—except for the 61st feature which has a value on <code>NaN</code> because it does not occur in the study area at all (i.e. all of its raster values are zeros). Now let’s add a new column with the feature abundances expressed in area units (i.e. km<sup>2</sup>).</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="gap-analysis.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add new column with feature abundances in km^2</span></span>
-<span id="cb132-2"><a href="gap-analysis.html#cb132-2" aria-hidden="true" tabindex="-1"></a>abundance_data<span class="sc">$</span>absolute_abundance_km2 <span class="ot">&lt;-</span></span>
-<span id="cb132-3"><a href="gap-analysis.html#cb132-3" aria-hidden="true" tabindex="-1"></a>  (abundance_data<span class="sc">$</span>absolute_abundance <span class="sc">*</span> <span class="fu">prod</span>(<span class="fu">res</span>(veg_data))) <span class="sc">%&gt;%</span></span>
-<span id="cb132-4"><a href="gap-analysis.html#cb132-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_units</span>(m<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb132-5"><a href="gap-analysis.html#cb132-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_units</span>(km<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb132-6"><a href="gap-analysis.html#cb132-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb132-7"><a href="gap-analysis.html#cb132-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print abundance data</span></span>
-<span id="cb132-8"><a href="gap-analysis.html#cb132-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(abundance_data)</span></code></pre></div>
-<pre><code>## # A tibble: 32 x 4
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="gap-analysis.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add new column with feature abundances in km^2</span></span>
+<span id="cb111-2"><a href="gap-analysis.html#cb111-2" aria-hidden="true" tabindex="-1"></a>abundance_data<span class="sc">$</span>absolute_abundance_km2 <span class="ot">&lt;-</span></span>
+<span id="cb111-3"><a href="gap-analysis.html#cb111-3" aria-hidden="true" tabindex="-1"></a>  (abundance_data<span class="sc">$</span>absolute_abundance <span class="sc">*</span> <span class="fu">prod</span>(<span class="fu">res</span>(veg_data))) <span class="sc">%&gt;%</span></span>
+<span id="cb111-4"><a href="gap-analysis.html#cb111-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_units</span>(m<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb111-5"><a href="gap-analysis.html#cb111-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_units</span>(km<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb111-6"><a href="gap-analysis.html#cb111-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-7"><a href="gap-analysis.html#cb111-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print abundance data</span></span>
+<span id="cb111-8"><a href="gap-analysis.html#cb111-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(abundance_data)</span></code></pre></div>
+<pre><code>## # A tibble: 32 × 4
 ##    feature       absolute_abundance relative_abundance absolute_abundance_km2
 ##    &lt;chr&gt;                      &lt;dbl&gt;              &lt;dbl&gt;                 [km^2]
 ##  1 vegetation_1                16.0                  1                   15.8
@@ -354,19 +353,19 @@ div.csl-indent {
 ##  8 vegetation_8                14.0                  1                   13.9
 ##  9 vegetation_9                18.0                  1                   17.8
 ## 10 vegetation_10               20.0                  1                   19.7
-## # ... with 22 more rows</code></pre>
+## # ℹ 22 more rows</code></pre>
 <p>Now let’s explore the abundance data.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="gap-analysis.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the average abundance of the features</span></span>
-<span id="cb134-2"><a href="gap-analysis.html#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(abundance_data<span class="sc">$</span>absolute_abundance_km2)</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="gap-analysis.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the average abundance of the features</span></span>
+<span id="cb113-2"><a href="gap-analysis.html#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(abundance_data<span class="sc">$</span>absolute_abundance_km2)</span></code></pre></div>
 <pre><code>## 86.82948 [km^2]</code></pre>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="gap-analysis.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot histogram of the features&#39; abundances</span></span>
-<span id="cb136-2"><a href="gap-analysis.html#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(abundance_data<span class="sc">$</span>absolute_abundance_km2, <span class="at">main =</span> <span class="st">&quot;Feature abundances&quot;</span>)</span></code></pre></div>
-<p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="gap-analysis.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find the abundance of the feature with the largest abundance</span></span>
-<span id="cb137-2"><a href="gap-analysis.html#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(abundance_data<span class="sc">$</span>absolute_abundance_km2)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="gap-analysis.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot histogram of the features&#39; abundances</span></span>
+<span id="cb115-2"><a href="gap-analysis.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(abundance_data<span class="sc">$</span>absolute_abundance_km2, <span class="at">main =</span> <span class="st">&quot;Feature abundances&quot;</span>)</span></code></pre></div>
+<p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="gap-analysis.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find the abundance of the feature with the largest abundance</span></span>
+<span id="cb116-2"><a href="gap-analysis.html#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(abundance_data<span class="sc">$</span>absolute_abundance_km2)</span></code></pre></div>
 <pre><code>## 737.982 [km^2]</code></pre>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="gap-analysis.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find the name of the feature with the largest abundance</span></span>
-<span id="cb139-2"><a href="gap-analysis.html#cb139-2" aria-hidden="true" tabindex="-1"></a>abundance_data<span class="sc">$</span>feature[<span class="fu">which.max</span>(abundance_data<span class="sc">$</span>absolute_abundance_km2)]</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="gap-analysis.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find the name of the feature with the largest abundance</span></span>
+<span id="cb118-2"><a href="gap-analysis.html#cb118-2" aria-hidden="true" tabindex="-1"></a>abundance_data<span class="sc">$</span>feature[<span class="fu">which.max</span>(abundance_data<span class="sc">$</span>absolute_abundance_km2)]</span></code></pre></div>
 <pre><code>## [1] &quot;vegetation_12&quot;</code></pre>
 <p>Now, try to answer the following questions.</p>
 
@@ -383,17 +382,17 @@ div.csl-indent {
 <div id="feature-representation-by-protected-areas" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Feature representation by protected areas<a href="gap-analysis.html#feature-representation-by-protected-areas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>After calculating the total amount of each feature in the planning units (i.e. the features’ abundances), we will now calculate the amount of each feature in the planning units that are covered by protected areas (i.e. feature representation by protected areas). We can complete this task using the <code>feature_representation</code> function. This function requires (i) a conservation problem object with the planning unit and biodiversity data and also (ii) an object representing a solution to the problem (i.e an object in the same format as the planning unit data with values indicating if the planning units are selected or not).</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="gap-analysis.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create column in planning unit data with binary values (zeros and ones)</span></span>
-<span id="cb141-2"><a href="gap-analysis.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="co"># indicating if a planning unit is covered by protected areas or not</span></span>
-<span id="cb141-3"><a href="gap-analysis.html#cb141-3" aria-hidden="true" tabindex="-1"></a>pu_data<span class="sc">$</span>pa_status <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(pu_data<span class="sc">$</span>locked_in)</span>
-<span id="cb141-4"><a href="gap-analysis.html#cb141-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb141-5"><a href="gap-analysis.html#cb141-5" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate feature representation by protected areas</span></span>
-<span id="cb141-6"><a href="gap-analysis.html#cb141-6" aria-hidden="true" tabindex="-1"></a>repr_data <span class="ot">&lt;-</span> <span class="fu">eval_feature_representation_summary</span>(p0, pu_data[, <span class="st">&quot;pa_status&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="gap-analysis.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create column in planning unit data with binary values (zeros and ones)</span></span>
+<span id="cb120-2"><a href="gap-analysis.html#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="co"># indicating if a planning unit is covered by protected areas or not</span></span>
+<span id="cb120-3"><a href="gap-analysis.html#cb120-3" aria-hidden="true" tabindex="-1"></a>pu_data<span class="sc">$</span>pa_status <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(pu_data<span class="sc">$</span>locked_in)</span>
+<span id="cb120-4"><a href="gap-analysis.html#cb120-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-5"><a href="gap-analysis.html#cb120-5" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate feature representation by protected areas</span></span>
+<span id="cb120-6"><a href="gap-analysis.html#cb120-6" aria-hidden="true" tabindex="-1"></a>repr_data <span class="ot">&lt;-</span> <span class="fu">eval_feature_representation_summary</span>(p0, pu_data[, <span class="st">&quot;pa_status&quot;</span>])</span></code></pre></div>
 <pre><code>## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.</code></pre>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="gap-analysis.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print feature representation data</span></span>
-<span id="cb143-2"><a href="gap-analysis.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(repr_data)</span></code></pre></div>
-<pre><code>## # A tibble: 32 x 5
+## ℹ Use `sf::st_as_sf()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="gap-analysis.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print feature representation data</span></span>
+<span id="cb122-2"><a href="gap-analysis.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(repr_data)</span></code></pre></div>
+<pre><code>## # A tibble: 32 × 5
 ##    summary feature       total_amount absolute_held relative_held
 ##    &lt;chr&gt;   &lt;chr&gt;                &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
 ##  1 overall vegetation_1          16.0         0            0     
@@ -406,30 +405,30 @@ div.csl-indent {
 ##  8 overall vegetation_8          14.0         0            0     
 ##  9 overall vegetation_9          18.0         0.846        0.0470
 ## 10 overall vegetation_10         20.0         0            0     
-## # ... with 22 more rows</code></pre>
+## # ℹ 22 more rows</code></pre>
 <p>Similar to the abundance data before, the <code>repr_data</code> object contains three columns. The <code>feature</code> column contains the name of each feature, the <code>absolute_held</code> column shows the total amount of each feature held in the solution (i.e. the planning units covered by protected areas), and the <code>relative_held</code> column shows the proportion of each feature held in the solution (i.e. the proportion of each feature’s spatial distribution held in protected areas). Since the <code>absolute_held</code> values correspond to the number of grid cells in the <code>veg_data</code> object with overlap with protected areas, let’s convert them to area units (i.e. km<sup>2</sup>) so we can report them.</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="gap-analysis.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add new column with the areas represented in km^2</span></span>
-<span id="cb145-2"><a href="gap-analysis.html#cb145-2" aria-hidden="true" tabindex="-1"></a>repr_data<span class="sc">$</span>absolute_held_km2 <span class="ot">&lt;-</span></span>
-<span id="cb145-3"><a href="gap-analysis.html#cb145-3" aria-hidden="true" tabindex="-1"></a>  (repr_data<span class="sc">$</span>absolute_held <span class="sc">*</span> <span class="fu">prod</span>(<span class="fu">res</span>(veg_data))) <span class="sc">%&gt;%</span></span>
-<span id="cb145-4"><a href="gap-analysis.html#cb145-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_units</span>(m<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb145-5"><a href="gap-analysis.html#cb145-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_units</span>(km<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb145-6"><a href="gap-analysis.html#cb145-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb145-7"><a href="gap-analysis.html#cb145-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print representation data</span></span>
-<span id="cb145-8"><a href="gap-analysis.html#cb145-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(repr_data)</span></code></pre></div>
-<pre><code>## # A tibble: 32 x 6
-##    summary feature       total_amount absolute_held relative_held absolute_held_km2
-##    &lt;chr&gt;   &lt;chr&gt;                &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;            [km^2]
-##  1 overall vegetation_1          16.0         0            0                  0    
-##  2 overall vegetation_2          14.3         0            0                  0    
-##  3 overall vegetation_3          10.4         0            0                  0    
-##  4 overall vegetation_4          17.8         0            0                  0    
-##  5 overall vegetation_5          13.0         0            0                  0    
-##  6 overall vegetation_6          14.3         0            0                  0    
-##  7 overall vegetation_7          20.0         0            0                  0    
-##  8 overall vegetation_8          14.0         0            0                  0    
-##  9 overall vegetation_9          18.0         0.846        0.0470             0.834
-## 10 overall vegetation_10         20.0         0            0                  0    
-## # ... with 22 more rows</code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="gap-analysis.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add new column with the areas represented in km^2</span></span>
+<span id="cb124-2"><a href="gap-analysis.html#cb124-2" aria-hidden="true" tabindex="-1"></a>repr_data<span class="sc">$</span>absolute_held_km2 <span class="ot">&lt;-</span></span>
+<span id="cb124-3"><a href="gap-analysis.html#cb124-3" aria-hidden="true" tabindex="-1"></a>  (repr_data<span class="sc">$</span>absolute_held <span class="sc">*</span> <span class="fu">prod</span>(<span class="fu">res</span>(veg_data))) <span class="sc">%&gt;%</span></span>
+<span id="cb124-4"><a href="gap-analysis.html#cb124-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_units</span>(m<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb124-5"><a href="gap-analysis.html#cb124-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_units</span>(km<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb124-6"><a href="gap-analysis.html#cb124-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-7"><a href="gap-analysis.html#cb124-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print representation data</span></span>
+<span id="cb124-8"><a href="gap-analysis.html#cb124-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(repr_data)</span></code></pre></div>
+<pre><code>## # A tibble: 32 × 6
+##    summary feature   total_amount absolute_held relative_held absolute_held_km2
+##    &lt;chr&gt;   &lt;chr&gt;            &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;            [km^2]
+##  1 overall vegetati…         16.0         0            0                  0    
+##  2 overall vegetati…         14.3         0            0                  0    
+##  3 overall vegetati…         10.4         0            0                  0    
+##  4 overall vegetati…         17.8         0            0                  0    
+##  5 overall vegetati…         13.0         0            0                  0    
+##  6 overall vegetati…         14.3         0            0                  0    
+##  7 overall vegetati…         20.0         0            0                  0    
+##  8 overall vegetati…         14.0         0            0                  0    
+##  9 overall vegetati…         18.0         0.846        0.0470             0.834
+## 10 overall vegetati…         20.0         0            0                  0    
+## # ℹ 22 more rows</code></pre>
 <p>Now let’s investigate how well the species are represented.</p>
 
 <div class="rmdquestion">
