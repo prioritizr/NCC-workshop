@@ -23,7 +23,7 @@ description: "Manual for the prioritizr module of the Spatial Conservation Prior
 cat("<img src=\"cover.png\" width=\"250\" height=\"250\" alt=\"Cover image\" align=\"right\" style=\"margin: 0 1em 0 1em\" />\n")
 ```
 
-Here you will find the manual for the prioritizr module of the [Automation & Technical Skills GIS Group Meeting](https://prioritizr.github.io/NCC-workshop/). **Before you arrive at the workshop, you should make sure that you have correctly [set up your computer for the workshop][Setting up your computer] and you have [downloaded the data from here](https://github.com/prioritizr/NCC-workshop/raw/main/data.zip).**
+Test! Here you will find the manual for the prioritizr module of the [Automation & Technical Skills GIS Group Meeting](https://prioritizr.github.io/NCC-workshop/). **Before you arrive at the workshop, you should make sure that you have correctly [set up your computer for the workshop][Setting up your computer] and you have [downloaded the data from here](https://github.com/prioritizr/NCC-workshop/raw/main/data.zip).**
 
 ```{r, include = FALSE}
 # set knitr options
