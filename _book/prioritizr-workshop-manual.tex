@@ -1,56 +1,45 @@
-% Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
 \PassOptionsToPackage{hyphens}{url}
-\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 %
-\documentclass[
-  12pt,
-]{book}
-\title{PRIORITIZR WORKSHOP MANUAL}
-\author{Jeffrey O. Hanson}
-\date{2023-03-27}
-
-\usepackage{amsmath,amssymb}
+\documentclass[12pt,]{book}
 \usepackage{lmodern}
-\usepackage{iftex}
-\ifPDFTeX
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provide euro and other symbols
-\else % if luatex or xetex
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
   \usepackage{unicode-math}
-  \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
-% Use upquote if available, for straight quotes in verbatim environments
+% use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\IfFileExists{microtype.sty}{% use microtype if available
-  \usepackage[]{microtype}
-  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\makeatletter
-\@ifundefined{KOMAClassName}{% if non-KOMA class
-  \IfFileExists{parskip.sty}{%
-    \usepackage{parskip}
-  }{% else
-    \setlength{\parindent}{0pt}
-    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
-}{% if KOMA class
-  \KOMAoptions{parskip=half}}
-\makeatother
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{hyperref}
 \hypersetup{
-  pdftitle={PRIORITIZR WORKSHOP MANUAL},
-  pdfauthor={Jeffrey O. Hanson},
-  colorlinks=true,
-  linkcolor={Maroon},
-  filecolor={Maroon},
-  citecolor={Blue},
-  urlcolor={blue},
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
+            pdftitle={PRIORITIZR WORKSHOP MANUAL},
+            pdfauthor={Jeffrey O. Hanson},
+            colorlinks=true,
+            linkcolor=Maroon,
+            filecolor=Maroon,
+            citecolor=Blue,
+            urlcolor=blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
 \usepackage[left=2.54cm, right=2.54cm, top=2.54cm, bottom=2.54cm]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -92,17 +81,10 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{longtable,booktabs,array}
-\usepackage{calc} % for calculating minipage widths
-% Correct order of tables after \paragraph or \subparagraph
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
-\makeatother
-% Allow footnotes in longtable head/foot
-\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
-\makesavenoteenv{longtable}
-\usepackage{graphicx}
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+\usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -111,14 +93,25 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-% Set default figure placement to htbp
-\makeatletter
-\def\fps@figure{htbp}
-\makeatother
-\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
 % load packages
 \usepackage{caption}
 \usepackage{float}
@@ -222,11 +215,12 @@
 \newenvironment{rmdwarning}
   {\begin{rmdblock}{warning}}
   {\end{rmdblock}}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 \usepackage[]{natbib}
 \bibliographystyle{plainnat}
+
+\title{PRIORITIZR WORKSHOP MANUAL}
+\author{Jeffrey O. Hanson}
+\date{2023-03-29}
 
 \begin{document}
 \maketitle
@@ -254,12 +248,12 @@ You are not alone in this workshop. If you are having trouble, please put your h
 \hypertarget{setup}{%
 \section{Setting up your computer}\label{setup}}
 
-You will need to have both \href{https://www.r-project.org}{R} and \href{https://www.rstudio.com/}{RStudio} installed on your computer to complete this workshop. Although it is not imperative that you have the latest version of RStudio installed, \textbf{you will need the latest version of R installed (i.e.~version 4.1.1)}. Please note that you might need administrative permissions to install these programs. After installing them, you will also need to install some R packages too.
+You will need to have both \href{https://www.r-project.org}{R} and \href{https://www.rstudio.com/}{RStudio} installed on your computer to complete this workshop. Although it is not imperative that you have the latest version of RStudio installed, \textbf{you will need the latest version of R installed (i.e.~version 4.2.3)}. Please note that you might need administrative permissions to install these programs. After installing them, you will also need to install some R packages too.
 
 \hypertarget{r}{%
 \subsection{R}\label{r}}
 
-The \href{https://www.r-project.org}{R statistical computing environment} can be downloaded from the Comprehensive R Archive Network (CRAN). Specifically, you can download the latest version of R (version 4.1.1) from here: \url{https://cloud.r-project.org}. Please note that you will need to download the correct file for your operating system (i.e.~Linux, Mac OSX, Windows).
+The \href{https://www.r-project.org}{R statistical computing environment} can be downloaded from the Comprehensive R Archive Network (CRAN). Specifically, you can download the latest version of R (version 4.2.3) from here: \url{https://cloud.r-project.org}. Please note that you will need to download the correct file for your operating system (i.e.~Linux, Mac OSX, Windows).
 
 \hypertarget{rstudio}{%
 \subsection{RStudio}\label{rstudio}}
@@ -273,17 +267,17 @@ You can type R code into the \emph{Console} and press the enter key to run code.
 \hypertarget{r-packages}{%
 \subsection{R packages}\label{r-packages}}
 
-An R package is a collection of R code and documentation that can be installed to enhance the standard R environment with additional functionality. Currently, there are over fifteen thousand R packages available on CRAN. Each of these R packages are developed to perform a specific task, such as \href{https://cran.r-project.org/web/packages/readxl/index.html}{reading Excel spreadsheets}, \href{https://cran.r-project.org/web/packages/MODIStsp/index.html}{downloading satellite imagery data}, \href{https://cran.r-project.org/web/packages/wdpar/index.html}{downloading and cleaning protected area data}, or \href{https://cran.r-project.org/web/packages/ENMeval/index.html}{fitting environmental niche models}. In fact, R has such a diverse ecosystem of R packages, that the question is almost always not ``can I use R to \ldots?'' but ``what R package can I use to \ldots?''. During this workshop, we will use several R packages. To install these R packages, please enter the code below in the \emph{Console} part of the RStudio interface and press enter. Note that you will require an Internet connection and the installation process may take some time to complete.
+An R package is a collection of R code and documentation that can be installed to enhance the standard R environment with additional functionality. Currently, there are over fifteen thousand R packages available on CRAN. Each of these R packages are developed to perform a specific task, such as \href{https://cran.r-project.org/web/packages/readxl/index.html}{reading Excel spreadsheets}, \href{https://cran.r-project.org/web/packages/MODIStsp/index.html}{downloading satellite imagery data}, \href{https://cran.r-project.org/web/packages/wdpar/index.html}{downloading and cleaning protected area data}, or \href{https://cran.r-project.org/web/packages/ENMeval/index.html}{fitting environmental niche models}. In fact, R has such a diverse ecosystem of R packages, that the question is almost always not ``can I use R to \ldots{}?'' but ``what R package can I use to \ldots{}?''. During this workshop, we will use several R packages. To install these R packages, please enter the code below in the \emph{Console} part of the RStudio interface and press enter. Note that you will require an Internet connection and the installation process may take some time to complete.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"sf"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"sp"}\NormalTok{, }\StringTok{"rgeos"}\NormalTok{, }\StringTok{"rgdal"}\NormalTok{, }\StringTok{"raster"}\NormalTok{,}
+\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"sf"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"sp"}\NormalTok{, }\StringTok{"rgeos"}\NormalTok{, }\StringTok{"rgdal"}\NormalTok{, }\StringTok{"raster"}\NormalTok{,}
                    \StringTok{"units"}\NormalTok{, }\StringTok{"prioritizr"}\NormalTok{, }\StringTok{"prioritizrdata"}\NormalTok{, }\StringTok{"Rsymphony"}\NormalTok{,}
                    \StringTok{"mapview"}\NormalTok{, }\StringTok{"assertthat"}\NormalTok{, }\StringTok{"velox"}\NormalTok{, }\StringTok{"remotes"}\NormalTok{,}
                    \StringTok{"gridExtra"}\NormalTok{))}
 
-\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(remotes)) }\FunctionTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
-\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_bioc}\NormalTok{(}\StringTok{"lpsymphony"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{require}\NormalTok{(remotes)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install_bioc}\NormalTok{(}\StringTok{"lpsymphony"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -310,9 +304,9 @@ You can also make notes and write your answers to the workshop questions inside 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# this is a comment and R will ignore this text if you run it}
-\CommentTok{\# R will run the code below because it does not start with a \# symbol}
-\FunctionTok{print}\NormalTok{(}\StringTok{"this is not a comment"}\NormalTok{)}
+\CommentTok{# this is a comment and R will ignore this text if you run it}
+\CommentTok{# R will run the code below because it does not start with a # symbol}
+\KeywordTok{print}\NormalTok{(}\StringTok{"this is not a comment"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -322,8 +316,8 @@ You can also make notes and write your answers to the workshop questions inside 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# you can also add comments to the same line of R code too}
-\FunctionTok{print}\NormalTok{(}\StringTok{"this is also not a comment"}\NormalTok{) }\CommentTok{\# but this is a comment}
+\CommentTok{# you can also add comments to the same line of R code too}
+\KeywordTok{print}\NormalTok{(}\StringTok{"this is also not a comment"}\NormalTok{) }\CommentTok{# but this is a comment}
 \end{Highlighting}
 \end{Shaded}
 
@@ -340,17 +334,27 @@ Now we will set up our R session for the workshop. Specifically, enter the follo
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# load packages}
-\FunctionTok{library}\NormalTok{(tidyverse)}
-\FunctionTok{library}\NormalTok{(prioritizr)}
-\FunctionTok{library}\NormalTok{(rgdal)}
-\FunctionTok{library}\NormalTok{(raster)}
-\FunctionTok{library}\NormalTok{(rgeos)}
-\FunctionTok{library}\NormalTok{(mapview)}
-\FunctionTok{library}\NormalTok{(units)}
-\FunctionTok{library}\NormalTok{(scales)}
-\FunctionTok{library}\NormalTok{(assertthat)}
-\FunctionTok{library}\NormalTok{(gridExtra)}
+\CommentTok{# load packages}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in system("timedatectl", intern = TRUE): running command 'timedatectl'
+## had status 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(prioritizr)}
+\KeywordTok{library}\NormalTok{(rgdal)}
+\KeywordTok{library}\NormalTok{(raster)}
+\KeywordTok{library}\NormalTok{(rgeos)}
+\KeywordTok{library}\NormalTok{(mapview)}
+\KeywordTok{library}\NormalTok{(units)}
+\KeywordTok{library}\NormalTok{(scales)}
+\KeywordTok{library}\NormalTok{(assertthat)}
+\KeywordTok{library}\NormalTok{(gridExtra)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -364,7 +368,7 @@ Now navigate to the folder where you unzipped the data and select \emph{Open}. Y
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{file.exists}\NormalTok{(}\StringTok{"data/pu.shp"}\NormalTok{)}
+\KeywordTok{file.exists}\NormalTok{(}\StringTok{"data/pu.shp"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -379,8 +383,8 @@ Now that we have downloaded the dataset, we will need to import it into our R se
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# import planning unit data}
-\NormalTok{pu\_data }\OtherTok{\textless{}{-}} \FunctionTok{readOGR}\NormalTok{(}\StringTok{"data/pu.shp"}\NormalTok{)}
+\CommentTok{# import planning unit data}
+\NormalTok{pu_data <-}\StringTok{ }\KeywordTok{readOGR}\NormalTok{(}\StringTok{"data/pu.shp"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -414,19 +418,19 @@ Now that we have downloaded the dataset, we will need to import it into our R se
 
 \begin{verbatim}
 ## OGR data source with driver: ESRI Shapefile 
-## Source: "D:\Work\NCC\Training\prioritizr_workshop\NCC-workshop\data\pu.shp", layer: "pu"
+## Source: "/mnt/d/Work/NCC/Training/prioritizr_workshop/NCC-workshop/data/pu.shp", layer: "pu"
 ## with 516 features
 ## It has 5 fields
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# format columns in planning unit data}
-\NormalTok{pu\_data}\SpecialCharTok{$}\NormalTok{locked\_in }\OtherTok{\textless{}{-}} \FunctionTok{as.logical}\NormalTok{(pu\_data}\SpecialCharTok{$}\NormalTok{locked\_in)}
-\NormalTok{pu\_data}\SpecialCharTok{$}\NormalTok{locked\_out }\OtherTok{\textless{}{-}} \FunctionTok{as.logical}\NormalTok{(pu\_data}\SpecialCharTok{$}\NormalTok{locked\_out)}
+\CommentTok{# format columns in planning unit data}
+\NormalTok{pu_data}\OperatorTok{$}\NormalTok{locked_in <-}\StringTok{ }\KeywordTok{as.logical}\NormalTok{(pu_data}\OperatorTok{$}\NormalTok{locked_in)}
+\NormalTok{pu_data}\OperatorTok{$}\NormalTok{locked_out <-}\StringTok{ }\KeywordTok{as.logical}\NormalTok{(pu_data}\OperatorTok{$}\NormalTok{locked_out)}
 
-\CommentTok{\# import vegetation data}
-\NormalTok{veg\_data }\OtherTok{\textless{}{-}} \FunctionTok{stack}\NormalTok{(}\StringTok{"data/vegetation.tif"}\NormalTok{)}
+\CommentTok{# import vegetation data}
+\NormalTok{veg_data <-}\StringTok{ }\KeywordTok{stack}\NormalTok{(}\StringTok{"data/vegetation.tif"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -453,8 +457,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print a short summary of the data}
-\FunctionTok{print}\NormalTok{(pu\_data)}
+\CommentTok{# print a short summary of the data}
+\KeywordTok{print}\NormalTok{(pu_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -471,8 +475,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# plot the planning unit data}
-\FunctionTok{plot}\NormalTok{(pu\_data)}
+\CommentTok{# plot the planning unit data}
+\KeywordTok{plot}\NormalTok{(pu_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -480,15 +484,15 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# plot an interactive map of the planning unit data}
-\FunctionTok{mapview}\NormalTok{(pu\_data)}
+\CommentTok{# plot an interactive map of the planning unit data}
+\KeywordTok{mapview}\NormalTok{(pu_data)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print the structure of object}
-\FunctionTok{str}\NormalTok{(pu\_data, }\AttributeTok{max.level =} \DecValTok{2}\NormalTok{)}
+\CommentTok{# print the structure of object}
+\KeywordTok{str}\NormalTok{(pu_data, }\DataTypeTok{max.level =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -505,8 +509,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print the class of the object}
-\FunctionTok{class}\NormalTok{(pu\_data)}
+\CommentTok{# print the class of the object}
+\KeywordTok{class}\NormalTok{(pu_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -518,8 +522,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print the slots of the object}
-\FunctionTok{slotNames}\NormalTok{(pu\_data)}
+\CommentTok{# print the slots of the object}
+\KeywordTok{slotNames}\NormalTok{(pu_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -529,8 +533,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print the geometry for the 80th planning unit}
-\NormalTok{pu\_data}\SpecialCharTok{@}\NormalTok{polygons[[}\DecValTok{80}\NormalTok{]]}
+\CommentTok{# print the geometry for the 80th planning unit}
+\NormalTok{pu_data}\OperatorTok{@}\NormalTok{polygons[[}\DecValTok{80}\NormalTok{]]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -578,8 +582,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print the coordinate reference system}
-\FunctionTok{print}\NormalTok{(pu\_data}\SpecialCharTok{@}\NormalTok{proj4string)}
+\CommentTok{# print the coordinate reference system}
+\KeywordTok{print}\NormalTok{(pu_data}\OperatorTok{@}\NormalTok{proj4string)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -626,8 +630,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print number of planning units (geometries) in the data}
-\FunctionTok{nrow}\NormalTok{(pu\_data)}
+\CommentTok{# print number of planning units (geometries) in the data}
+\KeywordTok{nrow}\NormalTok{(pu_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -637,8 +641,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print the first six rows in the attribute data}
-\FunctionTok{head}\NormalTok{(pu\_data}\SpecialCharTok{@}\NormalTok{data)}
+\CommentTok{# print the first six rows in the attribute data}
+\KeywordTok{head}\NormalTok{(pu_data}\OperatorTok{@}\NormalTok{data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -654,8 +658,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print the first six values in the cost column of the attribute data}
-\FunctionTok{head}\NormalTok{(pu\_data}\SpecialCharTok{$}\NormalTok{cost)}
+\CommentTok{# print the first six values in the cost column of the attribute data}
+\KeywordTok{head}\NormalTok{(pu_data}\OperatorTok{$}\NormalTok{cost)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -665,8 +669,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print the highest cost value}
-\FunctionTok{max}\NormalTok{(pu\_data}\SpecialCharTok{$}\NormalTok{cost)}
+\CommentTok{# print the highest cost value}
+\KeywordTok{max}\NormalTok{(pu_data}\OperatorTok{$}\NormalTok{cost)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -676,8 +680,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print the smallest cost value}
-\FunctionTok{min}\NormalTok{(pu\_data}\SpecialCharTok{$}\NormalTok{cost)}
+\CommentTok{# print the smallest cost value}
+\KeywordTok{min}\NormalTok{(pu_data}\OperatorTok{$}\NormalTok{cost)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -687,8 +691,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print average cost value}
-\FunctionTok{mean}\NormalTok{(pu\_data}\SpecialCharTok{$}\NormalTok{cost)}
+\CommentTok{# print average cost value}
+\KeywordTok{mean}\NormalTok{(pu_data}\OperatorTok{$}\NormalTok{cost)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -698,8 +702,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# plot a map of the planning unit cost data}
-\FunctionTok{spplot}\NormalTok{(pu\_data, }\StringTok{"cost"}\NormalTok{)}
+\CommentTok{# plot a map of the planning unit cost data}
+\KeywordTok{spplot}\NormalTok{(pu_data, }\StringTok{"cost"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -707,8 +711,8 @@ The planning unit data contains spatial data describing the geometry for each pl
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# plot an interactive map of the planning unit cost data}
-\FunctionTok{mapview}\NormalTok{(pu\_data, }\AttributeTok{zcol =} \StringTok{"cost"}\NormalTok{)}
+\CommentTok{# plot an interactive map of the planning unit cost data}
+\KeywordTok{mapview}\NormalTok{(pu_data, }\DataTypeTok{zcol =} \StringTok{"cost"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -748,7 +752,7 @@ Now, you can try and answer some questions about the planning unit data.
 \hypertarget{vegetation-data}{%
 \section{Vegetation data}\label{vegetation-data}}
 
-The vegetation data describes the spatial distribution of 62 vegetation classes in the study area. This data is in a raster format and so the data are organized using a square grid comprising square grid cells that are each the same size. In our case, the raster data contains multiple layers (also called ``bands'') and each layer has corresponds to a spatial grid with exactly the same area and has exactly the same dimensionality (i.e.~number of rows, columns, and cells). In this dataset, there are 62 different regular spatial grids layered on top of each other -- with each layer corresponding to a different vegetation class -- and each of these layers contains a grid with rows, 326 columns, and 53464 cells. Within each layer, each cell corresponds to a 0.967 by 1.02 km square. The values associated with each grid cell indicate the (one) presence or (zero) absence of a given vegetation class in the cell.
+The vegetation data describes the spatial distribution of 62 vegetation classes in the study area. This data is in a raster format and so the data are organized using a square grid comprising square grid cells that are each the same size. In our case, the raster data contains multiple layers (also called ``bands'') and each layer has corresponds to a spatial grid with exactly the same area and has exactly the same dimensionality (i.e.~number of rows, columns, and cells). In this dataset, there are 62 different regular spatial grids layered on top of each other -- with each layer corresponding to a different vegetation class -- and each of these layers contains a grid with 164 rows, 326 columns, and 53464 cells. Within each layer, each cell corresponds to a 0.967 by 1.02 km square. The values associated with each grid cell indicate the (one) presence or (zero) absence of a given vegetation class in the cell.
 
 \includegraphics{images/rasterbands.png}
 
@@ -756,8 +760,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print a short summary of the data}
-\FunctionTok{print}\NormalTok{(veg\_data)}
+\CommentTok{# print a short summary of the data}
+\KeywordTok{print}\NormalTok{(veg_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -774,8 +778,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# plot a map of the 36th vegetation class}
-\FunctionTok{plot}\NormalTok{(veg\_data[[}\DecValTok{32}\NormalTok{]])}
+\CommentTok{# plot a map of the 36th vegetation class}
+\KeywordTok{plot}\NormalTok{(veg_data[[}\DecValTok{32}\NormalTok{]])}
 \end{Highlighting}
 \end{Shaded}
 
@@ -783,15 +787,15 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# plot an interactive map of the 36th vegetation class}
-\FunctionTok{mapview}\NormalTok{(veg\_data[[}\DecValTok{32}\NormalTok{]])}
+\CommentTok{# plot an interactive map of the 36th vegetation class}
+\KeywordTok{mapview}\NormalTok{(veg_data[[}\DecValTok{32}\NormalTok{]])}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print number of rows in the data}
-\FunctionTok{nrow}\NormalTok{(veg\_data)}
+\CommentTok{# print number of rows in the data}
+\KeywordTok{nrow}\NormalTok{(veg_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -801,8 +805,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print number of columns  in the data}
-\FunctionTok{ncol}\NormalTok{(veg\_data)}
+\CommentTok{# print number of columns  in the data}
+\KeywordTok{ncol}\NormalTok{(veg_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -812,8 +816,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print number of cells in the data}
-\FunctionTok{ncell}\NormalTok{(veg\_data)}
+\CommentTok{# print number of cells in the data}
+\KeywordTok{ncell}\NormalTok{(veg_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -823,8 +827,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print number of layers in the data}
-\FunctionTok{nlayers}\NormalTok{(veg\_data)}
+\CommentTok{# print number of layers in the data}
+\KeywordTok{nlayers}\NormalTok{(veg_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -834,8 +838,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print  resolution on the x{-}axis}
-\FunctionTok{xres}\NormalTok{(veg\_data)}
+\CommentTok{# print  resolution on the x-axis}
+\KeywordTok{xres}\NormalTok{(veg_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -845,8 +849,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print resolution on the y{-}axis}
-\FunctionTok{yres}\NormalTok{(veg\_data)}
+\CommentTok{# print resolution on the y-axis}
+\KeywordTok{yres}\NormalTok{(veg_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -856,8 +860,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print spatial extent of the grid, i.e. coordinates for corners}
-\FunctionTok{extent}\NormalTok{(veg\_data)}
+\CommentTok{# print spatial extent of the grid, i.e. coordinates for corners}
+\KeywordTok{extent}\NormalTok{(veg_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -871,8 +875,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print the coordinate reference system}
-\FunctionTok{print}\NormalTok{(veg\_data}\SpecialCharTok{@}\NormalTok{crs)}
+\CommentTok{# print the coordinate reference system}
+\KeywordTok{print}\NormalTok{(veg_data}\OperatorTok{@}\NormalTok{crs)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -922,8 +926,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print a summary of the first layer in the stack}
-\FunctionTok{print}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]])}
+\CommentTok{# print a summary of the first layer in the stack}
+\KeywordTok{print}\NormalTok{(veg_data[[}\DecValTok{1}\NormalTok{]])}
 \end{Highlighting}
 \end{Shaded}
 
@@ -941,8 +945,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print the value in the 800th cell in the first layer of the stack}
-\FunctionTok{print}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]][}\DecValTok{800}\NormalTok{])}
+\CommentTok{# print the value in the 800th cell in the first layer of the stack}
+\KeywordTok{print}\NormalTok{(veg_data[[}\DecValTok{1}\NormalTok{]][}\DecValTok{800}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
@@ -953,9 +957,9 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print the value of the cell located in the 30th row and the 60th column of}
-\CommentTok{\# the first layer}
-\FunctionTok{print}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]][}\DecValTok{30}\NormalTok{, }\DecValTok{60}\NormalTok{])}
+\CommentTok{# print the value of the cell located in the 30th row and the 60th column of}
+\CommentTok{# the first layer}
+\KeywordTok{print}\NormalTok{(veg_data[[}\DecValTok{1}\NormalTok{]][}\DecValTok{30}\NormalTok{, }\DecValTok{60}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
@@ -966,8 +970,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate the sum of all the cell values in the first layer}
-\FunctionTok{cellStats}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"sum"}\NormalTok{)}
+\CommentTok{# calculate the sum of all the cell values in the first layer}
+\KeywordTok{cellStats}\NormalTok{(veg_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"sum"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -977,8 +981,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate the maximum value of all the cell values in the first layer}
-\FunctionTok{cellStats}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"max"}\NormalTok{)}
+\CommentTok{# calculate the maximum value of all the cell values in the first layer}
+\KeywordTok{cellStats}\NormalTok{(veg_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"max"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -988,8 +992,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate the minimum value of all the cell values in the first layer}
-\FunctionTok{cellStats}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"min"}\NormalTok{)}
+\CommentTok{# calculate the minimum value of all the cell values in the first layer}
+\KeywordTok{cellStats}\NormalTok{(veg_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"min"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -999,8 +1003,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate the mean value of all the cell values in the first layer}
-\FunctionTok{cellStats}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"mean"}\NormalTok{)}
+\CommentTok{# calculate the mean value of all the cell values in the first layer}
+\KeywordTok{cellStats}\NormalTok{(veg_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"mean"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1012,8 +1016,8 @@ Let's explore the vegetation data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate the maximum value in each layer}
-\FunctionTok{as\_tibble}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{max =} \FunctionTok{cellStats}\NormalTok{(veg\_data, }\StringTok{"max"}\NormalTok{)))}
+\CommentTok{# calculate the maximum value in each layer}
+\KeywordTok{as_tibble}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{max =} \KeywordTok{cellStats}\NormalTok{(veg_data, }\StringTok{"max"}\NormalTok{)))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1031,7 +1035,7 @@ Let's explore the vegetation data.
 ##  8     1
 ##  9     1
 ## 10     1
-## # ... with 22 more rows
+## # i 22 more rows
 \end{verbatim}
 
 Now, you can try and answer some questions about the vegetation data.
@@ -1066,31 +1070,26 @@ Now we will perform some preliminary calculations to explore the data. First, we
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# create prioritizr problem with only the data}
-\NormalTok{p0 }\OtherTok{\textless{}{-}} \FunctionTok{problem}\NormalTok{(pu\_data, veg\_data, }\AttributeTok{cost\_column =} \StringTok{"cost"}\NormalTok{)}
+\CommentTok{# create prioritizr problem with only the data}
+\NormalTok{p0 <-}\StringTok{ }\KeywordTok{problem}\NormalTok{(pu_data, veg_data, }\DataTypeTok{cost_column =} \StringTok{"cost"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
 ## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.
+## i Use `sf::st_as_sf()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{verbatim}
 ## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
+## i Use `terra::rast()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print empty problem,}
-\CommentTok{\# we can see that only the cost and feature data are defined}
-\FunctionTok{print}\NormalTok{(p0)}
+\CommentTok{# print empty problem,}
+\CommentTok{# we can see that only the cost and feature data are defined}
+\KeywordTok{print}\NormalTok{(p0)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1103,7 +1102,7 @@ Now we will perform some preliminary calculations to explore the data. First, we
 \end{verbatim}
 
 \begin{verbatim}
-## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4", "vegetation_5" , ... (32 total)
+## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
 \end{verbatim}
 
 \begin{verbatim}
@@ -1127,27 +1126,31 @@ Now we will perform some preliminary calculations to explore the data. First, we
 \end{verbatim}
 
 \begin{verbatim}
-## \@formulation
+## +@formulation
 \end{verbatim}
 
 \begin{verbatim}
-##  +@objective:   none specified
+## |+@objective:   none specified
 \end{verbatim}
 
 \begin{verbatim}
-##  +@penalties:   none specified
+## |+@penalties:   none specified
 \end{verbatim}
 
 \begin{verbatim}
-##  +@targets:     none specified
+## |+@targets:     none specified
 \end{verbatim}
 
 \begin{verbatim}
-##  +@constraints: none specified
+## |+@constraints: none specified
 \end{verbatim}
 
 \begin{verbatim}
-##  +@decisions:   binary decision
+## |\@decisions:   binary decision
+\end{verbatim}
+
+\begin{verbatim}
+## \@optimization
 \end{verbatim}
 
 \begin{verbatim}
@@ -1164,11 +1167,11 @@ Now we will perform some preliminary calculations to explore the data. First, we
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate amount of each feature in each planning unit}
-\NormalTok{abundance\_data }\OtherTok{\textless{}{-}} \FunctionTok{feature\_abundances}\NormalTok{(p0)}
+\CommentTok{# calculate amount of each feature in each planning unit}
+\NormalTok{abundance_data <-}\StringTok{ }\KeywordTok{feature_abundances}\NormalTok{(p0)}
 
-\CommentTok{\# print abundance data}
-\FunctionTok{print}\NormalTok{(abundance\_data)}
+\CommentTok{# print abundance data}
+\KeywordTok{print}\NormalTok{(abundance_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1186,17 +1189,17 @@ Now we will perform some preliminary calculations to explore the data. First, we
 ##  8 vegetation_8                14.0                  1
 ##  9 vegetation_9                18.0                  1
 ## 10 vegetation_10               20.0                  1
-## # ... with 22 more rows
+## # i 22 more rows
 \end{verbatim}
 
 \clearpage
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# note that only the first ten rows are printed,}
-\CommentTok{\# this is because the abundance\_data object is a tibble (i.e. tbl\_df) object}
-\CommentTok{\# and not a standard data.frame object}
-\FunctionTok{print}\NormalTok{(}\FunctionTok{class}\NormalTok{(abundance\_data))}
+\CommentTok{# note that only the first ten rows are printed,}
+\CommentTok{# this is because the abundance_data object is a tibble (i.e. tbl_df) object}
+\CommentTok{# and not a standard data.frame object}
+\KeywordTok{print}\NormalTok{(}\KeywordTok{class}\NormalTok{(abundance_data))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1206,8 +1209,8 @@ Now we will perform some preliminary calculations to explore the data. First, we
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# we can print all of the rows in abundance\_data like this}
-\FunctionTok{print}\NormalTok{(abundance\_data, }\AttributeTok{n =} \ConstantTok{Inf}\NormalTok{)}
+\CommentTok{# we can print all of the rows in abundance_data like this}
+\KeywordTok{print}\NormalTok{(abundance_data, }\DataTypeTok{n =} \OtherTok{Inf}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1253,14 +1256,14 @@ The \texttt{abundance\_data} object contains three columns. The \texttt{feature}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# add new column with feature abundances in km\^{}2}
-\NormalTok{abundance\_data}\SpecialCharTok{$}\NormalTok{absolute\_abundance\_km2 }\OtherTok{\textless{}{-}}
-\NormalTok{  (abundance\_data}\SpecialCharTok{$}\NormalTok{absolute\_abundance }\SpecialCharTok{*} \FunctionTok{prod}\NormalTok{(}\FunctionTok{res}\NormalTok{(veg\_data))) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{set\_units}\NormalTok{(m}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{set\_units}\NormalTok{(km}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\CommentTok{# add new column with feature abundances in km^2}
+\NormalTok{abundance_data}\OperatorTok{$}\NormalTok{absolute_abundance_km2 <-}
+\StringTok{  }\NormalTok{(abundance_data}\OperatorTok{$}\NormalTok{absolute_abundance }\OperatorTok{*}\StringTok{ }\KeywordTok{prod}\NormalTok{(}\KeywordTok{res}\NormalTok{(veg_data))) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{set_units}\NormalTok{(m}\OperatorTok{^}\DecValTok{2}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{set_units}\NormalTok{(km}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
 
-\CommentTok{\# print abundance data}
-\FunctionTok{print}\NormalTok{(abundance\_data)}
+\CommentTok{# print abundance data}
+\KeywordTok{print}\NormalTok{(abundance_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1278,15 +1281,15 @@ The \texttt{abundance\_data} object contains three columns. The \texttt{feature}
 ##  8 vegetation_8                14.0                  1                   13.9
 ##  9 vegetation_9                18.0                  1                   17.8
 ## 10 vegetation_10               20.0                  1                   19.7
-## # ... with 22 more rows
+## # i 22 more rows
 \end{verbatim}
 
 Now let's explore the abundance data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate the average abundance of the features}
-\FunctionTok{mean}\NormalTok{(abundance\_data}\SpecialCharTok{$}\NormalTok{absolute\_abundance\_km2)}
+\CommentTok{# calculate the average abundance of the features}
+\KeywordTok{mean}\NormalTok{(abundance_data}\OperatorTok{$}\NormalTok{absolute_abundance_km2)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1296,8 +1299,8 @@ Now let's explore the abundance data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# plot histogram of the features\textquotesingle{} abundances}
-\FunctionTok{hist}\NormalTok{(abundance\_data}\SpecialCharTok{$}\NormalTok{absolute\_abundance\_km2, }\AttributeTok{main =} \StringTok{"Feature abundances"}\NormalTok{)}
+\CommentTok{# plot histogram of the features' abundances}
+\KeywordTok{hist}\NormalTok{(abundance_data}\OperatorTok{$}\NormalTok{absolute_abundance_km2, }\DataTypeTok{main =} \StringTok{"Feature abundances"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1305,8 +1308,8 @@ Now let's explore the abundance data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# find the abundance of the feature with the largest abundance}
-\FunctionTok{max}\NormalTok{(abundance\_data}\SpecialCharTok{$}\NormalTok{absolute\_abundance\_km2)}
+\CommentTok{# find the abundance of the feature with the largest abundance}
+\KeywordTok{max}\NormalTok{(abundance_data}\OperatorTok{$}\NormalTok{absolute_abundance_km2)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1316,8 +1319,8 @@ Now let's explore the abundance data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# find the name of the feature with the largest abundance}
-\NormalTok{abundance\_data}\SpecialCharTok{$}\NormalTok{feature[}\FunctionTok{which.max}\NormalTok{(abundance\_data}\SpecialCharTok{$}\NormalTok{absolute\_abundance\_km2)]}
+\CommentTok{# find the name of the feature with the largest abundance}
+\NormalTok{abundance_data}\OperatorTok{$}\NormalTok{feature[}\KeywordTok{which.max}\NormalTok{(abundance_data}\OperatorTok{$}\NormalTok{absolute_abundance_km2)]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1351,24 +1354,24 @@ After calculating the total amount of each feature in the planning units (i.e.~t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# create column in planning unit data with binary values (zeros and ones)}
-\CommentTok{\# indicating if a planning unit is covered by protected areas or not}
-\NormalTok{pu\_data}\SpecialCharTok{$}\NormalTok{pa\_status }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(pu\_data}\SpecialCharTok{$}\NormalTok{locked\_in)}
+\CommentTok{# create column in planning unit data with binary values (zeros and ones)}
+\CommentTok{# indicating if a planning unit is covered by protected areas or not}
+\NormalTok{pu_data}\OperatorTok{$}\NormalTok{pa_status <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(pu_data}\OperatorTok{$}\NormalTok{locked_in)}
 
-\CommentTok{\# calculate feature representation by protected areas}
-\NormalTok{repr\_data }\OtherTok{\textless{}{-}} \FunctionTok{eval\_feature\_representation\_summary}\NormalTok{(p0, pu\_data[, }\StringTok{"pa\_status"}\NormalTok{])}
+\CommentTok{# calculate feature representation by protected areas}
+\NormalTok{repr_data <-}\StringTok{ }\KeywordTok{eval_feature_representation_summary}\NormalTok{(p0, pu_data[, }\StringTok{"pa_status"}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.
+## i Use `sf::st_as_sf()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print feature representation data}
-\FunctionTok{print}\NormalTok{(repr\_data)}
+\CommentTok{# print feature representation data}
+\KeywordTok{print}\NormalTok{(repr_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1386,39 +1389,39 @@ After calculating the total amount of each feature in the planning units (i.e.~t
 ##  8 overall vegetation_8          14.0         0            0     
 ##  9 overall vegetation_9          18.0         0.846        0.0470
 ## 10 overall vegetation_10         20.0         0            0     
-## # ... with 22 more rows
+## # i 22 more rows
 \end{verbatim}
 
 Similar to the abundance data before, the \texttt{repr\_data} object contains three columns. The \texttt{feature} column contains the name of each feature, the \texttt{absolute\_held} column shows the total amount of each feature held in the solution (i.e.~the planning units covered by protected areas), and the \texttt{relative\_held} column shows the proportion of each feature held in the solution (i.e.~the proportion of each feature's spatial distribution held in protected areas). Since the \texttt{absolute\_held} values correspond to the number of grid cells in the \texttt{veg\_data} object with overlap with protected areas, let's convert them to area units (i.e.~km\textsuperscript{2}) so we can report them.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# add new column with the areas represented in km\^{}2}
-\NormalTok{repr\_data}\SpecialCharTok{$}\NormalTok{absolute\_held\_km2 }\OtherTok{\textless{}{-}}
-\NormalTok{  (repr\_data}\SpecialCharTok{$}\NormalTok{absolute\_held }\SpecialCharTok{*} \FunctionTok{prod}\NormalTok{(}\FunctionTok{res}\NormalTok{(veg\_data))) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{set\_units}\NormalTok{(m}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{set\_units}\NormalTok{(km}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\CommentTok{# add new column with the areas represented in km^2}
+\NormalTok{repr_data}\OperatorTok{$}\NormalTok{absolute_held_km2 <-}
+\StringTok{  }\NormalTok{(repr_data}\OperatorTok{$}\NormalTok{absolute_held }\OperatorTok{*}\StringTok{ }\KeywordTok{prod}\NormalTok{(}\KeywordTok{res}\NormalTok{(veg_data))) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{set_units}\NormalTok{(m}\OperatorTok{^}\DecValTok{2}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{set_units}\NormalTok{(km}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
 
-\CommentTok{\# print representation data}
-\FunctionTok{print}\NormalTok{(repr\_data)}
+\CommentTok{# print representation data}
+\KeywordTok{print}\NormalTok{(repr_data)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 32 x 6
-##    summary feature       total_amount absolute_held relative_held absolute_held_km2
-##    <chr>   <chr>                <dbl>         <dbl>         <dbl>            [km^2]
-##  1 overall vegetation_1          16.0         0            0                  0    
-##  2 overall vegetation_2          14.3         0            0                  0    
-##  3 overall vegetation_3          10.4         0            0                  0    
-##  4 overall vegetation_4          17.8         0            0                  0    
-##  5 overall vegetation_5          13.0         0            0                  0    
-##  6 overall vegetation_6          14.3         0            0                  0    
-##  7 overall vegetation_7          20.0         0            0                  0    
-##  8 overall vegetation_8          14.0         0            0                  0    
-##  9 overall vegetation_9          18.0         0.846        0.0470             0.834
-## 10 overall vegetation_10         20.0         0            0                  0    
-## # ... with 22 more rows
+##    summary feature    total_amount absolute_held relative_held absolute_held_km2
+##    <chr>   <chr>             <dbl>         <dbl>         <dbl>            [km^2]
+##  1 overall vegetatio~         16.0         0            0                  0    
+##  2 overall vegetatio~         14.3         0            0                  0    
+##  3 overall vegetatio~         10.4         0            0                  0    
+##  4 overall vegetatio~         17.8         0            0                  0    
+##  5 overall vegetatio~         13.0         0            0                  0    
+##  6 overall vegetatio~         14.3         0            0                  0    
+##  7 overall vegetatio~         20.0         0            0                  0    
+##  8 overall vegetatio~         14.0         0            0                  0    
+##  9 overall vegetatio~         18.0         0.846        0.0470             0.834
+## 10 overall vegetatio~         20.0         0            0                  0    
+## # i 22 more rows
 \end{verbatim}
 
 Now let's investigate how well the species are represented.
@@ -1463,8 +1466,8 @@ To start things off, let's keep things simple. Let's create a prioritization usi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print planning unit data}
-\FunctionTok{print}\NormalTok{(pu\_data)}
+\CommentTok{# print planning unit data}
+\KeywordTok{print}\NormalTok{(pu_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1481,34 +1484,29 @@ To start things off, let's keep things simple. Let's create a prioritization usi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# make prioritization problem}
-\NormalTok{p1 }\OtherTok{\textless{}{-}} \FunctionTok{problem}\NormalTok{(pu\_data, veg\_data, }\AttributeTok{cost\_column =} \StringTok{"cost"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_min\_set\_objective}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_relative\_targets}\NormalTok{(}\FloatTok{0.05}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# 5\% representation targets}
-      \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{# make prioritization problem}
+\NormalTok{p1 <-}\StringTok{ }\KeywordTok{problem}\NormalTok{(pu_data, veg_data, }\DataTypeTok{cost_column =} \StringTok{"cost"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_min_set_objective}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_relative_targets}\NormalTok{(}\FloatTok{0.05}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# 5% representation targets}
+\StringTok{      }\KeywordTok{add_binary_decisions}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_lpsymphony_solver}\NormalTok{(}\DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
 ## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.
+## i Use `sf::st_as_sf()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{verbatim}
 ## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
+## i Use `terra::rast()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print problem}
-\FunctionTok{print}\NormalTok{(p1)}
+\CommentTok{# print problem}
+\KeywordTok{print}\NormalTok{(p1)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1521,7 +1519,7 @@ To start things off, let's keep things simple. Let's create a prioritization usi
 \end{verbatim}
 
 \begin{verbatim}
-## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4", "vegetation_5" , ... (32 total)
+## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
 \end{verbatim}
 
 \begin{verbatim}
@@ -1545,27 +1543,31 @@ To start things off, let's keep things simple. Let's create a prioritization usi
 \end{verbatim}
 
 \begin{verbatim}
-## \@formulation
+## +@formulation
 \end{verbatim}
 
 \begin{verbatim}
-##  +@objective:   minimum set objective
+## |+@objective:   minimum set objective
 \end{verbatim}
 
 \begin{verbatim}
-##  +@penalties:   none specified
+## |+@penalties:   none specified
 \end{verbatim}
 
 \begin{verbatim}
-##  +@targets:     relative targets (between 0.05 and 0.05)
+## |+@targets:     relative targets (between 0.05 and 0.05)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@constraints: none specified
+## |+@constraints: none specified
 \end{verbatim}
 
 \begin{verbatim}
-##  +@decisions:   binary decision
+## |\@decisions:   binary decision
+\end{verbatim}
+
+\begin{verbatim}
+## \@optimization
 \end{verbatim}
 
 \begin{verbatim}
@@ -1582,12 +1584,12 @@ To start things off, let's keep things simple. Let's create a prioritization usi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# solve problem}
-\NormalTok{s1 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p1)}
+\CommentTok{# solve problem}
+\NormalTok{s1 <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(p1)}
 
-\CommentTok{\# print solution, the solution\_1 column contains the solution values}
-\CommentTok{\# indicating if a planning unit is (1) selected or (0) not}
-\FunctionTok{print}\NormalTok{(s1)}
+\CommentTok{# print solution, the solution_1 column contains the solution values}
+\CommentTok{# indicating if a planning unit is (1) selected or (0) not}
+\KeywordTok{print}\NormalTok{(s1)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1604,30 +1606,30 @@ To start things off, let's keep things simple. Let's create a prioritization usi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate number of planning units selected in the prioritization}
-\FunctionTok{sum}\NormalTok{(s1}\SpecialCharTok{$}\NormalTok{solution\_1)}
+\CommentTok{# calculate number of planning units selected in the prioritization}
+\KeywordTok{sum}\NormalTok{(s1}\OperatorTok{$}\NormalTok{solution_}\DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 17
+## [1] 15
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate total cost of the prioritization}
-\FunctionTok{sum}\NormalTok{(s1}\SpecialCharTok{$}\NormalTok{solution\_1 }\SpecialCharTok{*}\NormalTok{ s1}\SpecialCharTok{$}\NormalTok{cost)}
+\CommentTok{# calculate total cost of the prioritization}
+\KeywordTok{sum}\NormalTok{(s1}\OperatorTok{$}\NormalTok{solution_}\DecValTok{1} \OperatorTok{*}\StringTok{ }\NormalTok{s1}\OperatorTok{$}\NormalTok{cost)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 394.0452
+## [1] 386.4116
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s1, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s1"}\NormalTok{)}
+\CommentTok{# plot solution}
+\KeywordTok{spplot}\NormalTok{(s1, }\StringTok{"solution_1"}\NormalTok{, }\DataTypeTok{col.regions =} \KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"s1"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1655,35 +1657,30 @@ Our first prioritization suffers many limitations, so let's add additional const
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# make prioritization problem}
-\NormalTok{p2 }\OtherTok{\textless{}{-}} \FunctionTok{problem}\NormalTok{(pu\_data, veg\_data, }\AttributeTok{cost\_column =} \StringTok{"cost"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_min\_set\_objective}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_relative\_targets}\NormalTok{(}\FloatTok{0.05}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_locked\_in\_constraints}\NormalTok{(}\StringTok{"locked\_in"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{# make prioritization problem}
+\NormalTok{p2 <-}\StringTok{ }\KeywordTok{problem}\NormalTok{(pu_data, veg_data, }\DataTypeTok{cost_column =} \StringTok{"cost"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_min_set_objective}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_relative_targets}\NormalTok{(}\FloatTok{0.05}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_locked_in_constraints}\NormalTok{(}\StringTok{"locked_in"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_binary_decisions}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_lpsymphony_solver}\NormalTok{(}\DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
 ## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.
+## i Use `sf::st_as_sf()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{verbatim}
 ## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
+## i Use `terra::rast()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print problem}
-\FunctionTok{print}\NormalTok{(p2)}
+\CommentTok{# print problem}
+\KeywordTok{print}\NormalTok{(p2)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1696,7 +1693,7 @@ Our first prioritization suffers many limitations, so let's add additional const
 \end{verbatim}
 
 \begin{verbatim}
-## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4", "vegetation_5" , ... (32 total)
+## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
 \end{verbatim}
 
 \begin{verbatim}
@@ -1720,31 +1717,35 @@ Our first prioritization suffers many limitations, so let's add additional const
 \end{verbatim}
 
 \begin{verbatim}
-## \@formulation
+## +@formulation
 \end{verbatim}
 
 \begin{verbatim}
-##  +@objective:   minimum set objective
+## |+@objective:   minimum set objective
 \end{verbatim}
 
 \begin{verbatim}
-##  +@penalties:   none specified
+## |+@penalties:   none specified
 \end{verbatim}
 
 \begin{verbatim}
-##  +@targets:     relative targets (between 0.05 and 0.05)
+## |+@targets:     relative targets (between 0.05 and 0.05)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@constraints:
+## |+@constraints:
 \end{verbatim}
 
 \begin{verbatim}
-##  |\@1:          locked in constraints (198 planning units)
+## ||\@1:          locked in constraints (198 planning units)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@decisions:   binary decision
+## |\@decisions:   binary decision
+\end{verbatim}
+
+\begin{verbatim}
+## \@optimization
 \end{verbatim}
 
 \begin{verbatim}
@@ -1761,11 +1762,11 @@ Our first prioritization suffers many limitations, so let's add additional const
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# solve problem}
-\NormalTok{s2 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p2)}
+\CommentTok{# solve problem}
+\NormalTok{s2 <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(p2)}
 
-\CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s2, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s2"}\NormalTok{)}
+\CommentTok{# plot solution}
+\KeywordTok{spplot}\NormalTok{(s2, }\StringTok{"solution_1"}\NormalTok{, }\DataTypeTok{col.regions =} \KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"s2"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1775,35 +1776,30 @@ Let's pretend that we talked to an expert on the vegetation communities in our s
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# make prioritization problem}
-\NormalTok{p3 }\OtherTok{\textless{}{-}} \FunctionTok{problem}\NormalTok{(pu\_data, veg\_data, }\AttributeTok{cost\_column =} \StringTok{"cost"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_min\_set\_objective}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_relative\_targets}\NormalTok{(}\FloatTok{0.2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_locked\_in\_constraints}\NormalTok{(}\StringTok{"locked\_in"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{# make prioritization problem}
+\NormalTok{p3 <-}\StringTok{ }\KeywordTok{problem}\NormalTok{(pu_data, veg_data, }\DataTypeTok{cost_column =} \StringTok{"cost"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_min_set_objective}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_relative_targets}\NormalTok{(}\FloatTok{0.2}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_locked_in_constraints}\NormalTok{(}\StringTok{"locked_in"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_binary_decisions}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_lpsymphony_solver}\NormalTok{(}\DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
 ## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.
+## i Use `sf::st_as_sf()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{verbatim}
 ## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
+## i Use `terra::rast()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print problem}
-\FunctionTok{print}\NormalTok{(p3)}
+\CommentTok{# print problem}
+\KeywordTok{print}\NormalTok{(p3)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1816,7 +1812,7 @@ Let's pretend that we talked to an expert on the vegetation communities in our s
 \end{verbatim}
 
 \begin{verbatim}
-## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4", "vegetation_5" , ... (32 total)
+## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
 \end{verbatim}
 
 \begin{verbatim}
@@ -1840,31 +1836,35 @@ Let's pretend that we talked to an expert on the vegetation communities in our s
 \end{verbatim}
 
 \begin{verbatim}
-## \@formulation
+## +@formulation
 \end{verbatim}
 
 \begin{verbatim}
-##  +@objective:   minimum set objective
+## |+@objective:   minimum set objective
 \end{verbatim}
 
 \begin{verbatim}
-##  +@penalties:   none specified
+## |+@penalties:   none specified
 \end{verbatim}
 
 \begin{verbatim}
-##  +@targets:     relative targets (between 0.2 and 0.2)
+## |+@targets:     relative targets (between 0.2 and 0.2)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@constraints:
+## |+@constraints:
 \end{verbatim}
 
 \begin{verbatim}
-##  |\@1:          locked in constraints (198 planning units)
+## ||\@1:          locked in constraints (198 planning units)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@decisions:   binary decision
+## |\@decisions:   binary decision
+\end{verbatim}
+
+\begin{verbatim}
+## \@optimization
 \end{verbatim}
 
 \begin{verbatim}
@@ -1881,11 +1881,11 @@ Let's pretend that we talked to an expert on the vegetation communities in our s
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# solve problem}
-\NormalTok{s3 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p3)}
+\CommentTok{# solve problem}
+\NormalTok{s3 <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(p3)}
 
-\CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s3, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s3"}\NormalTok{)}
+\CommentTok{# plot solution}
+\KeywordTok{spplot}\NormalTok{(s3, }\StringTok{"solution_1"}\NormalTok{, }\DataTypeTok{col.regions =} \KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"s3"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1895,36 +1895,31 @@ Next, let's lock out highly degraded areas. Similar to before, this data is pres
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# make prioritization problem}
-\NormalTok{p4 }\OtherTok{\textless{}{-}} \FunctionTok{problem}\NormalTok{(pu\_data, veg\_data, }\AttributeTok{cost\_column =} \StringTok{"cost"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_min\_set\_objective}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_relative\_targets}\NormalTok{(}\FloatTok{0.1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_locked\_in\_constraints}\NormalTok{(}\StringTok{"locked\_in"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_locked\_out\_constraints}\NormalTok{(}\StringTok{"locked\_out"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{# make prioritization problem}
+\NormalTok{p4 <-}\StringTok{ }\KeywordTok{problem}\NormalTok{(pu_data, veg_data, }\DataTypeTok{cost_column =} \StringTok{"cost"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_min_set_objective}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_relative_targets}\NormalTok{(}\FloatTok{0.1}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_locked_in_constraints}\NormalTok{(}\StringTok{"locked_in"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_locked_out_constraints}\NormalTok{(}\StringTok{"locked_out"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_binary_decisions}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_lpsymphony_solver}\NormalTok{(}\DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
 ## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.
+## i Use `sf::st_as_sf()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{verbatim}
 ## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
+## i Use `terra::rast()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print problem}
-\FunctionTok{print}\NormalTok{(p4)}
+\CommentTok{# print problem}
+\KeywordTok{print}\NormalTok{(p4)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1937,7 +1932,7 @@ Next, let's lock out highly degraded areas. Similar to before, this data is pres
 \end{verbatim}
 
 \begin{verbatim}
-## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4", "vegetation_5" , ... (32 total)
+## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
 \end{verbatim}
 
 \begin{verbatim}
@@ -1961,35 +1956,39 @@ Next, let's lock out highly degraded areas. Similar to before, this data is pres
 \end{verbatim}
 
 \begin{verbatim}
-## \@formulation
+## +@formulation
 \end{verbatim}
 
 \begin{verbatim}
-##  +@objective:   minimum set objective
+## |+@objective:   minimum set objective
 \end{verbatim}
 
 \begin{verbatim}
-##  +@penalties:   none specified
+## |+@penalties:   none specified
 \end{verbatim}
 
 \begin{verbatim}
-##  +@targets:     relative targets (between 0.1 and 0.1)
+## |+@targets:     relative targets (between 0.1 and 0.1)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@constraints:
+## |+@constraints:
 \end{verbatim}
 
 \begin{verbatim}
-##  |+@1:          locked in constraints (198 planning units)
+## ||+@1:          locked in constraints (198 planning units)
 \end{verbatim}
 
 \begin{verbatim}
-##  |\@2:          locked out constraints (6 planning units)
+## ||\@2:          locked out constraints (6 planning units)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@decisions:   binary decision
+## |\@decisions:   binary decision
+\end{verbatim}
+
+\begin{verbatim}
+## \@optimization
 \end{verbatim}
 
 \begin{verbatim}
@@ -2006,11 +2005,11 @@ Next, let's lock out highly degraded areas. Similar to before, this data is pres
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# solve problem}
-\NormalTok{s4 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p4)}
+\CommentTok{# solve problem}
+\NormalTok{s4 <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(p4)}
 
-\CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s4, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s4"}\NormalTok{)}
+\CommentTok{# plot solution}
+\KeywordTok{spplot}\NormalTok{(s4, }\StringTok{"solution_1"}\NormalTok{, }\DataTypeTok{col.regions =} \KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"s4"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2050,37 +2049,32 @@ Plans for protected area systems should facilitate gene flow and dispersal betwe
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# make prioritization problem}
-\NormalTok{p5 }\OtherTok{\textless{}{-}} \FunctionTok{problem}\NormalTok{(pu\_data, veg\_data, }\AttributeTok{cost\_column =} \StringTok{"cost"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_min\_set\_objective}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_boundary\_penalties}\NormalTok{(}\AttributeTok{penalty =} \FloatTok{0.0005}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_relative\_targets}\NormalTok{(}\FloatTok{0.1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_locked\_in\_constraints}\NormalTok{(}\StringTok{"locked\_in"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_locked\_out\_constraints}\NormalTok{(}\StringTok{"locked\_out"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{gap =} \DecValTok{1}\NormalTok{)}
+\CommentTok{# make prioritization problem}
+\NormalTok{p5 <-}\StringTok{ }\KeywordTok{problem}\NormalTok{(pu_data, veg_data, }\DataTypeTok{cost_column =} \StringTok{"cost"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_min_set_objective}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_boundary_penalties}\NormalTok{(}\DataTypeTok{penalty =} \FloatTok{0.0005}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_relative_targets}\NormalTok{(}\FloatTok{0.1}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_locked_in_constraints}\NormalTok{(}\StringTok{"locked_in"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_locked_out_constraints}\NormalTok{(}\StringTok{"locked_out"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_binary_decisions}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_lpsymphony_solver}\NormalTok{(}\DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{gap =} \DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
 ## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.
+## i Use `sf::st_as_sf()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{verbatim}
 ## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
+## i Use `terra::rast()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print problem}
-\FunctionTok{print}\NormalTok{(p5)}
+\CommentTok{# print problem}
+\KeywordTok{print}\NormalTok{(p5)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2093,7 +2087,7 @@ Plans for protected area systems should facilitate gene flow and dispersal betwe
 \end{verbatim}
 
 \begin{verbatim}
-## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4", "vegetation_5" , ... (32 total)
+## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
 \end{verbatim}
 
 \begin{verbatim}
@@ -2117,39 +2111,43 @@ Plans for protected area systems should facilitate gene flow and dispersal betwe
 \end{verbatim}
 
 \begin{verbatim}
-## \@formulation
+## +@formulation
 \end{verbatim}
 
 \begin{verbatim}
-##  +@objective:   minimum set objective
+## |+@objective:   minimum set objective
 \end{verbatim}
 
 \begin{verbatim}
-##  +@penalties:
+## |+@penalties:
 \end{verbatim}
 
 \begin{verbatim}
-##  |\@1:          boundary penalties (`penalty` = 5e-04, `edge_factor` = 0.5, ...)
+## ||\@1:          boundary penalties (`penalty` = 5e-04, `edge_factor` = 0.5, ...)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@targets:     relative targets (between 0.1 and 0.1)
+## |+@targets:     relative targets (between 0.1 and 0.1)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@constraints:
+## |+@constraints:
 \end{verbatim}
 
 \begin{verbatim}
-##  |+@1:          locked in constraints (198 planning units)
+## ||+@1:          locked in constraints (198 planning units)
 \end{verbatim}
 
 \begin{verbatim}
-##  |\@2:          locked out constraints (6 planning units)
+## ||\@2:          locked out constraints (6 planning units)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@decisions:   binary decision
+## |\@decisions:   binary decision
+\end{verbatim}
+
+\begin{verbatim}
+## \@optimization
 \end{verbatim}
 
 \begin{verbatim}
@@ -2166,21 +2164,21 @@ Plans for protected area systems should facilitate gene flow and dispersal betwe
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# solve problem,}
-\CommentTok{\# note this will take around 30 seconds}
-\NormalTok{s5 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p5)}
+\CommentTok{# solve problem,}
+\CommentTok{# note this will take around 30 seconds}
+\NormalTok{s5 <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(p5)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.
+## i Use `sf::st_as_sf()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print solution}
-\FunctionTok{print}\NormalTok{(s5)}
+\CommentTok{# print solution}
+\KeywordTok{print}\NormalTok{(s5)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2197,8 +2195,8 @@ Plans for protected area systems should facilitate gene flow and dispersal betwe
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s5, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s5"}\NormalTok{)}
+\CommentTok{# plot solution}
+\KeywordTok{spplot}\NormalTok{(s5, }\StringTok{"solution_1"}\NormalTok{, }\DataTypeTok{col.regions =} \KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"s5"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2224,16 +2222,16 @@ Now let's compare the solutions to the problems with (\texttt{s5}) and without (
 \hypertarget{budget-limited-prioritizations}{%
 \section{Budget limited prioritizations}\label{budget-limited-prioritizations}}
 
-In the real-world, the funding available for conservation is often very limited. As a consequence, decision makers often need prioritizations where the total cost of priority areas does not exceed a budget. In our fourth prioritization (\texttt{s4}), we found that we would need to spend an additional \$224 million AUD to ensure that each vegetation community is adequately represented in the protected area system. But what if the funds available for establishing new protected areas were limited to \$100 million AUD? In this case, we need a ``budget limited prioritization''. Budget limited prioritizations aim to maximize some measure of conservation benefit subject to a budget (e.g.~\href{https://prioritizr.net/reference/add_max_cover_objective.html}{number of species with at least one occurrence in the protected area system}, or \href{https://prioritizr.net/reference/add_max_phylo_div_objective.html}{phylogenetic diversity}). Let's create a prioritization by maximizing the number of adequately represented features whilst keeping within a pre-specified budget.
+In the real-world, the funding available for conservation is often very limited. As a consequence, decision makers often need prioritizations where the total cost of priority areas does not exceed a budget. In our fourth prioritization (\texttt{s4}), we found that we would need to spend an additional \$226 million AUD to ensure that each vegetation community is adequately represented in the protected area system. But what if the funds available for establishing new protected areas were limited to \$100 million AUD? In this case, we need a ``budget limited prioritization''. Budget limited prioritizations aim to maximize some measure of conservation benefit subject to a budget (e.g.~\href{https://prioritizr.net/reference/add_max_cover_objective.html}{number of species with at least one occurrence in the protected area system}, or \href{https://prioritizr.net/reference/add_max_phylo_div_objective.html}{phylogenetic diversity}). Let's create a prioritization by maximizing the number of adequately represented features whilst keeping within a pre-specified budget.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# funds for additional land acquisition (same units as cost data)}
-\NormalTok{funds }\OtherTok{\textless{}{-}} \DecValTok{100}
+\CommentTok{# funds for additional land acquisition (same units as cost data)}
+\NormalTok{funds <-}\StringTok{ }\DecValTok{100}
 
-\CommentTok{\# calculate the total budget for the prioritization}
-\NormalTok{budget }\OtherTok{\textless{}{-}}\NormalTok{ funds }\SpecialCharTok{+} \FunctionTok{sum}\NormalTok{(s4}\SpecialCharTok{$}\NormalTok{cost }\SpecialCharTok{*}\NormalTok{ s4}\SpecialCharTok{$}\NormalTok{locked\_in)}
-\FunctionTok{print}\NormalTok{(budget)}
+\CommentTok{# calculate the total budget for the prioritization}
+\NormalTok{budget <-}\StringTok{ }\NormalTok{funds }\OperatorTok{+}\StringTok{ }\KeywordTok{sum}\NormalTok{(s4}\OperatorTok{$}\NormalTok{cost }\OperatorTok{*}\StringTok{ }\NormalTok{s4}\OperatorTok{$}\NormalTok{locked_in)}
+\KeywordTok{print}\NormalTok{(budget)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2243,36 +2241,31 @@ In the real-world, the funding available for conservation is often very limited.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# make prioritization problem}
-\NormalTok{p6 }\OtherTok{\textless{}{-}} \FunctionTok{problem}\NormalTok{(pu\_data, veg\_data, }\AttributeTok{cost\_column =} \StringTok{"cost"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_max\_features\_objective}\NormalTok{(budget) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_relative\_targets}\NormalTok{(}\FloatTok{0.1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_locked\_in\_constraints}\NormalTok{(}\StringTok{"locked\_in"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_locked\_out\_constraints}\NormalTok{(}\StringTok{"locked\_out"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{# make prioritization problem}
+\NormalTok{p6 <-}\StringTok{ }\KeywordTok{problem}\NormalTok{(pu_data, veg_data, }\DataTypeTok{cost_column =} \StringTok{"cost"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_max_features_objective}\NormalTok{(budget) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_relative_targets}\NormalTok{(}\FloatTok{0.1}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_locked_in_constraints}\NormalTok{(}\StringTok{"locked_in"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_locked_out_constraints}\NormalTok{(}\StringTok{"locked_out"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_binary_decisions}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_lpsymphony_solver}\NormalTok{(}\DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
 ## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.
+## i Use `sf::st_as_sf()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{verbatim}
 ## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
+## i Use `terra::rast()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print problem}
-\FunctionTok{print}\NormalTok{(p6)}
+\CommentTok{# print problem}
+\KeywordTok{print}\NormalTok{(p6)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2285,7 +2278,7 @@ In the real-world, the funding available for conservation is often very limited.
 \end{verbatim}
 
 \begin{verbatim}
-## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4", "vegetation_5" , ... (32 total)
+## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
 \end{verbatim}
 
 \begin{verbatim}
@@ -2309,35 +2302,39 @@ In the real-world, the funding available for conservation is often very limited.
 \end{verbatim}
 
 \begin{verbatim}
-## \@formulation
+## +@formulation
 \end{verbatim}
 
 \begin{verbatim}
-##  +@objective:   maximum representation objective (`budget` = 6580.6397)
+## |+@objective:   maximum representation objective (`budget` = 6580.6397)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@penalties:   none specified
+## |+@penalties:   none specified
 \end{verbatim}
 
 \begin{verbatim}
-##  +@targets:     relative targets (between 0.1 and 0.1)
+## |+@targets:     relative targets (between 0.1 and 0.1)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@constraints:
+## |+@constraints:
 \end{verbatim}
 
 \begin{verbatim}
-##  |+@1:          locked in constraints (198 planning units)
+## ||+@1:          locked in constraints (198 planning units)
 \end{verbatim}
 
 \begin{verbatim}
-##  |\@2:          locked out constraints (6 planning units)
+## ||\@2:          locked out constraints (6 planning units)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@decisions:   binary decision
+## |\@decisions:   binary decision
+\end{verbatim}
+
+\begin{verbatim}
+## \@optimization
 \end{verbatim}
 
 \begin{verbatim}
@@ -2354,11 +2351,11 @@ In the real-world, the funding available for conservation is often very limited.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# solve problem}
-\NormalTok{s6 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p6)}
+\CommentTok{# solve problem}
+\NormalTok{s6 <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(p6)}
 
-\CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s6, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s6"}\NormalTok{)}
+\CommentTok{# plot solution}
+\KeywordTok{spplot}\NormalTok{(s6, }\StringTok{"solution_1"}\NormalTok{, }\DataTypeTok{col.regions =} \KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"s6"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2366,52 +2363,53 @@ In the real-world, the funding available for conservation is often very limited.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate feature representation}
-\NormalTok{r6 }\OtherTok{\textless{}{-}} \FunctionTok{eval\_feature\_representation\_summary}\NormalTok{(p6, s6[, }\StringTok{"solution\_1"}\NormalTok{])}
+\CommentTok{# calculate feature representation}
+\NormalTok{r6 <-}\StringTok{ }\KeywordTok{eval_feature_representation_summary}\NormalTok{(p6, s6[, }\StringTok{"solution_1"}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.
+## i Use `sf::st_as_sf()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate number of features with targets met}
-\FunctionTok{sum}\NormalTok{(r6}\SpecialCharTok{$}\NormalTok{relative\_held }\SpecialCharTok{\textgreater{}=} \FloatTok{0.2}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\CommentTok{# calculate number of features with targets met}
+\KeywordTok{sum}\NormalTok{(r6}\OperatorTok{$}\NormalTok{relative_held }\OperatorTok{>=}\StringTok{ }\FloatTok{0.2}\NormalTok{, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 15
+## [1] 16
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# find out which features have their targets met when we add weights,}
-\CommentTok{\# note that NA is for vegetation.61}
-\FunctionTok{print}\NormalTok{(r6}\SpecialCharTok{$}\NormalTok{feature[r6}\SpecialCharTok{$}\NormalTok{relative\_held }\SpecialCharTok{\textgreater{}=} \FloatTok{0.2}\NormalTok{])}
+\CommentTok{# find out which features have their targets met when we add weights,}
+\CommentTok{# note that NA is for vegetation.61}
+\KeywordTok{print}\NormalTok{(r6}\OperatorTok{$}\NormalTok{feature[r6}\OperatorTok{$}\NormalTok{relative_held }\OperatorTok{>=}\StringTok{ }\FloatTok{0.2}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "vegetation_9"  "vegetation_14" "vegetation_17" "vegetation_18" "vegetation_19"
-##  [6] "vegetation_20" "vegetation_21" "vegetation_22" "vegetation_23" "vegetation_24"
-## [11] "vegetation_25" "vegetation_26" "vegetation_27" "vegetation_28" "vegetation_29"
+##  [1] "vegetation_4"  "vegetation_5"  "vegetation_14" "vegetation_17"
+##  [5] "vegetation_18" "vegetation_19" "vegetation_20" "vegetation_21"
+##  [9] "vegetation_22" "vegetation_23" "vegetation_24" "vegetation_25"
+## [13] "vegetation_26" "vegetation_27" "vegetation_28" "vegetation_29"
 \end{verbatim}
 
 We can also add weights to specify that it is more important to meet the targets for certain features and less important for other features. A common approach for weighting features is to assign a greater importance to features with smaller spatial distributions. The rationale behind this weighting method is that features with smaller spatial distributions are at greater risk of extinction. So, let's calculate some weights for our vegetation communities and see how weighting the features changes our prioritization.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate weights as the log inverse number of grid cells that each vegetation}
-\CommentTok{\# class occupies, rescaled between 1 and 100}
-\NormalTok{wts }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{/} \FunctionTok{cellStats}\NormalTok{(veg\_data, }\StringTok{"sum"}\NormalTok{)}
-\NormalTok{wts }\OtherTok{\textless{}{-}} \FunctionTok{rescale}\NormalTok{(wts, }\AttributeTok{to =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{))}
+\CommentTok{# calculate weights as the log inverse number of grid cells that each vegetation}
+\CommentTok{# class occupies, rescaled between 1 and 100}
+\NormalTok{wts <-}\StringTok{ }\DecValTok{1} \OperatorTok{/}\StringTok{ }\KeywordTok{cellStats}\NormalTok{(veg_data, }\StringTok{"sum"}\NormalTok{)}
+\NormalTok{wts <-}\StringTok{ }\KeywordTok{rescale}\NormalTok{(wts, }\DataTypeTok{to =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{))}
 
-\CommentTok{\# print the name of the feature with smallest weight}
-\FunctionTok{names}\NormalTok{(veg\_data)[}\FunctionTok{which.min}\NormalTok{(wts)]}
+\CommentTok{# print the name of the feature with smallest weight}
+\KeywordTok{names}\NormalTok{(veg_data)[}\KeywordTok{which.min}\NormalTok{(wts)]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2421,8 +2419,8 @@ We can also add weights to specify that it is more important to meet the targets
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print the name of the feature with greatest weight}
-\FunctionTok{names}\NormalTok{(veg\_data)[}\FunctionTok{which.max}\NormalTok{(wts)]}
+\CommentTok{# print the name of the feature with greatest weight}
+\KeywordTok{names}\NormalTok{(veg_data)[}\KeywordTok{which.max}\NormalTok{(wts)]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2432,8 +2430,8 @@ We can also add weights to specify that it is more important to meet the targets
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# plot histogram of weights}
-\FunctionTok{hist}\NormalTok{(wts, }\AttributeTok{main =} \StringTok{"feature weights"}\NormalTok{)}
+\CommentTok{# plot histogram of weights}
+\KeywordTok{hist}\NormalTok{(wts, }\DataTypeTok{main =} \StringTok{"feature weights"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2441,37 +2439,32 @@ We can also add weights to specify that it is more important to meet the targets
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# make prioritization problem with weights}
-\NormalTok{p7 }\OtherTok{\textless{}{-}} \FunctionTok{problem}\NormalTok{(pu\_data, veg\_data, }\AttributeTok{cost\_column =} \StringTok{"cost"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_max\_features\_objective}\NormalTok{(budget) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_relative\_targets}\NormalTok{(}\FloatTok{0.1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_feature\_weights}\NormalTok{(wts) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_locked\_in\_constraints}\NormalTok{(}\StringTok{"locked\_in"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_locked\_out\_constraints}\NormalTok{(}\StringTok{"locked\_out"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{# make prioritization problem with weights}
+\NormalTok{p7 <-}\StringTok{ }\KeywordTok{problem}\NormalTok{(pu_data, veg_data, }\DataTypeTok{cost_column =} \StringTok{"cost"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_max_features_objective}\NormalTok{(budget) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_relative_targets}\NormalTok{(}\FloatTok{0.1}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_feature_weights}\NormalTok{(wts) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_locked_in_constraints}\NormalTok{(}\StringTok{"locked_in"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_locked_out_constraints}\NormalTok{(}\StringTok{"locked_out"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_binary_decisions}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_lpsymphony_solver}\NormalTok{(}\DataTypeTok{verbose =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
 ## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.
+## i Use `sf::st_as_sf()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{verbatim}
 ## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
+## i Use `terra::rast()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print problem}
-\FunctionTok{print}\NormalTok{(p7)}
+\CommentTok{# print problem}
+\KeywordTok{print}\NormalTok{(p7)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2484,7 +2477,7 @@ We can also add weights to specify that it is more important to meet the targets
 \end{verbatim}
 
 \begin{verbatim}
-## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4", "vegetation_5" , ... (32 total)
+## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
 \end{verbatim}
 
 \begin{verbatim}
@@ -2508,39 +2501,43 @@ We can also add weights to specify that it is more important to meet the targets
 \end{verbatim}
 
 \begin{verbatim}
-## \@formulation
+## +@formulation
 \end{verbatim}
 
 \begin{verbatim}
-##  +@objective:   maximum representation objective (`budget` = 6580.6397)
+## |+@objective:   maximum representation objective (`budget` = 6580.6397)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@penalties:
+## |+@penalties:
 \end{verbatim}
 
 \begin{verbatim}
-##  |\@1:          feature weights (`weights` = asymmetric continuous values (non-zero values between 1 and 10))
+## ||\@1:          feature weights (`weights` = asymmetric continuous values (non-zero values between 1 and 10))
 \end{verbatim}
 
 \begin{verbatim}
-##  +@targets:     relative targets (between 0.1 and 0.1)
+## |+@targets:     relative targets (between 0.1 and 0.1)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@constraints:
+## |+@constraints:
 \end{verbatim}
 
 \begin{verbatim}
-##  |+@1:          locked in constraints (198 planning units)
+## ||+@1:          locked in constraints (198 planning units)
 \end{verbatim}
 
 \begin{verbatim}
-##  |\@2:          locked out constraints (6 planning units)
+## ||\@2:          locked out constraints (6 planning units)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@decisions:   binary decision
+## |\@decisions:   binary decision
+\end{verbatim}
+
+\begin{verbatim}
+## \@optimization
 \end{verbatim}
 
 \begin{verbatim}
@@ -2557,11 +2554,11 @@ We can also add weights to specify that it is more important to meet the targets
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# solve problem}
-\NormalTok{s7 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p7)}
+\CommentTok{# solve problem}
+\NormalTok{s7 <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(p7)}
 
-\CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s7, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s7"}\NormalTok{)}
+\CommentTok{# plot solution}
+\KeywordTok{spplot}\NormalTok{(s7, }\StringTok{"solution_1"}\NormalTok{, }\DataTypeTok{col.regions =} \KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"s7"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2569,40 +2566,40 @@ We can also add weights to specify that it is more important to meet the targets
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate feature representation}
-\NormalTok{r7 }\OtherTok{\textless{}{-}} \FunctionTok{eval\_feature\_representation\_summary}\NormalTok{(p7, s7[, }\StringTok{"solution\_1"}\NormalTok{])}
+\CommentTok{# calculate feature representation}
+\NormalTok{r7 <-}\StringTok{ }\KeywordTok{eval_feature_representation_summary}\NormalTok{(p7, s7[, }\StringTok{"solution_1"}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.
+## i Use `sf::st_as_sf()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate number of features with targets met}
-\FunctionTok{sum}\NormalTok{(r7}\SpecialCharTok{$}\NormalTok{relative\_held }\SpecialCharTok{\textgreater{}=} \FloatTok{0.2}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\CommentTok{# calculate number of features with targets met}
+\KeywordTok{sum}\NormalTok{(r7}\OperatorTok{$}\NormalTok{relative_held }\OperatorTok{>=}\StringTok{ }\FloatTok{0.2}\NormalTok{, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 17
+## [1] 16
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# find out which features have their targets met when we add weights,}
-\CommentTok{\# note that NA is for vegetation.61}
-\FunctionTok{print}\NormalTok{(r7}\SpecialCharTok{$}\NormalTok{feature[r7}\SpecialCharTok{$}\NormalTok{relative\_held }\SpecialCharTok{\textgreater{}=} \FloatTok{0.2}\NormalTok{])}
+\CommentTok{# find out which features have their targets met when we add weights,}
+\CommentTok{# note that NA is for vegetation.61}
+\KeywordTok{print}\NormalTok{(r7}\OperatorTok{$}\NormalTok{feature[r7}\OperatorTok{$}\NormalTok{relative_held }\OperatorTok{>=}\StringTok{ }\FloatTok{0.2}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "vegetation_1"  "vegetation_2"  "vegetation_4"  "vegetation_14" "vegetation_17"
-##  [6] "vegetation_18" "vegetation_19" "vegetation_20" "vegetation_21" "vegetation_22"
-## [11] "vegetation_23" "vegetation_24" "vegetation_25" "vegetation_26" "vegetation_27"
-## [16] "vegetation_28" "vegetation_29"
+##  [1] "vegetation_1"  "vegetation_5"  "vegetation_14" "vegetation_17"
+##  [5] "vegetation_18" "vegetation_19" "vegetation_20" "vegetation_21"
+##  [9] "vegetation_22" "vegetation_23" "vegetation_24" "vegetation_25"
+## [13] "vegetation_26" "vegetation_27" "vegetation_28" "vegetation_29"
 \end{verbatim}
 
 \begin{rmdquestion}
@@ -2627,39 +2624,34 @@ In systematic conservation planning, only rarely do we have data on all of the s
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# make problem with a shuffle portfolio}
-\NormalTok{p8 }\OtherTok{\textless{}{-}} \FunctionTok{problem}\NormalTok{(pu\_data, veg\_data, }\AttributeTok{cost\_column =} \StringTok{"cost"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_max\_features\_objective}\NormalTok{(budget) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_relative\_targets}\NormalTok{(}\FloatTok{0.2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_feature\_weights}\NormalTok{(wts) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_shuffle\_portfolio}\NormalTok{(}\AttributeTok{number\_solutions =} \DecValTok{6}\NormalTok{,}
-                            \AttributeTok{remove\_duplicates =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{gap =} \DecValTok{10}\NormalTok{)}
+\CommentTok{# make problem with a shuffle portfolio}
+\NormalTok{p8 <-}\StringTok{ }\KeywordTok{problem}\NormalTok{(pu_data, veg_data, }\DataTypeTok{cost_column =} \StringTok{"cost"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_max_features_objective}\NormalTok{(budget) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_relative_targets}\NormalTok{(}\FloatTok{0.2}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_feature_weights}\NormalTok{(wts) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_binary_decisions}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_shuffle_portfolio}\NormalTok{(}\DataTypeTok{number_solutions =} \DecValTok{6}\NormalTok{,}
+                            \DataTypeTok{remove_duplicates =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{      }\KeywordTok{add_lpsymphony_solver}\NormalTok{(}\DataTypeTok{verbose =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{gap =} \DecValTok{10}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
 ## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.
+## i Use `sf::st_as_sf()` to convert data for future compatibility.
 \end{verbatim}
 
 \begin{verbatim}
 ## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.
+## i Use `terra::rast()` to convert data for future compatibility.
 \end{verbatim}
 
 \clearpage
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print problem}
-\FunctionTok{print}\NormalTok{(p8)}
+\CommentTok{# print problem}
+\KeywordTok{print}\NormalTok{(p8)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2672,7 +2664,7 @@ In systematic conservation planning, only rarely do we have data on all of the s
 \end{verbatim}
 
 \begin{verbatim}
-## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4", "vegetation_5" , ... (32 total)
+## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
 \end{verbatim}
 
 \begin{verbatim}
@@ -2696,31 +2688,35 @@ In systematic conservation planning, only rarely do we have data on all of the s
 \end{verbatim}
 
 \begin{verbatim}
-## \@formulation
+## +@formulation
 \end{verbatim}
 
 \begin{verbatim}
-##  +@objective:   maximum representation objective (`budget` = 6580.6397)
+## |+@objective:   maximum representation objective (`budget` = 6580.6397)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@penalties:
+## |+@penalties:
 \end{verbatim}
 
 \begin{verbatim}
-##  |\@1:          feature weights (`weights` = asymmetric continuous values (non-zero values between 1 and 10))
+## ||\@1:          feature weights (`weights` = asymmetric continuous values (non-zero values between 1 and 10))
 \end{verbatim}
 
 \begin{verbatim}
-##  +@targets:     relative targets (between 0.2 and 0.2)
+## |+@targets:     relative targets (between 0.2 and 0.2)
 \end{verbatim}
 
 \begin{verbatim}
-##  +@constraints: none specified
+## |+@constraints: none specified
 \end{verbatim}
 
 \begin{verbatim}
-##  +@decisions:   binary decision
+## |\@decisions:   binary decision
+\end{verbatim}
+
+\begin{verbatim}
+## \@optimization
 \end{verbatim}
 
 \begin{verbatim}
@@ -2737,12 +2733,12 @@ In systematic conservation planning, only rarely do we have data on all of the s
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# solve problem}
-\CommentTok{\# note that this will contain six solutions since we added a portfolio}
-\NormalTok{s8 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p8)}
+\CommentTok{# solve problem}
+\CommentTok{# note that this will contain six solutions since we added a portfolio}
+\NormalTok{s8 <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(p8)}
 
-\CommentTok{\# print solution}
-\FunctionTok{print}\NormalTok{(s8)}
+\CommentTok{# print solution}
+\KeywordTok{print}\NormalTok{(s8)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2759,8 +2755,8 @@ In systematic conservation planning, only rarely do we have data on all of the s
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate the cost of the first solution}
-\FunctionTok{sum}\NormalTok{(s8}\SpecialCharTok{$}\NormalTok{solution\_1 }\SpecialCharTok{*}\NormalTok{ s8}\SpecialCharTok{$}\NormalTok{cost)}
+\CommentTok{# calculate the cost of the first solution}
+\KeywordTok{sum}\NormalTok{(s8}\OperatorTok{$}\NormalTok{solution_}\DecValTok{1} \OperatorTok{*}\StringTok{ }\NormalTok{s8}\OperatorTok{$}\NormalTok{cost)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2770,32 +2766,32 @@ In systematic conservation planning, only rarely do we have data on all of the s
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate the cost of the second solution}
-\FunctionTok{sum}\NormalTok{(s8}\SpecialCharTok{$}\NormalTok{solution\_2 }\SpecialCharTok{*}\NormalTok{ s8}\SpecialCharTok{$}\NormalTok{cost)}
+\CommentTok{# calculate the cost of the second solution}
+\KeywordTok{sum}\NormalTok{(s8}\OperatorTok{$}\NormalTok{solution_}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{s8}\OperatorTok{$}\NormalTok{cost)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1193.757
+## [1] 1214.064
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# calculate the proportion of planning units with the same solution values}
-\CommentTok{\# in the first and second solutions}
-\FunctionTok{mean}\NormalTok{(s8}\SpecialCharTok{$}\NormalTok{solution\_1 }\SpecialCharTok{==}\NormalTok{ s8}\SpecialCharTok{$}\NormalTok{solution\_2)}
+\CommentTok{# calculate the proportion of planning units with the same solution values}
+\CommentTok{# in the first and second solutions}
+\KeywordTok{mean}\NormalTok{(s8}\OperatorTok{$}\NormalTok{solution_}\DecValTok{1} \OperatorTok{==}\StringTok{ }\NormalTok{s8}\OperatorTok{$}\NormalTok{solution_}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.9670543
+## [1] 0.9825581
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# plot first solution}
-\FunctionTok{spplot}\NormalTok{(s8, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{),}
-       \AttributeTok{main =} \StringTok{"s8 (solution 1)"}\NormalTok{)}
+\CommentTok{# plot first solution}
+\KeywordTok{spplot}\NormalTok{(s8, }\StringTok{"solution_1"}\NormalTok{, }\DataTypeTok{col.regions =} \KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{),}
+       \DataTypeTok{main =} \StringTok{"s8 (solution 1)"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2805,11 +2801,11 @@ In systematic conservation planning, only rarely do we have data on all of the s
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# plot all solutions}
-\NormalTok{s8\_plots }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"solution\_"}\NormalTok{, }\FunctionTok{seq\_len}\NormalTok{(}\DecValTok{6}\NormalTok{)), }\ControlFlowTok{function}\NormalTok{(x) \{}
-  \FunctionTok{spplot}\NormalTok{(s8, x, }\AttributeTok{main =}\NormalTok{ x, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{))}
+\CommentTok{# plot all solutions}
+\NormalTok{s8_plots <-}\StringTok{ }\KeywordTok{lapply}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(}\StringTok{"solution_"}\NormalTok{, }\KeywordTok{seq_len}\NormalTok{(}\DecValTok{6}\NormalTok{)), }\ControlFlowTok{function}\NormalTok{(x) \{}
+  \KeywordTok{spplot}\NormalTok{(s8, x, }\DataTypeTok{main =}\NormalTok{ x, }\DataTypeTok{col.regions =} \KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{))}
 \NormalTok{\})}
-\FunctionTok{do.call}\NormalTok{(grid.arrange, }\FunctionTok{append}\NormalTok{(s8\_plots, }\FunctionTok{list}\NormalTok{(}\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)))}
+\KeywordTok{do.call}\NormalTok{(grid.arrange, }\KeywordTok{append}\NormalTok{(s8_plots, }\KeywordTok{list}\NormalTok{(}\DataTypeTok{ncol =} \DecValTok{3}\NormalTok{)))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3048,7 +3044,7 @@ This chapter contains the answers to the questions presented in the earlier chap
   \texttt{sum(s8\$solution\_6\ *\ s8\$cost)}
 \item
   No the status of the planning units are very similar in the all of the solutions in the portfolio. \newline
-  \texttt{mean((s8\$solution\_1\ ==\ s8\$solution\_2)\ \&\ (s8\$solution\_1\ ==\ s8\$solution\_3)\ \&\ \ \ \ \ (s8\$solution\_1\ ==\ s8\$solution\_4)\ \&\ (s8\$solution\_1\ ==\ s8\$solution\_5)\ \&\ \ \ \ \ (s8\$solution\_1\ ==\ s8\$solution\_6))}
+  \texttt{mean((s8\$solution\_1\ ==\ s8\$solution\_2)\ \&\ (s8\$solution\_1\ ==\ s8\$solution\_3)\ \&\ \ (s8\$solution\_1\ ==\ s8\$solution\_4)\ \&\ (s8\$solution\_1\ ==\ s8\$solution\_5)\ \&\ \ (s8\$solution\_1\ ==\ s8\$solution\_6))}
 \item
   We should increase the number of the solutions in the portfolio.
 \end{enumerate}
@@ -3064,59 +3060,63 @@ Many thanks to \href{https://icons8.com}{Icons8} for providing the icons used in
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print session information}
-\FunctionTok{sessionInfo}\NormalTok{()}
+\CommentTok{# print session information}
+\KeywordTok{sessionInfo}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## R version 4.1.1 (2021-08-10)
-## Platform: x86_64-w64-mingw32/x64 (64-bit)
-## Running under: Windows 10 x64 (build 19044)
+## R version 4.2.3 (2023-03-15)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 20.04.6 LTS
 ## 
 ## Matrix products: default
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 ## 
 ## locale:
-## [1] LC_COLLATE=English_Canada.1252  LC_CTYPE=English_Canada.1252   
-## [3] LC_MONETARY=English_Canada.1252 LC_NUMERIC=C                   
-## [5] LC_TIME=English_Canada.1252    
+##  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+##  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+##  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+## [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] remotes_2.4.2          knitr_1.42             prioritizrdata_0.3.0.0
-##  [4] gridExtra_2.3          assertthat_0.2.1       scales_1.2.1          
-##  [7] units_0.8-1            mapview_2.11.0         rgeos_0.6-1           
-## [10] raster_3.6-14          rgdal_1.6-5            sp_1.6-0              
-## [13] prioritizr_8.0.0       lubridate_1.9.2        forcats_1.0.0         
-## [16] stringr_1.5.0          dplyr_1.1.0            purrr_1.0.1           
-## [19] readr_2.1.4            tidyr_1.3.0            tibble_3.1.8          
-## [22] ggplot2_3.4.1          tidyverse_2.0.0       
+##  [1] gridExtra_2.3    assertthat_0.2.1 scales_1.2.1     units_0.8-1     
+##  [5] mapview_2.11.0   rgeos_0.6-2      raster_3.6-20    rgdal_1.6-5     
+##  [9] sp_1.6-0         prioritizr_8.0.0 lubridate_1.9.2  forcats_1.0.0   
+## [13] stringr_1.5.0    dplyr_1.1.0      purrr_1.0.1      readr_2.1.4     
+## [17] tidyr_1.3.0      tibble_3.2.1     ggplot2_3.4.1    tidyverse_2.0.0 
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] sass_0.4.5          jsonlite_1.8.4      bslib_0.4.2         highr_0.10         
-##  [5] stats4_4.1.1        slam_0.1-50         yaml_2.3.7          pillar_1.8.1       
-##  [9] lattice_0.20-45     glue_1.6.2          exactextractr_0.9.1 digest_0.6.31      
-## [13] colorspace_2.1-0    htmltools_0.5.4     Matrix_1.5-3        pkgconfig_2.0.3    
-## [17] bookdown_0.33       webshot_0.5.4       terra_1.7-3         satellite_1.0.4    
-## [21] tzdb_0.3.0          timechange_0.2.0    proxy_0.4-27        generics_0.1.3     
-## [25] ellipsis_0.3.2      cachem_1.0.7        withr_2.5.0         cli_3.6.0          
-## [29] magrittr_2.0.3      evaluate_0.20       fansi_1.0.4         nlme_3.1-162       
-## [33] class_7.3-21        tools_4.1.1         hms_1.1.2           lifecycle_1.0.3    
-## [37] munsell_0.5.0       compiler_4.1.1      jquerylib_0.1.4     e1071_1.7-13       
-## [41] gurobi_10.0-1       rlang_1.0.6         classInt_0.4-9      grid_4.1.1         
-## [45] rstudioapi_0.14     htmlwidgets_1.6.1   crosstalk_1.2.0     leafem_0.2.0       
-## [49] base64enc_0.1-3     rmarkdown_2.20      gtable_0.3.1        codetools_0.2-19   
-## [53] DBI_1.1.3           R6_2.5.1            fastmap_1.1.1       utf8_1.2.3         
-## [57] lpsymphony_1.26.3   KernSmooth_2.23-20  ape_5.7             stringi_1.7.12     
-## [61] parallel_4.1.1      Rcpp_1.0.10         vctrs_0.5.2         sf_1.0-9           
-## [65] png_0.1-8           leaflet_2.1.1       tidyselect_1.2.0    xfun_0.37
+##  [1] Rcpp_1.0.10         gurobi_10.0-1       ape_5.7-1          
+##  [4] lattice_0.20-45     png_0.1-8           class_7.3-21       
+##  [7] digest_0.6.31       utf8_1.2.3          slam_0.1-50        
+## [10] R6_2.5.1            stats4_4.2.3        evaluate_0.20      
+## [13] e1071_1.7-13        pillar_1.9.0        rlang_1.1.0        
+## [16] rstudioapi_0.14     Matrix_1.5-3        rmarkdown_2.20     
+## [19] exactextractr_0.9.1 webshot_0.5.4       htmlwidgets_1.6.1  
+## [22] munsell_0.5.0       proxy_0.4-27        compiler_4.2.3     
+## [25] xfun_0.37           pkgconfig_2.0.3     base64enc_0.1-3    
+## [28] htmltools_0.5.4     tidyselect_1.2.0    bookdown_0.33      
+## [31] codetools_0.2-19    fansi_1.0.4         tzdb_0.3.0         
+## [34] withr_2.5.0         sf_1.0-12           grid_4.2.3         
+## [37] satellite_1.0.4     nlme_3.1-162        gtable_0.3.1       
+## [40] lifecycle_1.0.3     DBI_1.1.3           magrittr_2.0.3     
+## [43] KernSmooth_2.23-20  cli_3.6.1           stringi_1.7.12     
+## [46] leaflet_2.1.1       lpsymphony_1.26.3   ellipsis_0.3.2     
+## [49] generics_0.1.3      vctrs_0.6.1         tools_4.2.3        
+## [52] leafem_0.2.0        glue_1.6.2          hms_1.1.2          
+## [55] crosstalk_1.2.0     parallel_4.2.3      fastmap_1.1.1      
+## [58] yaml_2.3.7          timechange_0.2.0    colorspace_2.1-0   
+## [61] terra_1.7-18        classInt_0.4-9      knitr_1.42
 \end{verbatim}
 
 \hypertarget{references}{%
 \chapter{References}\label{references}}
 
-  \bibliography{references.bib}
+\bibliography{references.bib}
 
 \end{document}

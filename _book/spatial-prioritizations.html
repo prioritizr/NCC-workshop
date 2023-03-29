@@ -23,7 +23,7 @@
 <meta name="author" content="Jeffrey O. Hanson" />
 
 
-<meta name="date" content="2023-03-28" />
+<meta name="date" content="2023-03-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,27 +55,25 @@
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -84,15 +82,15 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +103,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -119,28 +117,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,33 +135,28 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome!</a></li>
-<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
-<ul>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
 <li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
-<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#setup"><i class="fa fa-check"></i><b>2.2</b> Setting up your computer</a>
-<ul>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#setup"><i class="fa fa-check"></i><b>2.2</b> Setting up your computer</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="introduction.html"><a href="introduction.html#r"><i class="fa fa-check"></i><b>2.2.1</b> R</a></li>
 <li class="chapter" data-level="2.2.2" data-path="introduction.html"><a href="introduction.html#rstudio"><i class="fa fa-check"></i><b>2.2.2</b> RStudio</a></li>
 <li class="chapter" data-level="2.2.3" data-path="introduction.html"><a href="introduction.html#r-packages"><i class="fa fa-check"></i><b>2.2.3</b> R packages</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#further-reading"><i class="fa fa-check"></i><b>2.3</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
-<ul>
+<li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a><ul>
 <li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#starting-out"><i class="fa fa-check"></i><b>3.1</b> Starting out</a></li>
 <li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#attaching-packages"><i class="fa fa-check"></i><b>3.2</b> Attaching packages</a></li>
 <li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#data-import"><i class="fa fa-check"></i><b>3.3</b> Data import</a></li>
 <li class="chapter" data-level="3.4" data-path="data.html"><a href="data.html#planning-unit-data"><i class="fa fa-check"></i><b>3.4</b> Planning unit data</a></li>
 <li class="chapter" data-level="3.5" data-path="data.html"><a href="data.html#vegetation-data"><i class="fa fa-check"></i><b>3.5</b> Vegetation data</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="gap-analysis.html"><a href="gap-analysis.html"><i class="fa fa-check"></i><b>4</b> Gap analysis</a>
-<ul>
+<li class="chapter" data-level="4" data-path="gap-analysis.html"><a href="gap-analysis.html"><i class="fa fa-check"></i><b>4</b> Gap analysis</a><ul>
 <li class="chapter" data-level="4.1" data-path="gap-analysis.html"><a href="gap-analysis.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
 <li class="chapter" data-level="4.2" data-path="gap-analysis.html"><a href="gap-analysis.html#feature-abundance"><i class="fa fa-check"></i><b>4.2</b> Feature abundance</a></li>
 <li class="chapter" data-level="4.3" data-path="gap-analysis.html"><a href="gap-analysis.html#feature-representation-by-protected-areas"><i class="fa fa-check"></i><b>4.3</b> Feature representation by protected areas</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html"><i class="fa fa-check"></i><b>5</b> Spatial prioritizations</a>
-<ul>
+<li class="chapter" data-level="5" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html"><i class="fa fa-check"></i><b>5</b> Spatial prioritizations</a><ul>
 <li class="chapter" data-level="5.1" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html#introduction-2"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
 <li class="chapter" data-level="5.2" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html#starting-out-simple"><i class="fa fa-check"></i><b>5.2</b> Starting out simple</a></li>
 <li class="chapter" data-level="5.3" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html#adding-complexity"><i class="fa fa-check"></i><b>5.3</b> Adding complexity</a></li>
@@ -193,20 +164,16 @@ div.csl-indent {
 <li class="chapter" data-level="5.5" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html#budget-limited-prioritizations"><i class="fa fa-check"></i><b>5.5</b> Budget limited prioritizations</a></li>
 <li class="chapter" data-level="5.6" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html#solution-portfolios"><i class="fa fa-check"></i><b>5.6</b> Solution portfolios</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>6</b> Answers</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="answers.html"><a href="answers.html#data-1"><i class="fa fa-check"></i><b>6.1</b> Data</a>
-<ul>
+<li class="chapter" data-level="6" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>6</b> Answers</a><ul>
+<li class="chapter" data-level="6.1" data-path="answers.html"><a href="answers.html#data-1"><i class="fa fa-check"></i><b>6.1</b> Data</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="answers.html"><a href="answers.html#planning-unit-data-1"><i class="fa fa-check"></i><b>6.1.1</b> Planning unit data</a></li>
 <li class="chapter" data-level="6.1.2" data-path="answers.html"><a href="answers.html#vegetation-data-1"><i class="fa fa-check"></i><b>6.1.2</b> Vegetation data</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="answers.html"><a href="answers.html#gap-analysis-1"><i class="fa fa-check"></i><b>6.2</b> Gap analysis</a>
-<ul>
+<li class="chapter" data-level="6.2" data-path="answers.html"><a href="answers.html#gap-analysis-1"><i class="fa fa-check"></i><b>6.2</b> Gap analysis</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="answers.html"><a href="answers.html#feature-abundance-1"><i class="fa fa-check"></i><b>6.2.1</b> Feature abundance</a></li>
 <li class="chapter" data-level="6.2.2" data-path="answers.html"><a href="answers.html#feature-representation-by-protected-areas-1"><i class="fa fa-check"></i><b>6.2.2</b> Feature representation by protected areas</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="answers.html"><a href="answers.html#spatial-prioritizations-1"><i class="fa fa-check"></i><b>6.3</b> Spatial prioritizations</a>
-<ul>
+<li class="chapter" data-level="6.3" data-path="answers.html"><a href="answers.html#spatial-prioritizations-1"><i class="fa fa-check"></i><b>6.3</b> Spatial prioritizations</a><ul>
 <li class="chapter" data-level="6.3.1" data-path="answers.html"><a href="answers.html#starting-out-simple-1"><i class="fa fa-check"></i><b>6.3.1</b> Starting out simple</a></li>
 <li class="chapter" data-level="6.3.2" data-path="answers.html"><a href="answers.html#adding-complexity-1"><i class="fa fa-check"></i><b>6.3.2</b> Adding complexity</a></li>
 <li class="chapter" data-level="6.3.3" data-path="answers.html"><a href="answers.html#penalizing-fragmentation-1"><i class="fa fa-check"></i><b>6.3.3</b> Penalizing fragmentation</a></li>
@@ -234,17 +201,17 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="spatial-prioritizations" class="section level1 hasAnchor" number="5">
+<div id="spatial-prioritizations" class="section level1 hasAnchor">
 <h1><span class="header-section-number">Chapter 5</span> Spatial prioritizations<a href="spatial-prioritizations.html#spatial-prioritizations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="introduction-2" class="section level2 hasAnchor" number="5.1">
+<div id="introduction-2" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.1</span> Introduction<a href="spatial-prioritizations.html#introduction-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Here we will develop prioritizations to identify priority areas for protected area establishment. Its worth noting that <a href="https://prioritizr.net/">prioritizr</a>, <a href="http://marxan.org/">Marxan</a>, and <a href="https://www.helsinki.fi/en/researchgroups/digital-geography-lab/software-developed-in-cbig#section-52992">Zonation</a> are all decision support tools. This means that they are designed to help you make decisions—they can’t make decisions for you.</p>
 </div>
-<div id="starting-out-simple" class="section level2 hasAnchor" number="5.2">
+<div id="starting-out-simple" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.2</span> Starting out simple<a href="spatial-prioritizations.html#starting-out-simple" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To start things off, let’s keep things simple. Let’s create a prioritization using the <a href="https://prioritizr.net/reference/add_min_set_objective.html">minimum set formulation of the reserve selection problem</a>. This formulation means that we want a solution that will meet the targets for our biodiversity features for minimum cost. Here, we will set 5% targets for each vegetation class and use the data in the <code>cost</code> column to specify acquisition costs. Unlike Marxan, we do not have to calibrate species penalty factors (SPFs) to ensure that our target are met—prioritizr should always return solutions to minimum set problems where all the targets are met. Although we strongly recommend using <a href="https://www.gurobi.com/">Gurobi</a> to solve problems (with <a href="https://prioritizr.net/reference/add_gurobi_solver.html"><code>add_gurobi_solver</code></a>), we will use the <a href="https://prioritizr.net/reference/add_lsymphony_solver.html">lpsymphony solver</a> in this workshop since it is easier to install. The Gurobi solver is much faster than the lpsymphony solver (<a href="https://prioritizr.net/articles/gurobi_installation.html">see here for installation instructions</a>).</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="spatial-prioritizations.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print planning unit data</span></span>
-<span id="cb147-2"><a href="spatial-prioritizations.html#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pu_data)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1"><span class="co"># print planning unit data</span></a>
+<a class="sourceLine" id="cb128-2" title="2"><span class="kw">print</span>(pu_data)</a></code></pre></div>
 <pre><code>## class       : SpatialPolygonsDataFrame 
 ## features    : 516 
 ## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
@@ -253,43 +220,42 @@ div.csl-indent {
 ## names       :   id,             cost, status, locked_in, locked_out, pa_status 
 ## min values  :  557, 3.59717531470679,      0,         0,          0,         0 
 ## max values  : 1130,  47.238336402701,      2,         1,          1,         1</code></pre>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="spatial-prioritizations.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make prioritization problem</span></span>
-<span id="cb149-2"><a href="spatial-prioritizations.html#cb149-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">problem</span>(pu_data, veg_data, <span class="at">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb149-3"><a href="spatial-prioritizations.html#cb149-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_min_set_objective</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb149-4"><a href="spatial-prioritizations.html#cb149-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_relative_targets</span>(<span class="fl">0.05</span>) <span class="sc">%&gt;%</span> <span class="co"># 5% representation targets</span></span>
-<span id="cb149-5"><a href="spatial-prioritizations.html#cb149-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_binary_decisions</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb149-6"><a href="spatial-prioritizations.html#cb149-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_lpsymphony_solver</span>(<span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1"><span class="co"># make prioritization problem</span></a>
+<a class="sourceLine" id="cb130-2" title="2">p1 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb130-3" title="3"><span class="st">      </span><span class="kw">add_min_set_objective</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb130-4" title="4"><span class="st">      </span><span class="kw">add_relative_targets</span>(<span class="fl">0.05</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 5% representation targets</span></a>
+<a class="sourceLine" id="cb130-5" title="5"><span class="st">      </span><span class="kw">add_binary_decisions</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb130-6" title="6"><span class="st">      </span><span class="kw">add_lpsymphony_solver</span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.</code></pre>
+## ℹ Use `sf::st_as_sf()` to convert data for future compatibility.</code></pre>
 <pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="spatial-prioritizations.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print problem</span></span>
-<span id="cb153-2"><a href="spatial-prioritizations.html#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p1)</span></code></pre></div>
+## ℹ Use `terra::rast()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" title="1"><span class="co"># print problem</span></a>
+<a class="sourceLine" id="cb133-2" title="2"><span class="kw">print</span>(p1)</a></code></pre></div>
 <pre><code>## A conservation problem (&lt;ConservationProblem&gt;)</code></pre>
-<pre><code>## +@data</code></pre>
-<pre><code>## |+@features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot;, &quot;vegetation_5&quot; , ... (32 total)</code></pre>
-<pre><code>## |\@planning units:</code></pre>
-<pre><code>## | +@data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
-<pre><code>## | +@costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
-<pre><code>## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
-<pre><code>## | \@CRS:        WGS 84 / UTM zone 55S</code></pre>
-<pre><code>## \@formulation</code></pre>
-<pre><code>##  +@objective:   minimum set objective</code></pre>
-<pre><code>##  +@penalties:   none specified</code></pre>
-<pre><code>##  +@targets:     relative targets (between 0.05 and 0.05)</code></pre>
-<pre><code>##  +@constraints: none specified</code></pre>
-<pre><code>##  +@decisions:   binary decision</code></pre>
-<pre><code>##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)</code></pre>
-<pre><code>##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)</code></pre>
-<pre><code>## # i Use `summary(...)` to see complete formulation.</code></pre>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="spatial-prioritizations.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co"># solve problem</span></span>
-<span id="cb171-2"><a href="spatial-prioritizations.html#cb171-2" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">solve</span>(p1)</span>
-<span id="cb171-3"><a href="spatial-prioritizations.html#cb171-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb171-4"><a href="spatial-prioritizations.html#cb171-4" aria-hidden="true" tabindex="-1"></a><span class="co"># print solution, the solution_1 column contains the solution values</span></span>
-<span id="cb171-5"><a href="spatial-prioritizations.html#cb171-5" aria-hidden="true" tabindex="-1"></a><span class="co"># indicating if a planning unit is (1) selected or (0) not</span></span>
-<span id="cb171-6"><a href="spatial-prioritizations.html#cb171-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(s1)</span></code></pre></div>
+<pre><code>## ├•data</code></pre>
+<pre><code>## │├•features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot; , … (32 total)</code></pre>
+<pre><code>## │└•planning units:</code></pre>
+<pre><code>## │ ├•data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
+<pre><code>## │ ├•costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
+<pre><code>## │ ├•extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
+<pre><code>## │ └•CRS:        WGS 84 / UTM zone 55S</code></pre>
+<pre><code>## ├•formulation</code></pre>
+<pre><code>## │├•objective:   minimum set objective</code></pre>
+<pre><code>## │├•penalties:   none specified</code></pre>
+<pre><code>## │├•targets:     relative targets (between 0.05 and 0.05)</code></pre>
+<pre><code>## │├•constraints: none specified</code></pre>
+<pre><code>## │└•decisions:   binary decision</code></pre>
+<pre><code>## └•optimization</code></pre>
+<pre><code>##  ├•portfolio:   shuffle portfolio (`number_solutions` = 1, …)</code></pre>
+<pre><code>##  └•solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, …)</code></pre>
+<pre><code>## # ℹ Use `summary(...)` to see complete formulation.</code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" title="1"><span class="co"># solve problem</span></a>
+<a class="sourceLine" id="cb152-2" title="2">s1 &lt;-<span class="st"> </span><span class="kw">solve</span>(p1)</a>
+<a class="sourceLine" id="cb152-3" title="3"></a>
+<a class="sourceLine" id="cb152-4" title="4"><span class="co"># print solution, the solution_1 column contains the solution values</span></a>
+<a class="sourceLine" id="cb152-5" title="5"><span class="co"># indicating if a planning unit is (1) selected or (0) not</span></a>
+<a class="sourceLine" id="cb152-6" title="6"><span class="kw">print</span>(s1)</a></code></pre></div>
 <pre><code>## class       : SpatialPolygonsDataFrame 
 ## features    : 516 
 ## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
@@ -298,14 +264,14 @@ div.csl-indent {
 ## names       :   id,             cost, status, locked_in, locked_out, pa_status, solution_1 
 ## min values  :  557, 3.59717531470679,      0,         0,          0,         0,          0 
 ## max values  : 1130,  47.238336402701,      2,         1,          1,         1,          1</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="spatial-prioritizations.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate number of planning units selected in the prioritization</span></span>
-<span id="cb173-2"><a href="spatial-prioritizations.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(s1<span class="sc">$</span>solution_1)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1"><span class="co"># calculate number of planning units selected in the prioritization</span></a>
+<a class="sourceLine" id="cb154-2" title="2"><span class="kw">sum</span>(s1<span class="op">$</span>solution_<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## [1] 15</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="spatial-prioritizations.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate total cost of the prioritization</span></span>
-<span id="cb175-2"><a href="spatial-prioritizations.html#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(s1<span class="sc">$</span>solution_1 <span class="sc">*</span> s1<span class="sc">$</span>cost)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1"><span class="co"># calculate total cost of the prioritization</span></a>
+<a class="sourceLine" id="cb156-2" title="2"><span class="kw">sum</span>(s1<span class="op">$</span>solution_<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>s1<span class="op">$</span>cost)</a></code></pre></div>
 <pre><code>## [1] 386.4116</code></pre>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="spatial-prioritizations.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot solution</span></span>
-<span id="cb177-2"><a href="spatial-prioritizations.html#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(s1, <span class="st">&quot;solution_1&quot;</span>, <span class="at">col.regions =</span> <span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="at">main =</span> <span class="st">&quot;s1&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1"><span class="co"># plot solution</span></a>
+<a class="sourceLine" id="cb158-2" title="2"><span class="kw">spplot</span>(s1, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;s1&quot;</span>)</a></code></pre></div>
 <p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-34-1.png" width="65%" style="display: block; margin: auto;" /></p>
 <p>Now let’s examine the solution.</p>
 
@@ -316,131 +282,130 @@ div.csl-indent {
 <li>Can you verify that all of the targets were met in the prioritization (hint: <code>feature_representation(p1, s1[, "solution_1"])</code>)?</li>
 </ol>
 </div>
+
 </div>
-<div id="adding-complexity" class="section level2 hasAnchor" number="5.3">
+<div id="adding-complexity" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.3</span> Adding complexity<a href="spatial-prioritizations.html#adding-complexity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Our first prioritization suffers many limitations, so let’s add additional constraints to the problem to make it more useful. First, let’s lock in planing units that are already by covered protected areas. If some vegetation communities are already secured inside existing protected areas, then we might not need to add as many new protected areas to the existing protected area system to meet their targets. Since our planning unit data (<code>pu_da</code>) already contains this information in the <code>locked_in</code> column, we can use this column name to specify which planning units should be locked in.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="spatial-prioritizations.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make prioritization problem</span></span>
-<span id="cb178-2"><a href="spatial-prioritizations.html#cb178-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">problem</span>(pu_data, veg_data, <span class="at">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb178-3"><a href="spatial-prioritizations.html#cb178-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_min_set_objective</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb178-4"><a href="spatial-prioritizations.html#cb178-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_relative_targets</span>(<span class="fl">0.05</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb178-5"><a href="spatial-prioritizations.html#cb178-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb178-6"><a href="spatial-prioritizations.html#cb178-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_binary_decisions</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb178-7"><a href="spatial-prioritizations.html#cb178-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_lpsymphony_solver</span>(<span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" title="1"><span class="co"># make prioritization problem</span></a>
+<a class="sourceLine" id="cb159-2" title="2">p2 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb159-3" title="3"><span class="st">      </span><span class="kw">add_min_set_objective</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb159-4" title="4"><span class="st">      </span><span class="kw">add_relative_targets</span>(<span class="fl">0.05</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb159-5" title="5"><span class="st">      </span><span class="kw">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb159-6" title="6"><span class="st">      </span><span class="kw">add_binary_decisions</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb159-7" title="7"><span class="st">      </span><span class="kw">add_lpsymphony_solver</span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.</code></pre>
+## ℹ Use `sf::st_as_sf()` to convert data for future compatibility.</code></pre>
 <pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="spatial-prioritizations.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print problem</span></span>
-<span id="cb182-2"><a href="spatial-prioritizations.html#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p2)</span></code></pre></div>
+## ℹ Use `terra::rast()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1"><span class="co"># print problem</span></a>
+<a class="sourceLine" id="cb162-2" title="2"><span class="kw">print</span>(p2)</a></code></pre></div>
 <pre><code>## A conservation problem (&lt;ConservationProblem&gt;)</code></pre>
-<pre><code>## +@data</code></pre>
-<pre><code>## |+@features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot;, &quot;vegetation_5&quot; , ... (32 total)</code></pre>
-<pre><code>## |\@planning units:</code></pre>
-<pre><code>## | +@data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
-<pre><code>## | +@costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
-<pre><code>## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
-<pre><code>## | \@CRS:        WGS 84 / UTM zone 55S</code></pre>
-<pre><code>## \@formulation</code></pre>
-<pre><code>##  +@objective:   minimum set objective</code></pre>
-<pre><code>##  +@penalties:   none specified</code></pre>
-<pre><code>##  +@targets:     relative targets (between 0.05 and 0.05)</code></pre>
-<pre><code>##  +@constraints:</code></pre>
-<pre><code>##  |\@1:          locked in constraints (198 planning units)</code></pre>
-<pre><code>##  +@decisions:   binary decision</code></pre>
-<pre><code>##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)</code></pre>
-<pre><code>##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)</code></pre>
-<pre><code>## # i Use `summary(...)` to see complete formulation.</code></pre>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="spatial-prioritizations.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="co"># solve problem</span></span>
-<span id="cb201-2"><a href="spatial-prioritizations.html#cb201-2" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">solve</span>(p2)</span>
-<span id="cb201-3"><a href="spatial-prioritizations.html#cb201-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-4"><a href="spatial-prioritizations.html#cb201-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot solution</span></span>
-<span id="cb201-5"><a href="spatial-prioritizations.html#cb201-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(s2, <span class="st">&quot;solution_1&quot;</span>, <span class="at">col.regions =</span> <span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="at">main =</span> <span class="st">&quot;s2&quot;</span>)</span></code></pre></div>
+<pre><code>## ├•data</code></pre>
+<pre><code>## │├•features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot; , … (32 total)</code></pre>
+<pre><code>## │└•planning units:</code></pre>
+<pre><code>## │ ├•data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
+<pre><code>## │ ├•costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
+<pre><code>## │ ├•extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
+<pre><code>## │ └•CRS:        WGS 84 / UTM zone 55S</code></pre>
+<pre><code>## ├•formulation</code></pre>
+<pre><code>## │├•objective:   minimum set objective</code></pre>
+<pre><code>## │├•penalties:   none specified</code></pre>
+<pre><code>## │├•targets:     relative targets (between 0.05 and 0.05)</code></pre>
+<pre><code>## │├•constraints:</code></pre>
+<pre><code>## ││└•1:          locked in constraints (198 planning units)</code></pre>
+<pre><code>## │└•decisions:   binary decision</code></pre>
+<pre><code>## └•optimization</code></pre>
+<pre><code>##  ├•portfolio:   shuffle portfolio (`number_solutions` = 1, …)</code></pre>
+<pre><code>##  └•solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, …)</code></pre>
+<pre><code>## # ℹ Use `summary(...)` to see complete formulation.</code></pre>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1"><span class="co"># solve problem</span></a>
+<a class="sourceLine" id="cb182-2" title="2">s2 &lt;-<span class="st"> </span><span class="kw">solve</span>(p2)</a>
+<a class="sourceLine" id="cb182-3" title="3"></a>
+<a class="sourceLine" id="cb182-4" title="4"><span class="co"># plot solution</span></a>
+<a class="sourceLine" id="cb182-5" title="5"><span class="kw">spplot</span>(s2, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;s2&quot;</span>)</a></code></pre></div>
 <p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-36-1.png" width="65%" style="display: block; margin: auto;" /></p>
 <p>Let’s pretend that we talked to an expert on the vegetation communities in our study system and they recommended that a 20% target was needed for each vegetation class. So, armed with this information, let’s set the targets to 20%.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="spatial-prioritizations.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make prioritization problem</span></span>
-<span id="cb202-2"><a href="spatial-prioritizations.html#cb202-2" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">problem</span>(pu_data, veg_data, <span class="at">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb202-3"><a href="spatial-prioritizations.html#cb202-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_min_set_objective</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb202-4"><a href="spatial-prioritizations.html#cb202-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_relative_targets</span>(<span class="fl">0.2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb202-5"><a href="spatial-prioritizations.html#cb202-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb202-6"><a href="spatial-prioritizations.html#cb202-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_binary_decisions</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb202-7"><a href="spatial-prioritizations.html#cb202-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_lpsymphony_solver</span>(<span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1"><span class="co"># make prioritization problem</span></a>
+<a class="sourceLine" id="cb183-2" title="2">p3 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb183-3" title="3"><span class="st">      </span><span class="kw">add_min_set_objective</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb183-4" title="4"><span class="st">      </span><span class="kw">add_relative_targets</span>(<span class="fl">0.2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb183-5" title="5"><span class="st">      </span><span class="kw">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb183-6" title="6"><span class="st">      </span><span class="kw">add_binary_decisions</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb183-7" title="7"><span class="st">      </span><span class="kw">add_lpsymphony_solver</span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.</code></pre>
+## ℹ Use `sf::st_as_sf()` to convert data for future compatibility.</code></pre>
 <pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="spatial-prioritizations.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print problem</span></span>
-<span id="cb206-2"><a href="spatial-prioritizations.html#cb206-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p3)</span></code></pre></div>
+## ℹ Use `terra::rast()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" title="1"><span class="co"># print problem</span></a>
+<a class="sourceLine" id="cb186-2" title="2"><span class="kw">print</span>(p3)</a></code></pre></div>
 <pre><code>## A conservation problem (&lt;ConservationProblem&gt;)</code></pre>
-<pre><code>## +@data</code></pre>
-<pre><code>## |+@features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot;, &quot;vegetation_5&quot; , ... (32 total)</code></pre>
-<pre><code>## |\@planning units:</code></pre>
-<pre><code>## | +@data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
-<pre><code>## | +@costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
-<pre><code>## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
-<pre><code>## | \@CRS:        WGS 84 / UTM zone 55S</code></pre>
-<pre><code>## \@formulation</code></pre>
-<pre><code>##  +@objective:   minimum set objective</code></pre>
-<pre><code>##  +@penalties:   none specified</code></pre>
-<pre><code>##  +@targets:     relative targets (between 0.2 and 0.2)</code></pre>
-<pre><code>##  +@constraints:</code></pre>
-<pre><code>##  |\@1:          locked in constraints (198 planning units)</code></pre>
-<pre><code>##  +@decisions:   binary decision</code></pre>
-<pre><code>##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)</code></pre>
-<pre><code>##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)</code></pre>
-<pre><code>## # i Use `summary(...)` to see complete formulation.</code></pre>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="spatial-prioritizations.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="co"># solve problem</span></span>
-<span id="cb225-2"><a href="spatial-prioritizations.html#cb225-2" aria-hidden="true" tabindex="-1"></a>s3 <span class="ot">&lt;-</span> <span class="fu">solve</span>(p3)</span>
-<span id="cb225-3"><a href="spatial-prioritizations.html#cb225-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb225-4"><a href="spatial-prioritizations.html#cb225-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot solution</span></span>
-<span id="cb225-5"><a href="spatial-prioritizations.html#cb225-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(s3, <span class="st">&quot;solution_1&quot;</span>, <span class="at">col.regions =</span> <span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="at">main =</span> <span class="st">&quot;s3&quot;</span>)</span></code></pre></div>
+<pre><code>## ├•data</code></pre>
+<pre><code>## │├•features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot; , … (32 total)</code></pre>
+<pre><code>## │└•planning units:</code></pre>
+<pre><code>## │ ├•data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
+<pre><code>## │ ├•costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
+<pre><code>## │ ├•extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
+<pre><code>## │ └•CRS:        WGS 84 / UTM zone 55S</code></pre>
+<pre><code>## ├•formulation</code></pre>
+<pre><code>## │├•objective:   minimum set objective</code></pre>
+<pre><code>## │├•penalties:   none specified</code></pre>
+<pre><code>## │├•targets:     relative targets (between 0.2 and 0.2)</code></pre>
+<pre><code>## │├•constraints:</code></pre>
+<pre><code>## ││└•1:          locked in constraints (198 planning units)</code></pre>
+<pre><code>## │└•decisions:   binary decision</code></pre>
+<pre><code>## └•optimization</code></pre>
+<pre><code>##  ├•portfolio:   shuffle portfolio (`number_solutions` = 1, …)</code></pre>
+<pre><code>##  └•solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, …)</code></pre>
+<pre><code>## # ℹ Use `summary(...)` to see complete formulation.</code></pre>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1"><span class="co"># solve problem</span></a>
+<a class="sourceLine" id="cb206-2" title="2">s3 &lt;-<span class="st"> </span><span class="kw">solve</span>(p3)</a>
+<a class="sourceLine" id="cb206-3" title="3"></a>
+<a class="sourceLine" id="cb206-4" title="4"><span class="co"># plot solution</span></a>
+<a class="sourceLine" id="cb206-5" title="5"><span class="kw">spplot</span>(s3, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;s3&quot;</span>)</a></code></pre></div>
 <p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-37-1.png" width="65%" style="display: block; margin: auto;" /></p>
 <p>Next, let’s lock out highly degraded areas. Similar to before, this data is present in our planning unit data so we can use the <code>locked_out</code> column name to achieve this.</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="spatial-prioritizations.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make prioritization problem</span></span>
-<span id="cb226-2"><a href="spatial-prioritizations.html#cb226-2" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">problem</span>(pu_data, veg_data, <span class="at">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb226-3"><a href="spatial-prioritizations.html#cb226-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_min_set_objective</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb226-4"><a href="spatial-prioritizations.html#cb226-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_relative_targets</span>(<span class="fl">0.1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb226-5"><a href="spatial-prioritizations.html#cb226-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb226-6"><a href="spatial-prioritizations.html#cb226-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_locked_out_constraints</span>(<span class="st">&quot;locked_out&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb226-7"><a href="spatial-prioritizations.html#cb226-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_binary_decisions</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb226-8"><a href="spatial-prioritizations.html#cb226-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_lpsymphony_solver</span>(<span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1"><span class="co"># make prioritization problem</span></a>
+<a class="sourceLine" id="cb207-2" title="2">p4 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb207-3" title="3"><span class="st">      </span><span class="kw">add_min_set_objective</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb207-4" title="4"><span class="st">      </span><span class="kw">add_relative_targets</span>(<span class="fl">0.1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb207-5" title="5"><span class="st">      </span><span class="kw">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb207-6" title="6"><span class="st">      </span><span class="kw">add_locked_out_constraints</span>(<span class="st">&quot;locked_out&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb207-7" title="7"><span class="st">      </span><span class="kw">add_binary_decisions</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb207-8" title="8"><span class="st">      </span><span class="kw">add_lpsymphony_solver</span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.</code></pre>
+## ℹ Use `sf::st_as_sf()` to convert data for future compatibility.</code></pre>
 <pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="spatial-prioritizations.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print problem</span></span>
-<span id="cb230-2"><a href="spatial-prioritizations.html#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p4)</span></code></pre></div>
+## ℹ Use `terra::rast()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1"><span class="co"># print problem</span></a>
+<a class="sourceLine" id="cb210-2" title="2"><span class="kw">print</span>(p4)</a></code></pre></div>
 <pre><code>## A conservation problem (&lt;ConservationProblem&gt;)</code></pre>
-<pre><code>## +@data</code></pre>
-<pre><code>## |+@features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot;, &quot;vegetation_5&quot; , ... (32 total)</code></pre>
-<pre><code>## |\@planning units:</code></pre>
-<pre><code>## | +@data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
-<pre><code>## | +@costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
-<pre><code>## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
-<pre><code>## | \@CRS:        WGS 84 / UTM zone 55S</code></pre>
-<pre><code>## \@formulation</code></pre>
-<pre><code>##  +@objective:   minimum set objective</code></pre>
-<pre><code>##  +@penalties:   none specified</code></pre>
-<pre><code>##  +@targets:     relative targets (between 0.1 and 0.1)</code></pre>
-<pre><code>##  +@constraints:</code></pre>
-<pre><code>##  |+@1:          locked in constraints (198 planning units)</code></pre>
-<pre><code>##  |\@2:          locked out constraints (6 planning units)</code></pre>
-<pre><code>##  +@decisions:   binary decision</code></pre>
-<pre><code>##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)</code></pre>
-<pre><code>##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)</code></pre>
-<pre><code>## # i Use `summary(...)` to see complete formulation.</code></pre>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="spatial-prioritizations.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="co"># solve problem</span></span>
-<span id="cb250-2"><a href="spatial-prioritizations.html#cb250-2" aria-hidden="true" tabindex="-1"></a>s4 <span class="ot">&lt;-</span> <span class="fu">solve</span>(p4)</span>
-<span id="cb250-3"><a href="spatial-prioritizations.html#cb250-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb250-4"><a href="spatial-prioritizations.html#cb250-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot solution</span></span>
-<span id="cb250-5"><a href="spatial-prioritizations.html#cb250-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(s4, <span class="st">&quot;solution_1&quot;</span>, <span class="at">col.regions =</span> <span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="at">main =</span> <span class="st">&quot;s4&quot;</span>)</span></code></pre></div>
+<pre><code>## ├•data</code></pre>
+<pre><code>## │├•features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot; , … (32 total)</code></pre>
+<pre><code>## │└•planning units:</code></pre>
+<pre><code>## │ ├•data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
+<pre><code>## │ ├•costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
+<pre><code>## │ ├•extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
+<pre><code>## │ └•CRS:        WGS 84 / UTM zone 55S</code></pre>
+<pre><code>## ├•formulation</code></pre>
+<pre><code>## │├•objective:   minimum set objective</code></pre>
+<pre><code>## │├•penalties:   none specified</code></pre>
+<pre><code>## │├•targets:     relative targets (between 0.1 and 0.1)</code></pre>
+<pre><code>## │├•constraints:</code></pre>
+<pre><code>## ││├•1:          locked in constraints (198 planning units)</code></pre>
+<pre><code>## ││└•2:          locked out constraints (6 planning units)</code></pre>
+<pre><code>## │└•decisions:   binary decision</code></pre>
+<pre><code>## └•optimization</code></pre>
+<pre><code>##  ├•portfolio:   shuffle portfolio (`number_solutions` = 1, …)</code></pre>
+<pre><code>##  └•solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, …)</code></pre>
+<pre><code>## # ℹ Use `summary(...)` to see complete formulation.</code></pre>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1"><span class="co"># solve problem</span></a>
+<a class="sourceLine" id="cb231-2" title="2">s4 &lt;-<span class="st"> </span><span class="kw">solve</span>(p4)</a>
+<a class="sourceLine" id="cb231-3" title="3"></a>
+<a class="sourceLine" id="cb231-4" title="4"><span class="co"># plot solution</span></a>
+<a class="sourceLine" id="cb231-5" title="5"><span class="kw">spplot</span>(s4, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;s4&quot;</span>)</a></code></pre></div>
 <p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-39-1.png" width="65%" style="display: block; margin: auto;" /></p>
+
 <p>Now, let’s compare the solutions.</p>
 
 <div class="rmdquestion">
@@ -454,54 +419,55 @@ div.csl-indent {
 <li>What happens if you specify targets that exceed the total amount of vegetation in the study area and try to solve the problem? You can do this by modifying the code to make <code>p4</code> with <code>add_absolute_targets(1000)</code> instead of <code>add_relative_targets(0.2)</code> and generating a new solution.</li>
 </ol>
 </div>
+
 </div>
-<div id="penalizing-fragmentation" class="section level2 hasAnchor" number="5.4">
+<div id="penalizing-fragmentation" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.4</span> Penalizing fragmentation<a href="spatial-prioritizations.html#penalizing-fragmentation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Plans for protected area systems should facilitate gene flow and dispersal between individual reserves in the system. However, the prioritizations we have made so far have been highly fragmented. Similar to the Marxan decision support tool, we can add penalties to our conservation planning problem to penalize fragmentation (i.e. total exposed boundary length) and we also need to set a useful penalty value when adding such penalties (akin to Marxan’s boundary length multiplier value; BLM). If we set our penalty value too low, then we will end up with a solution that is identical to the solution with no added penalties. If we set our penalty value too high, then prioritizr will take a long time to solve the problem and we will end up with a solution that contains lots of extra planning units that are not needed (since the penalty value is so high that minimizing fragmentation is more important than cost). As a rule of thumb, we generally want penalty values between 0.00001 and 0.01 but finding a useful penalty value requires calibration. The “correct” penalty value depends on the size of the planning units, the main objective values (e.g. cost values), and the effect of fragmentation on biodiversity persistence. Let’s create a new problem that is similar to our previous problem (<code>p4</code>)—except that it contains boundary length penalties and a slightly higher optimality gap to reduce runtime (default is 0.1)—and solve it. Since our planning unit data is in a spatial format (i.e. vector or raster data), prioritizr can automatically calculate the boundary data for us.</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="spatial-prioritizations.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make prioritization problem</span></span>
-<span id="cb251-2"><a href="spatial-prioritizations.html#cb251-2" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">problem</span>(pu_data, veg_data, <span class="at">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb251-3"><a href="spatial-prioritizations.html#cb251-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_min_set_objective</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb251-4"><a href="spatial-prioritizations.html#cb251-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_boundary_penalties</span>(<span class="at">penalty =</span> <span class="fl">0.0005</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb251-5"><a href="spatial-prioritizations.html#cb251-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_relative_targets</span>(<span class="fl">0.1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb251-6"><a href="spatial-prioritizations.html#cb251-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb251-7"><a href="spatial-prioritizations.html#cb251-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_locked_out_constraints</span>(<span class="st">&quot;locked_out&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb251-8"><a href="spatial-prioritizations.html#cb251-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_binary_decisions</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb251-9"><a href="spatial-prioritizations.html#cb251-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_lpsymphony_solver</span>(<span class="at">verbose =</span> <span class="cn">FALSE</span>, <span class="at">gap =</span> <span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
+
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1"><span class="co"># make prioritization problem</span></a>
+<a class="sourceLine" id="cb232-2" title="2">p5 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb232-3" title="3"><span class="st">      </span><span class="kw">add_min_set_objective</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb232-4" title="4"><span class="st">      </span><span class="kw">add_boundary_penalties</span>(<span class="dt">penalty =</span> <span class="fl">0.0005</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb232-5" title="5"><span class="st">      </span><span class="kw">add_relative_targets</span>(<span class="fl">0.1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb232-6" title="6"><span class="st">      </span><span class="kw">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb232-7" title="7"><span class="st">      </span><span class="kw">add_locked_out_constraints</span>(<span class="st">&quot;locked_out&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb232-8" title="8"><span class="st">      </span><span class="kw">add_binary_decisions</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb232-9" title="9"><span class="st">      </span><span class="kw">add_lpsymphony_solver</span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>, <span class="dt">gap =</span> <span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.</code></pre>
+## ℹ Use `sf::st_as_sf()` to convert data for future compatibility.</code></pre>
 <pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="spatial-prioritizations.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print problem</span></span>
-<span id="cb255-2"><a href="spatial-prioritizations.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p5)</span></code></pre></div>
+## ℹ Use `terra::rast()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" title="1"><span class="co"># print problem</span></a>
+<a class="sourceLine" id="cb235-2" title="2"><span class="kw">print</span>(p5)</a></code></pre></div>
 <pre><code>## A conservation problem (&lt;ConservationProblem&gt;)</code></pre>
-<pre><code>## +@data</code></pre>
-<pre><code>## |+@features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot;, &quot;vegetation_5&quot; , ... (32 total)</code></pre>
-<pre><code>## |\@planning units:</code></pre>
-<pre><code>## | +@data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
-<pre><code>## | +@costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
-<pre><code>## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
-<pre><code>## | \@CRS:        WGS 84 / UTM zone 55S</code></pre>
-<pre><code>## \@formulation</code></pre>
-<pre><code>##  +@objective:   minimum set objective</code></pre>
-<pre><code>##  +@penalties:</code></pre>
-<pre><code>##  |\@1:          boundary penalties (`penalty` = 5e-04, `edge_factor` = 0.5, ...)</code></pre>
-<pre><code>##  +@targets:     relative targets (between 0.1 and 0.1)</code></pre>
-<pre><code>##  +@constraints:</code></pre>
-<pre><code>##  |+@1:          locked in constraints (198 planning units)</code></pre>
-<pre><code>##  |\@2:          locked out constraints (6 planning units)</code></pre>
-<pre><code>##  +@decisions:   binary decision</code></pre>
-<pre><code>##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)</code></pre>
-<pre><code>##  \@solver:      lpsymphony (`gap` = 1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)</code></pre>
-<pre><code>## # i Use `summary(...)` to see complete formulation.</code></pre>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="spatial-prioritizations.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="co"># solve problem,</span></span>
-<span id="cb276-2"><a href="spatial-prioritizations.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note this will take around 30 seconds</span></span>
-<span id="cb276-3"><a href="spatial-prioritizations.html#cb276-3" aria-hidden="true" tabindex="-1"></a>s5 <span class="ot">&lt;-</span> <span class="fu">solve</span>(p5)</span></code></pre></div>
+<pre><code>## ├•data</code></pre>
+<pre><code>## │├•features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot; , … (32 total)</code></pre>
+<pre><code>## │└•planning units:</code></pre>
+<pre><code>## │ ├•data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
+<pre><code>## │ ├•costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
+<pre><code>## │ ├•extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
+<pre><code>## │ └•CRS:        WGS 84 / UTM zone 55S</code></pre>
+<pre><code>## ├•formulation</code></pre>
+<pre><code>## │├•objective:   minimum set objective</code></pre>
+<pre><code>## │├•penalties:</code></pre>
+<pre><code>## ││└•1:          boundary penalties (`penalty` = 5e-04, `edge_factor` = 0.5, …)</code></pre>
+<pre><code>## │├•targets:     relative targets (between 0.1 and 0.1)</code></pre>
+<pre><code>## │├•constraints:</code></pre>
+<pre><code>## ││├•1:          locked in constraints (198 planning units)</code></pre>
+<pre><code>## ││└•2:          locked out constraints (6 planning units)</code></pre>
+<pre><code>## │└•decisions:   binary decision</code></pre>
+<pre><code>## └•optimization</code></pre>
+<pre><code>##  ├•portfolio:   shuffle portfolio (`number_solutions` = 1, …)</code></pre>
+<pre><code>##  └•solver:      lpsymphony (`gap` = 1, `time_limit` = 2147483647, `first_feasible` = FALSE, …)</code></pre>
+<pre><code>## # ℹ Use `summary(...)` to see complete formulation.</code></pre>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" title="1"><span class="co"># solve problem,</span></a>
+<a class="sourceLine" id="cb257-2" title="2"><span class="co"># note this will take around 30 seconds</span></a>
+<a class="sourceLine" id="cb257-3" title="3">s5 &lt;-<span class="st"> </span><span class="kw">solve</span>(p5)</a></code></pre></div>
 <pre><code>## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.</code></pre>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="spatial-prioritizations.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print solution</span></span>
-<span id="cb278-2"><a href="spatial-prioritizations.html#cb278-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(s5)</span></code></pre></div>
+## ℹ Use `sf::st_as_sf()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" title="1"><span class="co"># print solution</span></a>
+<a class="sourceLine" id="cb259-2" title="2"><span class="kw">print</span>(s5)</a></code></pre></div>
 <pre><code>## class       : SpatialPolygonsDataFrame 
 ## features    : 516 
 ## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
@@ -510,8 +476,8 @@ div.csl-indent {
 ## names       :   id,             cost, status, locked_in, locked_out, pa_status, solution_1 
 ## min values  :  557, 3.59717531470679,      0,         0,          0,         0,          0 
 ## max values  : 1130,  47.238336402701,      2,         1,          1,         1,          1</code></pre>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="spatial-prioritizations.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot solution</span></span>
-<span id="cb280-2"><a href="spatial-prioritizations.html#cb280-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(s5, <span class="st">&quot;solution_1&quot;</span>, <span class="at">col.regions =</span> <span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="at">main =</span> <span class="st">&quot;s5&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" title="1"><span class="co"># plot solution</span></a>
+<a class="sourceLine" id="cb261-2" title="2"><span class="kw">spplot</span>(s5, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;s5&quot;</span>)</a></code></pre></div>
 <p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-41-1.png" width="65%" style="display: block; margin: auto;" /></p>
 <p>Now let’s compare the solutions to the problems with (<code>s5</code>) and without (<code>s4</code>) the boundary length penalties.</p>
 
@@ -522,144 +488,144 @@ div.csl-indent {
 <li>Try setting the penalty value to 0.5. What is the cost of the solution now? Is it different from the fourth solution (<code>s4</code>) (hint: try plotting the solutions to visualize them)? Is this a useful penalty value? Why?</li>
 </ol>
 </div>
+
+
 </div>
-<div id="budget-limited-prioritizations" class="section level2 hasAnchor" number="5.5">
+<div id="budget-limited-prioritizations" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.5</span> Budget limited prioritizations<a href="spatial-prioritizations.html#budget-limited-prioritizations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the real-world, the funding available for conservation is often very limited. As a consequence, decision makers often need prioritizations where the total cost of priority areas does not exceed a budget. In our fourth prioritization (<code>s4</code>), we found that we would need to spend an additional $226 million AUD to ensure that each vegetation community is adequately represented in the protected area system. But what if the funds available for establishing new protected areas were limited to $100 million AUD? In this case, we need a “budget limited prioritization”. Budget limited prioritizations aim to maximize some measure of conservation benefit subject to a budget (e.g. <a href="https://prioritizr.net/reference/add_max_cover_objective.html">number of species with at least one occurrence in the protected area system</a>, or <a href="https://prioritizr.net/reference/add_max_phylo_div_objective.html">phylogenetic diversity</a>). Let’s create a prioritization by maximizing the number of adequately represented features whilst keeping within a pre-specified budget.</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="spatial-prioritizations.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="co"># funds for additional land acquisition (same units as cost data)</span></span>
-<span id="cb281-2"><a href="spatial-prioritizations.html#cb281-2" aria-hidden="true" tabindex="-1"></a>funds <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb281-3"><a href="spatial-prioritizations.html#cb281-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb281-4"><a href="spatial-prioritizations.html#cb281-4" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the total budget for the prioritization</span></span>
-<span id="cb281-5"><a href="spatial-prioritizations.html#cb281-5" aria-hidden="true" tabindex="-1"></a>budget <span class="ot">&lt;-</span> funds <span class="sc">+</span> <span class="fu">sum</span>(s4<span class="sc">$</span>cost <span class="sc">*</span> s4<span class="sc">$</span>locked_in)</span>
-<span id="cb281-6"><a href="spatial-prioritizations.html#cb281-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(budget)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" title="1"><span class="co"># funds for additional land acquisition (same units as cost data)</span></a>
+<a class="sourceLine" id="cb262-2" title="2">funds &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb262-3" title="3"></a>
+<a class="sourceLine" id="cb262-4" title="4"><span class="co"># calculate the total budget for the prioritization</span></a>
+<a class="sourceLine" id="cb262-5" title="5">budget &lt;-<span class="st"> </span>funds <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>(s4<span class="op">$</span>cost <span class="op">*</span><span class="st"> </span>s4<span class="op">$</span>locked_in)</a>
+<a class="sourceLine" id="cb262-6" title="6"><span class="kw">print</span>(budget)</a></code></pre></div>
 <pre><code>## [1] 6580.64</code></pre>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="spatial-prioritizations.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make prioritization problem</span></span>
-<span id="cb283-2"><a href="spatial-prioritizations.html#cb283-2" aria-hidden="true" tabindex="-1"></a>p6 <span class="ot">&lt;-</span> <span class="fu">problem</span>(pu_data, veg_data, <span class="at">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb283-3"><a href="spatial-prioritizations.html#cb283-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_max_features_objective</span>(budget) <span class="sc">%&gt;%</span></span>
-<span id="cb283-4"><a href="spatial-prioritizations.html#cb283-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_relative_targets</span>(<span class="fl">0.1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb283-5"><a href="spatial-prioritizations.html#cb283-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb283-6"><a href="spatial-prioritizations.html#cb283-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_locked_out_constraints</span>(<span class="st">&quot;locked_out&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb283-7"><a href="spatial-prioritizations.html#cb283-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_binary_decisions</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb283-8"><a href="spatial-prioritizations.html#cb283-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_lpsymphony_solver</span>(<span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" title="1"><span class="co"># make prioritization problem</span></a>
+<a class="sourceLine" id="cb264-2" title="2">p6 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb264-3" title="3"><span class="st">      </span><span class="kw">add_max_features_objective</span>(budget) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb264-4" title="4"><span class="st">      </span><span class="kw">add_relative_targets</span>(<span class="fl">0.1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb264-5" title="5"><span class="st">      </span><span class="kw">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb264-6" title="6"><span class="st">      </span><span class="kw">add_locked_out_constraints</span>(<span class="st">&quot;locked_out&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb264-7" title="7"><span class="st">      </span><span class="kw">add_binary_decisions</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb264-8" title="8"><span class="st">      </span><span class="kw">add_lpsymphony_solver</span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.</code></pre>
+## ℹ Use `sf::st_as_sf()` to convert data for future compatibility.</code></pre>
 <pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="spatial-prioritizations.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print problem</span></span>
-<span id="cb287-2"><a href="spatial-prioritizations.html#cb287-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p6)</span></code></pre></div>
+## ℹ Use `terra::rast()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" title="1"><span class="co"># print problem</span></a>
+<a class="sourceLine" id="cb267-2" title="2"><span class="kw">print</span>(p6)</a></code></pre></div>
 <pre><code>## A conservation problem (&lt;ConservationProblem&gt;)</code></pre>
-<pre><code>## +@data</code></pre>
-<pre><code>## |+@features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot;, &quot;vegetation_5&quot; , ... (32 total)</code></pre>
-<pre><code>## |\@planning units:</code></pre>
-<pre><code>## | +@data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
-<pre><code>## | +@costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
-<pre><code>## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
-<pre><code>## | \@CRS:        WGS 84 / UTM zone 55S</code></pre>
-<pre><code>## \@formulation</code></pre>
-<pre><code>##  +@objective:   maximum representation objective (`budget` = 6580.6397)</code></pre>
-<pre><code>##  +@penalties:   none specified</code></pre>
-<pre><code>##  +@targets:     relative targets (between 0.1 and 0.1)</code></pre>
-<pre><code>##  +@constraints:</code></pre>
-<pre><code>##  |+@1:          locked in constraints (198 planning units)</code></pre>
-<pre><code>##  |\@2:          locked out constraints (6 planning units)</code></pre>
-<pre><code>##  +@decisions:   binary decision</code></pre>
-<pre><code>##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)</code></pre>
-<pre><code>##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)</code></pre>
-<pre><code>## # i Use `summary(...)` to see complete formulation.</code></pre>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="spatial-prioritizations.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="co"># solve problem</span></span>
-<span id="cb307-2"><a href="spatial-prioritizations.html#cb307-2" aria-hidden="true" tabindex="-1"></a>s6 <span class="ot">&lt;-</span> <span class="fu">solve</span>(p6)</span>
-<span id="cb307-3"><a href="spatial-prioritizations.html#cb307-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb307-4"><a href="spatial-prioritizations.html#cb307-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot solution</span></span>
-<span id="cb307-5"><a href="spatial-prioritizations.html#cb307-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(s6, <span class="st">&quot;solution_1&quot;</span>, <span class="at">col.regions =</span> <span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="at">main =</span> <span class="st">&quot;s6&quot;</span>)</span></code></pre></div>
+<pre><code>## ├•data</code></pre>
+<pre><code>## │├•features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot; , … (32 total)</code></pre>
+<pre><code>## │└•planning units:</code></pre>
+<pre><code>## │ ├•data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
+<pre><code>## │ ├•costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
+<pre><code>## │ ├•extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
+<pre><code>## │ └•CRS:        WGS 84 / UTM zone 55S</code></pre>
+<pre><code>## ├•formulation</code></pre>
+<pre><code>## │├•objective:   maximum representation objective (`budget` = 6580.6397)</code></pre>
+<pre><code>## │├•penalties:   none specified</code></pre>
+<pre><code>## │├•targets:     relative targets (between 0.1 and 0.1)</code></pre>
+<pre><code>## │├•constraints:</code></pre>
+<pre><code>## ││├•1:          locked in constraints (198 planning units)</code></pre>
+<pre><code>## ││└•2:          locked out constraints (6 planning units)</code></pre>
+<pre><code>## │└•decisions:   binary decision</code></pre>
+<pre><code>## └•optimization</code></pre>
+<pre><code>##  ├•portfolio:   shuffle portfolio (`number_solutions` = 1, …)</code></pre>
+<pre><code>##  └•solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, …)</code></pre>
+<pre><code>## # ℹ Use `summary(...)` to see complete formulation.</code></pre>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" title="1"><span class="co"># solve problem</span></a>
+<a class="sourceLine" id="cb288-2" title="2">s6 &lt;-<span class="st"> </span><span class="kw">solve</span>(p6)</a>
+<a class="sourceLine" id="cb288-3" title="3"></a>
+<a class="sourceLine" id="cb288-4" title="4"><span class="co"># plot solution</span></a>
+<a class="sourceLine" id="cb288-5" title="5"><span class="kw">spplot</span>(s6, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;s6&quot;</span>)</a></code></pre></div>
 <p><img src="prioritizr-workshop-manual_files/figure-html/budget-1.png" width="65%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="spatial-prioritizations.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate feature representation</span></span>
-<span id="cb308-2"><a href="spatial-prioritizations.html#cb308-2" aria-hidden="true" tabindex="-1"></a>r6 <span class="ot">&lt;-</span> <span class="fu">eval_feature_representation_summary</span>(p6, s6[, <span class="st">&quot;solution_1&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" title="1"><span class="co"># calculate feature representation</span></a>
+<a class="sourceLine" id="cb289-2" title="2">r6 &lt;-<span class="st"> </span><span class="kw">eval_feature_representation_summary</span>(p6, s6[, <span class="st">&quot;solution_1&quot;</span>])</a></code></pre></div>
 <pre><code>## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.</code></pre>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="spatial-prioritizations.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate number of features with targets met</span></span>
-<span id="cb310-2"><a href="spatial-prioritizations.html#cb310-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(r6<span class="sc">$</span>relative_held <span class="sc">&gt;=</span> <span class="fl">0.2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+## ℹ Use `sf::st_as_sf()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" title="1"><span class="co"># calculate number of features with targets met</span></a>
+<a class="sourceLine" id="cb291-2" title="2"><span class="kw">sum</span>(r6<span class="op">$</span>relative_held <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.2</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## [1] 16</code></pre>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="spatial-prioritizations.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find out which features have their targets met when we add weights,</span></span>
-<span id="cb312-2"><a href="spatial-prioritizations.html#cb312-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note that NA is for vegetation.61</span></span>
-<span id="cb312-3"><a href="spatial-prioritizations.html#cb312-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(r6<span class="sc">$</span>feature[r6<span class="sc">$</span>relative_held <span class="sc">&gt;=</span> <span class="fl">0.2</span>])</span></code></pre></div>
-<pre><code>##  [1] &quot;vegetation_4&quot;  &quot;vegetation_5&quot;  &quot;vegetation_14&quot; &quot;vegetation_17&quot; &quot;vegetation_18&quot;
-##  [6] &quot;vegetation_19&quot; &quot;vegetation_20&quot; &quot;vegetation_21&quot; &quot;vegetation_22&quot; &quot;vegetation_23&quot;
-## [11] &quot;vegetation_24&quot; &quot;vegetation_25&quot; &quot;vegetation_26&quot; &quot;vegetation_27&quot; &quot;vegetation_28&quot;
-## [16] &quot;vegetation_29&quot;</code></pre>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" title="1"><span class="co"># find out which features have their targets met when we add weights,</span></a>
+<a class="sourceLine" id="cb293-2" title="2"><span class="co"># note that NA is for vegetation.61</span></a>
+<a class="sourceLine" id="cb293-3" title="3"><span class="kw">print</span>(r6<span class="op">$</span>feature[r6<span class="op">$</span>relative_held <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.2</span>])</a></code></pre></div>
+<pre><code>##  [1] &quot;vegetation_4&quot;  &quot;vegetation_5&quot;  &quot;vegetation_14&quot; &quot;vegetation_17&quot;
+##  [5] &quot;vegetation_18&quot; &quot;vegetation_19&quot; &quot;vegetation_20&quot; &quot;vegetation_21&quot;
+##  [9] &quot;vegetation_22&quot; &quot;vegetation_23&quot; &quot;vegetation_24&quot; &quot;vegetation_25&quot;
+## [13] &quot;vegetation_26&quot; &quot;vegetation_27&quot; &quot;vegetation_28&quot; &quot;vegetation_29&quot;</code></pre>
 <p>We can also add weights to specify that it is more important to meet the targets for certain features and less important for other features. A common approach for weighting features is to assign a greater importance to features with smaller spatial distributions. The rationale behind this weighting method is that features with smaller spatial distributions are at greater risk of extinction. So, let’s calculate some weights for our vegetation communities and see how weighting the features changes our prioritization.</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="spatial-prioritizations.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate weights as the log inverse number of grid cells that each vegetation</span></span>
-<span id="cb314-2"><a href="spatial-prioritizations.html#cb314-2" aria-hidden="true" tabindex="-1"></a><span class="co"># class occupies, rescaled between 1 and 100</span></span>
-<span id="cb314-3"><a href="spatial-prioritizations.html#cb314-3" aria-hidden="true" tabindex="-1"></a>wts <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fu">cellStats</span>(veg_data, <span class="st">&quot;sum&quot;</span>)</span>
-<span id="cb314-4"><a href="spatial-prioritizations.html#cb314-4" aria-hidden="true" tabindex="-1"></a>wts <span class="ot">&lt;-</span> <span class="fu">rescale</span>(wts, <span class="at">to =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>))</span>
-<span id="cb314-5"><a href="spatial-prioritizations.html#cb314-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb314-6"><a href="spatial-prioritizations.html#cb314-6" aria-hidden="true" tabindex="-1"></a><span class="co"># print the name of the feature with smallest weight</span></span>
-<span id="cb314-7"><a href="spatial-prioritizations.html#cb314-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(veg_data)[<span class="fu">which.min</span>(wts)]</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" title="1"><span class="co"># calculate weights as the log inverse number of grid cells that each vegetation</span></a>
+<a class="sourceLine" id="cb295-2" title="2"><span class="co"># class occupies, rescaled between 1 and 100</span></a>
+<a class="sourceLine" id="cb295-3" title="3">wts &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">cellStats</span>(veg_data, <span class="st">&quot;sum&quot;</span>)</a>
+<a class="sourceLine" id="cb295-4" title="4">wts &lt;-<span class="st"> </span><span class="kw">rescale</span>(wts, <span class="dt">to =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb295-5" title="5"></a>
+<a class="sourceLine" id="cb295-6" title="6"><span class="co"># print the name of the feature with smallest weight</span></a>
+<a class="sourceLine" id="cb295-7" title="7"><span class="kw">names</span>(veg_data)[<span class="kw">which.min</span>(wts)]</a></code></pre></div>
 <pre><code>## [1] &quot;vegetation_12&quot;</code></pre>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="spatial-prioritizations.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the name of the feature with greatest weight</span></span>
-<span id="cb316-2"><a href="spatial-prioritizations.html#cb316-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(veg_data)[<span class="fu">which.max</span>(wts)]</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" title="1"><span class="co"># print the name of the feature with greatest weight</span></a>
+<a class="sourceLine" id="cb297-2" title="2"><span class="kw">names</span>(veg_data)[<span class="kw">which.max</span>(wts)]</a></code></pre></div>
 <pre><code>## [1] &quot;vegetation_3&quot;</code></pre>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="spatial-prioritizations.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot histogram of weights</span></span>
-<span id="cb318-2"><a href="spatial-prioritizations.html#cb318-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wts, <span class="at">main =</span> <span class="st">&quot;feature weights&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" title="1"><span class="co"># plot histogram of weights</span></a>
+<a class="sourceLine" id="cb299-2" title="2"><span class="kw">hist</span>(wts, <span class="dt">main =</span> <span class="st">&quot;feature weights&quot;</span>)</a></code></pre></div>
 <p><img src="prioritizr-workshop-manual_files/figure-html/budget-weights-1.png" width="65%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="spatial-prioritizations.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make prioritization problem with weights</span></span>
-<span id="cb319-2"><a href="spatial-prioritizations.html#cb319-2" aria-hidden="true" tabindex="-1"></a>p7 <span class="ot">&lt;-</span> <span class="fu">problem</span>(pu_data, veg_data, <span class="at">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb319-3"><a href="spatial-prioritizations.html#cb319-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_max_features_objective</span>(budget) <span class="sc">%&gt;%</span></span>
-<span id="cb319-4"><a href="spatial-prioritizations.html#cb319-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_relative_targets</span>(<span class="fl">0.1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb319-5"><a href="spatial-prioritizations.html#cb319-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_feature_weights</span>(wts) <span class="sc">%&gt;%</span></span>
-<span id="cb319-6"><a href="spatial-prioritizations.html#cb319-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb319-7"><a href="spatial-prioritizations.html#cb319-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_locked_out_constraints</span>(<span class="st">&quot;locked_out&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb319-8"><a href="spatial-prioritizations.html#cb319-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_binary_decisions</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb319-9"><a href="spatial-prioritizations.html#cb319-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_lpsymphony_solver</span>(<span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" title="1"><span class="co"># make prioritization problem with weights</span></a>
+<a class="sourceLine" id="cb300-2" title="2">p7 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb300-3" title="3"><span class="st">      </span><span class="kw">add_max_features_objective</span>(budget) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb300-4" title="4"><span class="st">      </span><span class="kw">add_relative_targets</span>(<span class="fl">0.1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb300-5" title="5"><span class="st">      </span><span class="kw">add_feature_weights</span>(wts) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb300-6" title="6"><span class="st">      </span><span class="kw">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb300-7" title="7"><span class="st">      </span><span class="kw">add_locked_out_constraints</span>(<span class="st">&quot;locked_out&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb300-8" title="8"><span class="st">      </span><span class="kw">add_binary_decisions</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb300-9" title="9"><span class="st">      </span><span class="kw">add_lpsymphony_solver</span>(<span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.</code></pre>
+## ℹ Use `sf::st_as_sf()` to convert data for future compatibility.</code></pre>
 <pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="spatial-prioritizations.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print problem</span></span>
-<span id="cb323-2"><a href="spatial-prioritizations.html#cb323-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p7)</span></code></pre></div>
+## ℹ Use `terra::rast()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" title="1"><span class="co"># print problem</span></a>
+<a class="sourceLine" id="cb303-2" title="2"><span class="kw">print</span>(p7)</a></code></pre></div>
 <pre><code>## A conservation problem (&lt;ConservationProblem&gt;)</code></pre>
-<pre><code>## +@data</code></pre>
-<pre><code>## |+@features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot;, &quot;vegetation_5&quot; , ... (32 total)</code></pre>
-<pre><code>## |\@planning units:</code></pre>
-<pre><code>## | +@data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
-<pre><code>## | +@costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
-<pre><code>## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
-<pre><code>## | \@CRS:        WGS 84 / UTM zone 55S</code></pre>
-<pre><code>## \@formulation</code></pre>
-<pre><code>##  +@objective:   maximum representation objective (`budget` = 6580.6397)</code></pre>
-<pre><code>##  +@penalties:</code></pre>
-<pre><code>##  |\@1:          feature weights (`weights` = asymmetric continuous values (non-zero values between 1 and 10))</code></pre>
-<pre><code>##  +@targets:     relative targets (between 0.1 and 0.1)</code></pre>
-<pre><code>##  +@constraints:</code></pre>
-<pre><code>##  |+@1:          locked in constraints (198 planning units)</code></pre>
-<pre><code>##  |\@2:          locked out constraints (6 planning units)</code></pre>
-<pre><code>##  +@decisions:   binary decision</code></pre>
-<pre><code>##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)</code></pre>
-<pre><code>##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)</code></pre>
-<pre><code>## # i Use `summary(...)` to see complete formulation.</code></pre>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="spatial-prioritizations.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="co"># solve problem</span></span>
-<span id="cb344-2"><a href="spatial-prioritizations.html#cb344-2" aria-hidden="true" tabindex="-1"></a>s7 <span class="ot">&lt;-</span> <span class="fu">solve</span>(p7)</span>
-<span id="cb344-3"><a href="spatial-prioritizations.html#cb344-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb344-4"><a href="spatial-prioritizations.html#cb344-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot solution</span></span>
-<span id="cb344-5"><a href="spatial-prioritizations.html#cb344-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(s7, <span class="st">&quot;solution_1&quot;</span>, <span class="at">col.regions =</span> <span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="at">main =</span> <span class="st">&quot;s7&quot;</span>)</span></code></pre></div>
+<pre><code>## ├•data</code></pre>
+<pre><code>## │├•features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot; , … (32 total)</code></pre>
+<pre><code>## │└•planning units:</code></pre>
+<pre><code>## │ ├•data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
+<pre><code>## │ ├•costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
+<pre><code>## │ ├•extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
+<pre><code>## │ └•CRS:        WGS 84 / UTM zone 55S</code></pre>
+<pre><code>## ├•formulation</code></pre>
+<pre><code>## │├•objective:   maximum representation objective (`budget` = 6580.6397)</code></pre>
+<pre><code>## │├•penalties:</code></pre>
+<pre><code>## ││└•1:          feature weights (`weights` = asymmetric continuous values (non-zero values between 1 and 10))</code></pre>
+<pre><code>## │├•targets:     relative targets (between 0.1 and 0.1)</code></pre>
+<pre><code>## │├•constraints:</code></pre>
+<pre><code>## ││├•1:          locked in constraints (198 planning units)</code></pre>
+<pre><code>## ││└•2:          locked out constraints (6 planning units)</code></pre>
+<pre><code>## │└•decisions:   binary decision</code></pre>
+<pre><code>## └•optimization</code></pre>
+<pre><code>##  ├•portfolio:   shuffle portfolio (`number_solutions` = 1, …)</code></pre>
+<pre><code>##  └•solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, …)</code></pre>
+<pre><code>## # ℹ Use `summary(...)` to see complete formulation.</code></pre>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb325-1" title="1"><span class="co"># solve problem</span></a>
+<a class="sourceLine" id="cb325-2" title="2">s7 &lt;-<span class="st"> </span><span class="kw">solve</span>(p7)</a>
+<a class="sourceLine" id="cb325-3" title="3"></a>
+<a class="sourceLine" id="cb325-4" title="4"><span class="co"># plot solution</span></a>
+<a class="sourceLine" id="cb325-5" title="5"><span class="kw">spplot</span>(s7, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;s7&quot;</span>)</a></code></pre></div>
 <p><img src="prioritizr-workshop-manual_files/figure-html/budget-weights-2.png" width="65%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="spatial-prioritizations.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate feature representation</span></span>
-<span id="cb345-2"><a href="spatial-prioritizations.html#cb345-2" aria-hidden="true" tabindex="-1"></a>r7 <span class="ot">&lt;-</span> <span class="fu">eval_feature_representation_summary</span>(p7, s7[, <span class="st">&quot;solution_1&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb326-1" title="1"><span class="co"># calculate feature representation</span></a>
+<a class="sourceLine" id="cb326-2" title="2">r7 &lt;-<span class="st"> </span><span class="kw">eval_feature_representation_summary</span>(p7, s7[, <span class="st">&quot;solution_1&quot;</span>])</a></code></pre></div>
 <pre><code>## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.</code></pre>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="spatial-prioritizations.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate number of features with targets met</span></span>
-<span id="cb347-2"><a href="spatial-prioritizations.html#cb347-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(r7<span class="sc">$</span>relative_held <span class="sc">&gt;=</span> <span class="fl">0.2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+## ℹ Use `sf::st_as_sf()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb328-1" title="1"><span class="co"># calculate number of features with targets met</span></a>
+<a class="sourceLine" id="cb328-2" title="2"><span class="kw">sum</span>(r7<span class="op">$</span>relative_held <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.2</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## [1] 16</code></pre>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="spatial-prioritizations.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find out which features have their targets met when we add weights,</span></span>
-<span id="cb349-2"><a href="spatial-prioritizations.html#cb349-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note that NA is for vegetation.61</span></span>
-<span id="cb349-3"><a href="spatial-prioritizations.html#cb349-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(r7<span class="sc">$</span>feature[r7<span class="sc">$</span>relative_held <span class="sc">&gt;=</span> <span class="fl">0.2</span>])</span></code></pre></div>
-<pre><code>##  [1] &quot;vegetation_1&quot;  &quot;vegetation_5&quot;  &quot;vegetation_14&quot; &quot;vegetation_17&quot; &quot;vegetation_18&quot;
-##  [6] &quot;vegetation_19&quot; &quot;vegetation_20&quot; &quot;vegetation_21&quot; &quot;vegetation_22&quot; &quot;vegetation_23&quot;
-## [11] &quot;vegetation_24&quot; &quot;vegetation_25&quot; &quot;vegetation_26&quot; &quot;vegetation_27&quot; &quot;vegetation_28&quot;
-## [16] &quot;vegetation_29&quot;</code></pre>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb330-1" title="1"><span class="co"># find out which features have their targets met when we add weights,</span></a>
+<a class="sourceLine" id="cb330-2" title="2"><span class="co"># note that NA is for vegetation.61</span></a>
+<a class="sourceLine" id="cb330-3" title="3"><span class="kw">print</span>(r7<span class="op">$</span>feature[r7<span class="op">$</span>relative_held <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.2</span>])</a></code></pre></div>
+<pre><code>##  [1] &quot;vegetation_1&quot;  &quot;vegetation_5&quot;  &quot;vegetation_14&quot; &quot;vegetation_17&quot;
+##  [5] &quot;vegetation_18&quot; &quot;vegetation_19&quot; &quot;vegetation_20&quot; &quot;vegetation_21&quot;
+##  [9] &quot;vegetation_22&quot; &quot;vegetation_23&quot; &quot;vegetation_24&quot; &quot;vegetation_25&quot;
+## [13] &quot;vegetation_26&quot; &quot;vegetation_27&quot; &quot;vegetation_28&quot; &quot;vegetation_29&quot;</code></pre>
 
 <div class="rmdquestion">
 <ol style="list-style-type: decimal">
@@ -669,51 +635,52 @@ div.csl-indent {
 <li>Is there a difference between which features are adequately represented in the sixth (<code>s6</code>) and seventh (<code>s7</code>) solutions? If so, what is the difference?</li>
 </ol>
 </div>
+
 </div>
-<div id="solution-portfolios" class="section level2 hasAnchor" number="5.6">
+<div id="solution-portfolios" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.6</span> Solution portfolios<a href="spatial-prioritizations.html#solution-portfolios" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In systematic conservation planning, only rarely do we have data on all of the stakeholder preferences and biodiversity features that we are interested in conserving. As a consequence, it is often useful to generate a portfolio of near optimal solutions to present to decision makers to guide the reserve selection process. Generally we would want many solutions in our portfolio (e.g. 1000) to ensure that our portfolio contains a range of spatially distinct solutions, but here we will generate a portfolio containing just six near-optimal solutions so the code doesn’t take too long to run. We will also increase the optimality gap to obtain solutions that are more suboptimal than earlier (the default gap value is 0.1).</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="spatial-prioritizations.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make problem with a shuffle portfolio</span></span>
-<span id="cb351-2"><a href="spatial-prioritizations.html#cb351-2" aria-hidden="true" tabindex="-1"></a>p8 <span class="ot">&lt;-</span> <span class="fu">problem</span>(pu_data, veg_data, <span class="at">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb351-3"><a href="spatial-prioritizations.html#cb351-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_max_features_objective</span>(budget) <span class="sc">%&gt;%</span></span>
-<span id="cb351-4"><a href="spatial-prioritizations.html#cb351-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_relative_targets</span>(<span class="fl">0.2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb351-5"><a href="spatial-prioritizations.html#cb351-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_feature_weights</span>(wts) <span class="sc">%&gt;%</span></span>
-<span id="cb351-6"><a href="spatial-prioritizations.html#cb351-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_binary_decisions</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb351-7"><a href="spatial-prioritizations.html#cb351-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_shuffle_portfolio</span>(<span class="at">number_solutions =</span> <span class="dv">6</span>,</span>
-<span id="cb351-8"><a href="spatial-prioritizations.html#cb351-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">remove_duplicates =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb351-9"><a href="spatial-prioritizations.html#cb351-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">add_lpsymphony_solver</span>(<span class="at">verbose =</span> <span class="cn">TRUE</span>, <span class="at">gap =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb332-1" title="1"><span class="co"># make problem with a shuffle portfolio</span></a>
+<a class="sourceLine" id="cb332-2" title="2">p8 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb332-3" title="3"><span class="st">      </span><span class="kw">add_max_features_objective</span>(budget) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb332-4" title="4"><span class="st">      </span><span class="kw">add_relative_targets</span>(<span class="fl">0.2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb332-5" title="5"><span class="st">      </span><span class="kw">add_feature_weights</span>(wts) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb332-6" title="6"><span class="st">      </span><span class="kw">add_binary_decisions</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb332-7" title="7"><span class="st">      </span><span class="kw">add_shuffle_portfolio</span>(<span class="dt">number_solutions =</span> <span class="dv">6</span>,</a>
+<a class="sourceLine" id="cb332-8" title="8">                            <span class="dt">remove_duplicates =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb332-9" title="9"><span class="st">      </span><span class="kw">add_lpsymphony_solver</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">gap =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## Warning: Support for sp package will be deprecated.
-## i Use `]8;;ide:help:sf::st_as_sfsf::st_as_sf]8;;()` to convert data for future compatibility.</code></pre>
+## ℹ Use `sf::st_as_sf()` to convert data for future compatibility.</code></pre>
 <pre><code>## Warning: Support for raster package will be deprecated.
-## i Use `]8;;ide:help:terra::rastterra::rast]8;;()` to convert data for future compatibility.</code></pre>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="spatial-prioritizations.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print problem</span></span>
-<span id="cb355-2"><a href="spatial-prioritizations.html#cb355-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p8)</span></code></pre></div>
+## ℹ Use `terra::rast()` to convert data for future compatibility.</code></pre>
+
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb335-1" title="1"><span class="co"># print problem</span></a>
+<a class="sourceLine" id="cb335-2" title="2"><span class="kw">print</span>(p8)</a></code></pre></div>
 <pre><code>## A conservation problem (&lt;ConservationProblem&gt;)</code></pre>
-<pre><code>## +@data</code></pre>
-<pre><code>## |+@features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot;, &quot;vegetation_5&quot; , ... (32 total)</code></pre>
-<pre><code>## |\@planning units:</code></pre>
-<pre><code>## | +@data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
-<pre><code>## | +@costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
-<pre><code>## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
-<pre><code>## | \@CRS:        WGS 84 / UTM zone 55S</code></pre>
-<pre><code>## \@formulation</code></pre>
-<pre><code>##  +@objective:   maximum representation objective (`budget` = 6580.6397)</code></pre>
-<pre><code>##  +@penalties:</code></pre>
-<pre><code>##  |\@1:          feature weights (`weights` = asymmetric continuous values (non-zero values between 1 and 10))</code></pre>
-<pre><code>##  +@targets:     relative targets (between 0.2 and 0.2)</code></pre>
-<pre><code>##  +@constraints: none specified</code></pre>
-<pre><code>##  +@decisions:   binary decision</code></pre>
-<pre><code>##  +@portfolio:   shuffle portfolio (`number_solutions` = 6, ...)</code></pre>
-<pre><code>##  \@solver:      lpsymphony (`gap` = 10, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)</code></pre>
-<pre><code>## # i Use `summary(...)` to see complete formulation.</code></pre>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="spatial-prioritizations.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="co"># solve problem</span></span>
-<span id="cb374-2"><a href="spatial-prioritizations.html#cb374-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note that this will contain six solutions since we added a portfolio</span></span>
-<span id="cb374-3"><a href="spatial-prioritizations.html#cb374-3" aria-hidden="true" tabindex="-1"></a>s8 <span class="ot">&lt;-</span> <span class="fu">solve</span>(p8)</span>
-<span id="cb374-4"><a href="spatial-prioritizations.html#cb374-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb374-5"><a href="spatial-prioritizations.html#cb374-5" aria-hidden="true" tabindex="-1"></a><span class="co"># print solution</span></span>
-<span id="cb374-6"><a href="spatial-prioritizations.html#cb374-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(s8)</span></code></pre></div>
+<pre><code>## ├•data</code></pre>
+<pre><code>## │├•features:    &quot;vegetation_1&quot;, &quot;vegetation_2&quot;, &quot;vegetation_3&quot;, &quot;vegetation_4&quot; , … (32 total)</code></pre>
+<pre><code>## │└•planning units:</code></pre>
+<pre><code>## │ ├•data:       &lt;SpatialPolygonsDataFrame&gt; (516 total)</code></pre>
+<pre><code>## │ ├•costs:      continuous values (between 3.5972 and 47.2383)</code></pre>
+<pre><code>## │ ├•extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)</code></pre>
+<pre><code>## │ └•CRS:        WGS 84 / UTM zone 55S</code></pre>
+<pre><code>## ├•formulation</code></pre>
+<pre><code>## │├•objective:   maximum representation objective (`budget` = 6580.6397)</code></pre>
+<pre><code>## │├•penalties:</code></pre>
+<pre><code>## ││└•1:          feature weights (`weights` = asymmetric continuous values (non-zero values between 1 and 10))</code></pre>
+<pre><code>## │├•targets:     relative targets (between 0.2 and 0.2)</code></pre>
+<pre><code>## │├•constraints: none specified</code></pre>
+<pre><code>## │└•decisions:   binary decision</code></pre>
+<pre><code>## └•optimization</code></pre>
+<pre><code>##  ├•portfolio:   shuffle portfolio (`number_solutions` = 6, …)</code></pre>
+<pre><code>##  └•solver:      lpsymphony (`gap` = 10, `time_limit` = 2147483647, `first_feasible` = FALSE, …)</code></pre>
+<pre><code>## # ℹ Use `summary(...)` to see complete formulation.</code></pre>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb355-1" title="1"><span class="co"># solve problem</span></a>
+<a class="sourceLine" id="cb355-2" title="2"><span class="co"># note that this will contain six solutions since we added a portfolio</span></a>
+<a class="sourceLine" id="cb355-3" title="3">s8 &lt;-<span class="st"> </span><span class="kw">solve</span>(p8)</a>
+<a class="sourceLine" id="cb355-4" title="4"></a>
+<a class="sourceLine" id="cb355-5" title="5"><span class="co"># print solution</span></a>
+<a class="sourceLine" id="cb355-6" title="6"><span class="kw">print</span>(s8)</a></code></pre></div>
 <pre><code>## class       : SpatialPolygonsDataFrame 
 ## features    : 516 
 ## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
@@ -722,25 +689,26 @@ div.csl-indent {
 ## names       :   id,             cost, status, locked_in, locked_out, pa_status, solution_1, solution_2, solution_3, solution_4, solution_5, solution_6 
 ## min values  :  557, 3.59717531470679,      0,         0,          0,         0,          0,          0,          0,          0,          0,          0 
 ## max values  : 1130,  47.238336402701,      2,         1,          1,         1,          1,          1,          1,          1,          1,          1</code></pre>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="spatial-prioritizations.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the cost of the first solution</span></span>
-<span id="cb376-2"><a href="spatial-prioritizations.html#cb376-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(s8<span class="sc">$</span>solution_1 <span class="sc">*</span> s8<span class="sc">$</span>cost)</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb357-1" title="1"><span class="co"># calculate the cost of the first solution</span></a>
+<a class="sourceLine" id="cb357-2" title="2"><span class="kw">sum</span>(s8<span class="op">$</span>solution_<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>s8<span class="op">$</span>cost)</a></code></pre></div>
 <pre><code>## [1] 1188.274</code></pre>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="spatial-prioritizations.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the cost of the second solution</span></span>
-<span id="cb378-2"><a href="spatial-prioritizations.html#cb378-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(s8<span class="sc">$</span>solution_2 <span class="sc">*</span> s8<span class="sc">$</span>cost)</span></code></pre></div>
-<pre><code>## [1] 1198.589</code></pre>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="spatial-prioritizations.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the proportion of planning units with the same solution values</span></span>
-<span id="cb380-2"><a href="spatial-prioritizations.html#cb380-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in the first and second solutions</span></span>
-<span id="cb380-3"><a href="spatial-prioritizations.html#cb380-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(s8<span class="sc">$</span>solution_1 <span class="sc">==</span> s8<span class="sc">$</span>solution_2)</span></code></pre></div>
-<pre><code>## [1] 0.9728682</code></pre>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="spatial-prioritizations.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot first solution</span></span>
-<span id="cb382-2"><a href="spatial-prioritizations.html#cb382-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spplot</span>(s8, <span class="st">&quot;solution_1&quot;</span>, <span class="at">col.regions =</span> <span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>),</span>
-<span id="cb382-3"><a href="spatial-prioritizations.html#cb382-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">&quot;s8 (solution 1)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb359-1" title="1"><span class="co"># calculate the cost of the second solution</span></a>
+<a class="sourceLine" id="cb359-2" title="2"><span class="kw">sum</span>(s8<span class="op">$</span>solution_<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>s8<span class="op">$</span>cost)</a></code></pre></div>
+<pre><code>## [1] 1234.68</code></pre>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb361-1" title="1"><span class="co"># calculate the proportion of planning units with the same solution values</span></a>
+<a class="sourceLine" id="cb361-2" title="2"><span class="co"># in the first and second solutions</span></a>
+<a class="sourceLine" id="cb361-3" title="3"><span class="kw">mean</span>(s8<span class="op">$</span>solution_<span class="dv">1</span> <span class="op">==</span><span class="st"> </span>s8<span class="op">$</span>solution_<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 0.9379845</code></pre>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb363-1" title="1"><span class="co"># plot first solution</span></a>
+<a class="sourceLine" id="cb363-2" title="2"><span class="kw">spplot</span>(s8, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>),</a>
+<a class="sourceLine" id="cb363-3" title="3">       <span class="dt">main =</span> <span class="st">&quot;s8 (solution 1)&quot;</span>)</a></code></pre></div>
 <p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-47-1.png" width="65%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="spatial-prioritizations.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot all solutions</span></span>
-<span id="cb383-2"><a href="spatial-prioritizations.html#cb383-2" aria-hidden="true" tabindex="-1"></a>s8_plots <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">paste0</span>(<span class="st">&quot;solution_&quot;</span>, <span class="fu">seq_len</span>(<span class="dv">6</span>)), <span class="cf">function</span>(x) {</span>
-<span id="cb383-3"><a href="spatial-prioritizations.html#cb383-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spplot</span>(s8, x, <span class="at">main =</span> x, <span class="at">col.regions =</span> <span class="fu">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>))</span>
-<span id="cb383-4"><a href="spatial-prioritizations.html#cb383-4" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb383-5"><a href="spatial-prioritizations.html#cb383-5" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(grid.arrange, <span class="fu">append</span>(s8_plots, <span class="fu">list</span>(<span class="at">ncol =</span> <span class="dv">3</span>)))</span></code></pre></div>
+
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb364-1" title="1"><span class="co"># plot all solutions</span></a>
+<a class="sourceLine" id="cb364-2" title="2">s8_plots &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">paste0</span>(<span class="st">&quot;solution_&quot;</span>, <span class="kw">seq_len</span>(<span class="dv">6</span>)), <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb364-3" title="3">  <span class="kw">spplot</span>(s8, x, <span class="dt">main =</span> x, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>))</a>
+<a class="sourceLine" id="cb364-4" title="4">})</a>
+<a class="sourceLine" id="cb364-5" title="5"><span class="kw">do.call</span>(grid.arrange, <span class="kw">append</span>(s8_plots, <span class="kw">list</span>(<span class="dt">ncol =</span> <span class="dv">3</span>)))</a></code></pre></div>
 <p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-48-1.png" width="768" style="display: block; margin: auto;" /></p>
 
 <div class="rmdquestion">
@@ -750,6 +718,7 @@ div.csl-indent {
 <li>What could we do to obtain a portfolio with more different solutions?</li>
 </ol>
 </div>
+
 
 </div>
 </div>
