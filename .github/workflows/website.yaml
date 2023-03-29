@@ -56,7 +56,7 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_bioc("lpsymphony")
-          tinytex::install_tinytex()
+          tinytex::install_tinytex(force = TRUE)
         shell: Rscript {0}
 
       - name: Cache bookdown results
