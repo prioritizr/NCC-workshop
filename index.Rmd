@@ -6,11 +6,11 @@ site: bookdown::bookdown_site
 documentclass: book
 bibliography: references.bib
 csl: reference-style.csl
-url: 'https\://prioritizr.github.io/cibio-workshop'
+url: 'https\://prioritizr.github.io/NCC-workshop'
 link-citations: yes
 cover-image: images/cover.png
 favicon: favicon.ico
-github-repo: prioritizr/cibio-workshop
+github-repo: prioritizr/NCC-workshop
 fontsize: 12pt
 urlcolor: blue
 geometry: "left=2.54cm, right=2.54cm, top=2.54cm, bottom=2.54cm"
