@@ -147,7 +147,7 @@ p5 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_locked_in_constraints("locked_in") %>%
       add_locked_out_constraints("locked_out") %>%
       add_binary_decisions() %>%
-      add_lpsymphony_solver(verbose = FALSE, gap = 1)
+      add_lpsymphony_solver(verbose = FALSE)
 
 # print problem
 print(p5)
