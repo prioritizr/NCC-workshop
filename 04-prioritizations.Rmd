@@ -142,7 +142,7 @@ Plans for protected area systems should facilitate gene flow and dispersal betwe
 # make prioritization problem
 p5 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_min_set_objective() %>%
-      add_boundary_penalties(penalty = 0.0005) %>%
+      add_boundary_penalties(penalty = 0.001) %>%
       add_relative_targets(0.1) %>%
       add_locked_in_constraints("locked_in") %>%
       add_locked_out_constraints("locked_out") %>%
