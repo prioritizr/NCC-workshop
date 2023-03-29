@@ -22,6 +22,7 @@ site: clean_temp
 pdf: clean_temp
 	Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book')"
 	rm -f prioritizr-workshop-manual.log
+	rm -f prioritizr-workshop-manual.toc
 
 check:
 	R -e "source('verify-solutions.R')"
