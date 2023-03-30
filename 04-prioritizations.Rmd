@@ -241,7 +241,7 @@ We can also add weights to specify that it is more important to meet the targets
 # class occupies, rescaled between 1 and 100
 wts <- 1 / global(veg_data, "sum", na.rm = TRUE) %>%
   pull(sum)
-wts <- rescale(wts, to = c(1, 10))
+wts <- scales::rescale(wts, to = c(1, 10))
 
 # print the name of the feature with smallest weight
 names(veg_data)[which.min(wts)]
