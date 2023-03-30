@@ -279,12 +279,9 @@ An R package is a collection of R code and documentation that can be installed t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"sf"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"sp"}\NormalTok{, }\StringTok{"rgeos"}\NormalTok{, }\StringTok{"rgdal"}\NormalTok{, }\StringTok{"raster"}\NormalTok{,}
-                   \StringTok{"units"}\NormalTok{, }\StringTok{"prioritizr"}\NormalTok{, }\StringTok{"prioritizrdata"}\NormalTok{, }\StringTok{"Rsymphony"}\NormalTok{,}
+\FunctionTok{install.packages}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"sf"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"terra"}\NormalTok{, }\StringTok{"rgeos"}\NormalTok{, }\StringTok{"rgdal"}\NormalTok{, }
+                   \StringTok{"units"}\NormalTok{, }\StringTok{"highs"}\NormalTok{, }\StringTok{"prioritizr"}\NormalTok{, }\StringTok{"prioritizrdata"}\NormalTok{, }
                    \StringTok{"mapview"}\NormalTok{, }\StringTok{"assertthat"}\NormalTok{, }\StringTok{"remotes"}\NormalTok{, }\StringTok{"gridExtra"}\NormalTok{))}
-
-\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(remotes)) }\FunctionTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
-\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_bioc}\NormalTok{(}\StringTok{"lpsymphony"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -343,9 +340,11 @@ Now we will set up our R session for the workshop. Specifically, enter the follo
 \begin{Highlighting}[]
 \CommentTok{\# load packages}
 \FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(highs)}
 \FunctionTok{library}\NormalTok{(prioritizr)}
 \FunctionTok{library}\NormalTok{(rgdal)}
-\FunctionTok{library}\NormalTok{(raster)}
+\FunctionTok{library}\NormalTok{(terra)}
+\FunctionTok{library}\NormalTok{(sf)}
 \FunctionTok{library}\NormalTok{(rgeos)}
 \FunctionTok{library}\NormalTok{(mapview)}
 \FunctionTok{library}\NormalTok{(units)}
@@ -381,43 +380,18 @@ Now that we have downloaded the dataset, we will need to import it into our R se
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# import planning unit data}
-\NormalTok{pu\_data }\OtherTok{\textless{}{-}} \FunctionTok{readOGR}\NormalTok{(}\StringTok{"data/pu.shp"}\NormalTok{)}
+\NormalTok{pu\_data }\OtherTok{\textless{}{-}} \FunctionTok{st\_read}\NormalTok{(}\StringTok{"data/pu.shp"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: OGR support is provided by the sf and terra packages among others
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: OGR support is provided by the sf and terra packages among others
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: OGR support is provided by the sf and terra packages among others
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: OGR support is provided by the sf and terra packages among others
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: OGR support is provided by the sf and terra packages among others
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: OGR support is provided by the sf and terra packages among others
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: OGR support is provided by the sf and terra packages among others
-\end{verbatim}
-
-\begin{verbatim}
-## OGR data source with driver: ESRI Shapefile 
-## Source: "/home/runner/work/NCC-workshop/NCC-workshop/data/pu.shp", layer: "pu"
-## with 516 features
-## It has 5 fields
+## Reading layer `pu' from data source 
+##   `/home/runner/work/NCC-workshop/NCC-workshop/data/pu.shp' using driver `ESRI Shapefile'
+## Simple feature collection with 516 features and 5 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 348703.2 ymin: 5167775 xmax: 611932.4 ymax: 5344516
+## Projected CRS: WGS 84 / UTM zone 55S
 \end{verbatim}
 
 \begin{Shaded}
@@ -427,7 +401,7 @@ Now that we have downloaded the dataset, we will need to import it into our R se
 \NormalTok{pu\_data}\SpecialCharTok{$}\NormalTok{locked\_out }\OtherTok{\textless{}{-}} \FunctionTok{as.logical}\NormalTok{(pu\_data}\SpecialCharTok{$}\NormalTok{locked\_out)}
 
 \CommentTok{\# import vegetation data}
-\NormalTok{veg\_data }\OtherTok{\textless{}{-}} \FunctionTok{stack}\NormalTok{(}\StringTok{"data/vegetation.tif"}\NormalTok{)}
+\NormalTok{veg\_data }\OtherTok{\textless{}{-}} \FunctionTok{rast}\NormalTok{(}\StringTok{"data/vegetation.tif"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -436,7 +410,7 @@ Now that we have downloaded the dataset, we will need to import it into our R se
 \hypertarget{planning-unit-data}{%
 \section{Planning unit data}\label{planning-unit-data}}
 
-The planning unit data contains spatial data describing the geometry for each planning unit and attribute data with information about each planning unit (e.g.~cost values). Let's investigate the \texttt{pu\_data} object. The attribute data contains 5 columns with contain the following information:
+The planning unit data contains spatial data describing the geometry for each planning unit and attribute data with information about each planning unit (e.g.~cost values). Let's investigate the \texttt{pu\_data} object. The attribute data contains 6 columns with contain the following information:
 
 \begin{itemize}
 \tightlist
@@ -460,14 +434,23 @@ The planning unit data contains spatial data describing the geometry for each pl
 \end{Shaded}
 
 \begin{verbatim}
-## class       : SpatialPolygonsDataFrame 
-## features    : 516 
-## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
-## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
-## variables   : 5
-## names       :   id,             cost, status, locked_in, locked_out 
-## min values  :  557, 3.59717531470679,      0,         0,          0 
-## max values  : 1130,  47.238336402701,      2,         1,          1
+## Simple feature collection with 516 features and 5 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 348703.2 ymin: 5167775 xmax: 611932.4 ymax: 5344516
+## Projected CRS: WGS 84 / UTM zone 55S
+## First 10 features:
+##     id     cost status locked_in locked_out                       geometry
+## 1  557 29.74225      0     FALSE      FALSE MULTIPOLYGON (((363141.4 53...
+## 2  558 29.87703      0     FALSE      FALSE MULTIPOLYGON (((377633.2 53...
+## 3  574 28.60687      0     FALSE      FALSE MULTIPOLYGON (((356423.1 53...
+## 4  575 30.83416      0     FALSE      FALSE MULTIPOLYGON (((370910.6 53...
+## 5  576 38.75511      0     FALSE      FALSE MULTIPOLYGON (((385400.1 53...
+## 6  577 38.11618      2      TRUE      FALSE MULTIPOLYGON (((399891.6 53...
+## 7  578 33.33462      2      TRUE      FALSE MULTIPOLYGON (((414385.2 53...
+## 8  592 31.67498      0     FALSE      FALSE MULTIPOLYGON (((355774.9 53...
+## 9  593 28.97336      0     FALSE      FALSE MULTIPOLYGON (((361980.2 53...
+## 10 594 31.63435      0     FALSE      FALSE MULTIPOLYGON (((378676.8 53...
 \end{verbatim}
 
 \begin{Shaded}
@@ -477,7 +460,7 @@ The planning unit data contains spatial data describing the geometry for each pl
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-15-1} \end{center}
+\begin{center}\includegraphics{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-16-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -494,14 +477,18 @@ The planning unit data contains spatial data describing the geometry for each pl
 \end{Shaded}
 
 \begin{verbatim}
-## Formal class 'SpatialPolygonsDataFrame' [package "sp"] with 5 slots
-##   ..@ data       :'data.frame':  516 obs. of  5 variables:
-##   ..@ polygons   :List of 516
-##   ..@ plotOrder  : int [1:516] 69 104 1 122 157 190 4 221 17 140 ...
-##   ..@ bbox       : num [1:2, 1:2] 348703 5167775 611932 5344516
-##   .. ..- attr(*, "dimnames")=List of 2
-##   ..@ proj4string:Formal class 'CRS' [package "sp"] with 1 slot
-##   ..$ comment: chr "TRUE"
+## Classes 'sf' and 'data.frame':   516 obs. of  6 variables:
+##  $ id        : int  557 558 574 575 576 577 578 592 593 594 ...
+##  $ cost      : num  29.7 29.9 28.6 30.8 38.8 ...
+##  $ status    : int  0 0 0 0 0 2 2 0 0 0 ...
+##  $ locked_in : logi  FALSE FALSE FALSE FALSE FALSE TRUE ...
+##  $ locked_out: logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ geometry  :sfc_MULTIPOLYGON of length 516; first list element: List of 1
+##   ..$ :List of 1
+##   ..- attr(*, "class")= chr [1:3] "XY" "MULTIPOLYGON" "sfg"
+##  - attr(*, "sf_column")= chr "geometry"
+##  - attr(*, "agr")= Factor w/ 3 levels "constant","aggregate",..: NA NA NA NA NA
+##   ..- attr(*, "names")= chr [1:5] "id" "cost" "status" "locked_in" ...
 \end{verbatim}
 
 \begin{Shaded}
@@ -512,9 +499,7 @@ The planning unit data contains spatial data describing the geometry for each pl
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "SpatialPolygonsDataFrame"
-## attr(,"package")
-## [1] "sp"
+## [1] "sf"         "data.frame"
 \end{verbatim}
 
 \begin{Shaded}
@@ -525,70 +510,39 @@ The planning unit data contains spatial data describing the geometry for each pl
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "data"        "polygons"    "plotOrder"   "bbox"        "proj4string"
+## [1] ".S3Class"
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# print the geometry for the 80th planning unit}
-\NormalTok{pu\_data}\SpecialCharTok{@}\NormalTok{polygons[[}\DecValTok{80}\NormalTok{]]}
+\NormalTok{pu\_data}\SpecialCharTok{$}\NormalTok{geometry[}\DecValTok{80}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## An object of class "Polygons"
-## Slot "Polygons":
-## [[1]]
-## An object of class "Polygon"
-## Slot "labpt":
-## [1]  520772.4 5325744.8
-## 
-## Slot "area":
-## [1] 64900653
-## 
-## Slot "hole":
-## [1] FALSE
-## 
-## Slot "ringDir":
-## [1] 1
-## 
-## Slot "coords":
-##          [,1]    [,2]
-## [1,] 518845.5 5321029
-## [2,] 515940.4 5325147
-## [3,] 517867.0 5329863
-## [4,] 522700.2 5330460
-## [5,] 525604.7 5326342
-## [6,] 523676.6 5321627
-## [7,] 518845.5 5321029
-## 
-## 
-## 
-## Slot "plotOrder":
-## [1] 1
-## 
-## Slot "labpt":
-## [1]  520772.4 5325744.8
-## 
-## Slot "ID":
-## [1] "79"
-## 
-## Slot "area":
-## [1] 64900653
+## Geometry set for 1 feature 
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 515940.4 ymin: 5321029 xmax: 525604.7 ymax: 5330460
+## Projected CRS: WGS 84 / UTM zone 55S
+\end{verbatim}
+
+\begin{verbatim}
+## MULTIPOLYGON (((518845.5 5321029, 515940.4 5325...
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# print the coordinate reference system}
-\FunctionTok{print}\NormalTok{(pu\_data}\SpecialCharTok{@}\NormalTok{proj4string)}
+\FunctionTok{st\_crs}\NormalTok{(pu\_data)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Coordinate Reference System:
-## Deprecated Proj.4 representation:
-##  +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
-## WKT2 2019 representation:
+##   User input: WGS 84 / UTM zone 55S 
+##   wkt:
 ## PROJCRS["WGS 84 / UTM zone 55S",
 ##     BASEGEOGCRS["WGS 84",
 ##         DATUM["World Geodetic System 1984",
@@ -639,18 +593,23 @@ The planning unit data contains spatial data describing the geometry for each pl
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# print the first six rows in the attribute data}
-\FunctionTok{head}\NormalTok{(pu\_data}\SpecialCharTok{@}\NormalTok{data)}
+\FunctionTok{head}\NormalTok{(pu\_data)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##    id     cost status locked_in locked_out
-## 0 557 29.74225      0     FALSE      FALSE
-## 1 558 29.87703      0     FALSE      FALSE
-## 2 574 28.60687      0     FALSE      FALSE
-## 3 575 30.83416      0     FALSE      FALSE
-## 4 576 38.75511      0     FALSE      FALSE
-## 5 577 38.11618      2      TRUE      FALSE
+## Simple feature collection with 6 features and 5 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 355774.9 ymin: 5327253 xmax: 406623 ymax: 5343940
+## Projected CRS: WGS 84 / UTM zone 55S
+##    id     cost status locked_in locked_out                       geometry
+## 1 557 29.74225      0     FALSE      FALSE MULTIPOLYGON (((363141.4 53...
+## 2 558 29.87703      0     FALSE      FALSE MULTIPOLYGON (((377633.2 53...
+## 3 574 28.60687      0     FALSE      FALSE MULTIPOLYGON (((356423.1 53...
+## 4 575 30.83416      0     FALSE      FALSE MULTIPOLYGON (((370910.6 53...
+## 5 576 38.75511      0     FALSE      FALSE MULTIPOLYGON (((385400.1 53...
+## 6 577 38.11618      2      TRUE      FALSE MULTIPOLYGON (((399891.6 53...
 \end{verbatim}
 
 \begin{Shaded}
@@ -700,11 +659,11 @@ The planning unit data contains spatial data describing the geometry for each pl
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# plot a map of the planning unit cost data}
-\FunctionTok{spplot}\NormalTok{(pu\_data, }\StringTok{"cost"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(pu\_data[}\StringTok{"cost"}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-17-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-18-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -749,7 +708,7 @@ Now, you can try and answer some questions about the planning unit data.
 \hypertarget{vegetation-data}{%
 \section{Vegetation data}\label{vegetation-data}}
 
-The vegetation data describes the spatial distribution of 62 vegetation classes in the study area. This data is in a raster format and so the data are organized using a square grid comprising square grid cells that are each the same size. In our case, the raster data contains multiple layers (also called ``bands'') and each layer has corresponds to a spatial grid with exactly the same area and has exactly the same dimensionality (i.e.~number of rows, columns, and cells). In this dataset, there are 62 different regular spatial grids layered on top of each other -- with each layer corresponding to a different vegetation class -- and each of these layers contains a grid with 164 rows, 326 columns, and 53464 cells. Within each layer, each cell corresponds to a 0.967 by 1.02 km square. The values associated with each grid cell indicate the (one) presence or (zero) absence of a given vegetation class in the cell.
+The vegetation data describes the spatial distribution of 62 vegetation classes in the study area. This data is in a raster format and so the data are organized using a square grid comprising square grid cells that are each the same size. In our case, the raster data contains multiple layers (also called ``bands'') and each layer has corresponds to a spatial grid with exactly the same area and has exactly the same dimensionality (i.e.~number of rows, columns, and cells). In this dataset, there are 62 different regular spatial grids layered on top of each other -- with each layer corresponding to a different vegetation class -- and each of these layers contains a grid with 164 rows, 326 columns, and \ensuremath{5.3464\times 10^{4}} cells. Within each layer, each cell corresponds to a 0.967 by 1.02 km square. The values associated with each grid cell indicate the (one) presence or (zero) absence of a given vegetation class in the cell.
 
 \includegraphics{images/rasterbands.png}
 
@@ -763,14 +722,15 @@ Let's explore the vegetation data.
 \end{Shaded}
 
 \begin{verbatim}
-## class      : RasterStack 
-## dimensions : 164, 326, 53464, 32  (nrow, ncol, ncell, nlayers)
-## resolution : 967, 1020  (x, y)
-## extent     : 298636.7, 613878.7, 5167756, 5335036  (xmin, xmax, ymin, ymax)
-## crs        : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
-## names      : vegetation_1, vegetation_2, vegetation_3, vegetation_4, vegetation_5, vegetation_6, vegetation_7, vegetation_8, vegetation_9, vegetation_10, vegetation_11, vegetation_12, vegetation_13, vegetation_14, vegetation_15, ... 
-## min values :            0,            0,            0,            0,            0,            0,            0,            0,            0,             0,             0,             0,             0,             0,             0, ... 
-## max values :            1,            1,            1,            1,            1,            1,            1,            1,            1,             1,             1,             1,             1,             1,             1, ...
+## class       : SpatRaster 
+## dimensions  : 164, 326, 32  (nrow, ncol, nlyr)
+## resolution  : 967, 1020  (x, y)
+## extent      : 298636.7, 613878.7, 5167756, 5335036  (xmin, xmax, ymin, ymax)
+## coord. ref. : WGS 84 / UTM zone 55S (EPSG:32755) 
+## source      : vegetation.tif 
+## names       : vegetation_1, vegetation_2, vegetation_3, vegetation_4, vegetation_5, vegetation_6, ... 
+## min values  :            0,            0,            0,            0,            0,            0, ... 
+## max values  :            1,            1,            1,            1,            1,            1, ...
 \end{verbatim}
 
 \begin{Shaded}
@@ -780,12 +740,12 @@ Let's explore the vegetation data.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-20-1} \end{center}
+\begin{center}\includegraphics{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-21-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# plot an interactive map of the 36th vegetation class}
-\FunctionTok{mapview}\NormalTok{(veg\_data[[}\DecValTok{32}\NormalTok{]])}
+\CommentTok{\# 1mapview(veg\_data[[32]])}
 \end{Highlighting}
 \end{Shaded}
 
@@ -825,7 +785,7 @@ Let's explore the vegetation data.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# print number of layers in the data}
-\FunctionTok{nlayers}\NormalTok{(veg\_data)}
+\FunctionTok{nlyr}\NormalTok{(veg\_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -858,67 +818,23 @@ Let's explore the vegetation data.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# print spatial extent of the grid, i.e. coordinates for corners}
-\FunctionTok{extent}\NormalTok{(veg\_data)}
+\FunctionTok{ext}\NormalTok{(veg\_data)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## class      : Extent 
-## xmin       : 298636.7 
-## xmax       : 613878.7 
-## ymin       : 5167756 
-## ymax       : 5335036
+## SpatExtent : 298636.732237428, 613878.732237428, 5167755.76801917, 5335035.76801917 (xmin, xmax, ymin, ymax)
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# print the coordinate reference system}
-\FunctionTok{print}\NormalTok{(veg\_data}\SpecialCharTok{@}\NormalTok{crs)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{crs}\NormalTok{(veg\_data))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Coordinate Reference System:
-## Deprecated Proj.4 representation:
-##  +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
-## WKT2 2019 representation:
-## PROJCRS["unknown",
-##     BASEGEOGCRS["unknown",
-##         DATUM["World Geodetic System 1984",
-##             ELLIPSOID["WGS 84",6378137,298.257223563,
-##                 LENGTHUNIT["metre",1]],
-##             ID["EPSG",6326]],
-##         PRIMEM["Greenwich",0,
-##             ANGLEUNIT["degree",0.0174532925199433],
-##             ID["EPSG",8901]]],
-##     CONVERSION["UTM zone 55S",
-##         METHOD["Transverse Mercator",
-##             ID["EPSG",9807]],
-##         PARAMETER["Latitude of natural origin",0,
-##             ANGLEUNIT["degree",0.0174532925199433],
-##             ID["EPSG",8801]],
-##         PARAMETER["Longitude of natural origin",147,
-##             ANGLEUNIT["degree",0.0174532925199433],
-##             ID["EPSG",8802]],
-##         PARAMETER["Scale factor at natural origin",0.9996,
-##             SCALEUNIT["unity",1],
-##             ID["EPSG",8805]],
-##         PARAMETER["False easting",500000,
-##             LENGTHUNIT["metre",1],
-##             ID["EPSG",8806]],
-##         PARAMETER["False northing",10000000,
-##             LENGTHUNIT["metre",1],
-##             ID["EPSG",8807]],
-##         ID["EPSG",17055]],
-##     CS[Cartesian,2],
-##         AXIS["(E)",east,
-##             ORDER[1],
-##             LENGTHUNIT["metre",1,
-##                 ID["EPSG",9001]]],
-##         AXIS["(N)",north,
-##             ORDER[2],
-##             LENGTHUNIT["metre",1,
-##                 ID["EPSG",9001]]]]
+## [1] "PROJCRS[\"WGS 84 / UTM zone 55S\",\n    BASEGEOGCRS[\"WGS 84\",\n        DATUM[\"World Geodetic System 1984\",\n            ELLIPSOID[\"WGS 84\",6378137,298.257223563,\n                LENGTHUNIT[\"metre\",1]]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        ID[\"EPSG\",4326]],\n    CONVERSION[\"UTM zone 55S\",\n        METHOD[\"Transverse Mercator\",\n            ID[\"EPSG\",9807]],\n        PARAMETER[\"Latitude of natural origin\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8801]],\n        PARAMETER[\"Longitude of natural origin\",147,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8802]],\n        PARAMETER[\"Scale factor at natural origin\",0.9996,\n            SCALEUNIT[\"unity\",1],\n            ID[\"EPSG\",8805]],\n        PARAMETER[\"False easting\",500000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8806]],\n        PARAMETER[\"False northing\",10000000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8807]]],\n    CS[Cartesian,2],\n        AXIS[\"(E)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1]],\n        AXIS[\"(N)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1]],\n    USAGE[\n        SCOPE[\"unknown\"],\n        AREA[\"World - S hemisphere - 144°E to 150°E - by country\"],\n        BBOX[-80,144,0,150]],\n    ID[\"EPSG\",32755]]"
 \end{verbatim}
 
 \begin{Shaded}
@@ -929,15 +845,15 @@ Let's explore the vegetation data.
 \end{Shaded}
 
 \begin{verbatim}
-## class      : RasterLayer 
-## band       : 1  (of  32  bands)
-## dimensions : 164, 326, 53464  (nrow, ncol, ncell)
-## resolution : 967, 1020  (x, y)
-## extent     : 298636.7, 613878.7, 5167756, 5335036  (xmin, xmax, ymin, ymax)
-## crs        : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
-## source     : vegetation.tif 
-## names      : vegetation_1 
-## values     : 0, 1  (min, max)
+## class       : SpatRaster 
+## dimensions  : 164, 326, 1  (nrow, ncol, nlyr)
+## resolution  : 967, 1020  (x, y)
+## extent      : 298636.7, 613878.7, 5167756, 5335036  (xmin, xmax, ymin, ymax)
+## coord. ref. : WGS 84 / UTM zone 55S (EPSG:32755) 
+## source      : vegetation.tif 
+## name        : vegetation_1 
+## min value   :            0 
+## max value   :            1
 \end{verbatim}
 
 \begin{Shaded}
@@ -948,8 +864,8 @@ Let's explore the vegetation data.
 \end{Shaded}
 
 \begin{verbatim}
-##   
-## 0
+##   vegetation_1
+## 1            0
 \end{verbatim}
 
 \begin{Shaded}
@@ -961,52 +877,56 @@ Let's explore the vegetation data.
 \end{Shaded}
 
 \begin{verbatim}
-##   
-## 0
+##   vegetation_1
+## 1            0
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# calculate the sum of all the cell values in the first layer}
-\FunctionTok{cellStats}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"sum"}\NormalTok{)}
+\FunctionTok{global}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"sum"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 17
+##              sum
+## vegetation_1  17
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# calculate the maximum value of all the cell values in the first layer}
-\FunctionTok{cellStats}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"max"}\NormalTok{)}
+\FunctionTok{global}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"max"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1
+##              max
+## vegetation_1   1
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# calculate the minimum value of all the cell values in the first layer}
-\FunctionTok{cellStats}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"min"}\NormalTok{)}
+\FunctionTok{global}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"min"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0
+##              min
+## vegetation_1   0
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# calculate the mean value of all the cell values in the first layer}
-\FunctionTok{cellStats}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"mean"}\NormalTok{)}
+\FunctionTok{global}\NormalTok{(veg\_data[[}\DecValTok{1}\NormalTok{]], }\StringTok{"mean"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.00035239
+##                    mean
+## vegetation_1 0.00035239
 \end{verbatim}
 
 \clearpage
@@ -1014,7 +934,7 @@ Let's explore the vegetation data.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# calculate the maximum value in each layer}
-\FunctionTok{as\_tibble}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{max =} \FunctionTok{cellStats}\NormalTok{(veg\_data, }\StringTok{"max"}\NormalTok{)))}
+\FunctionTok{as\_tibble}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{max =} \FunctionTok{global}\NormalTok{(veg\_data, }\StringTok{"max"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1069,21 +989,7 @@ Now we will perform some preliminary calculations to explore the data. First, we
 \begin{Highlighting}[]
 \CommentTok{\# create prioritizr problem with only the data}
 \NormalTok{p0 }\OtherTok{\textless{}{-}} \FunctionTok{problem}\NormalTok{(pu\_data, veg\_data, }\AttributeTok{cost\_column =} \StringTok{"cost"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Warning: Support for sp package will be deprecated.
-## i Use `sf::st_as_sf()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `terra::rast()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# print empty problem,}
 \CommentTok{\# we can see that only the cost and feature data are defined}
 \FunctionTok{print}\NormalTok{(p0)}
@@ -1092,73 +998,22 @@ Now we will perform some preliminary calculations to explore the data. First, we
 
 \begin{verbatim}
 ## A conservation problem (<ConservationProblem>)
-\end{verbatim}
-
-\begin{verbatim}
 ## +@data
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@planning units:
-\end{verbatim}
-
-\begin{verbatim}
-## | +@data:       <SpatialPolygonsDataFrame> (516 total)
-\end{verbatim}
-
-\begin{verbatim}
+## | +@data:       <sfdata.frame> (516 total)
 ## | +@costs:      continuous values (between 3.5972 and 47.2383)
-\end{verbatim}
-
-\begin{verbatim}
 ## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)
-\end{verbatim}
-
-\begin{verbatim}
 ## | \@CRS:        WGS 84 / UTM zone 55S
-\end{verbatim}
-
-\begin{verbatim}
 ## +@formulation
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@objective:   none specified
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@penalties:   none specified
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@targets:     none specified
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@constraints: none specified
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@decisions:   binary decision
-\end{verbatim}
-
-\begin{verbatim}
 ## \@optimization
-\end{verbatim}
-
-\begin{verbatim}
 ##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)
-\end{verbatim}
-
-\begin{verbatim}
-##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)
-\end{verbatim}
-
-\begin{verbatim}
+##  \@solver:      highs solver (`gap` = 0.1, `time_limit` = 2147483647, ...)
 ## # i Use `summary(...)` to see complete formulation.
 \end{verbatim}
 
@@ -1225,28 +1080,7 @@ Now we will perform some preliminary calculations to explore the data. First, we
 ##  8 vegetation_8                14.0                  1
 ##  9 vegetation_9                18.0                  1
 ## 10 vegetation_10               20.0                  1
-## 11 vegetation_11               23.6                  1
-## 12 vegetation_12              748.                   1
-## 13 vegetation_13              126.                   1
-## 14 vegetation_14               10.5                  1
-## 15 vegetation_15               17.5                  1
-## 16 vegetation_16               15.0                  1
-## 17 vegetation_17              213.                   1
-## 18 vegetation_18               14.3                  1
-## 19 vegetation_19               17.1                  1
-## 20 vegetation_20               21.4                  1
-## 21 vegetation_21               18.6                  1
-## 22 vegetation_22              297.                   1
-## 23 vegetation_23               20.3                  1
-## 24 vegetation_24              165.                   1
-## 25 vegetation_25              716.                   1
-## 26 vegetation_26               24.0                  1
-## 27 vegetation_27               18.8                  1
-## 28 vegetation_28               17.5                  1
-## 29 vegetation_29               24.7                  1
-## 30 vegetation_30               59.0                  1
-## 31 vegetation_31               60.0                  1
-## 32 vegetation_32               32.0                  1
+## # i 22 more rows
 \end{verbatim}
 
 The \texttt{abundance\_data} object contains three columns. The \texttt{feature} column contains the name of each feature (derived from \texttt{names(veg\_data})), the \texttt{absolute\_abundance} column contains the total amount of each feature in all the planning units, and the \texttt{relative\_abundance} column contains the total amount of each feature in the planning units expressed as a proportion of the total amount in the underlying raster data. Since all the raster cells containing vegetation overlap with the planning units, all of the values in the \texttt{relative\_abundance} column are equal to one (meaning 100\%)---except for the 61st feature which has a value on \texttt{NaN} because it does not occur in the study area at all (i.e.~all of its raster values are zeros). Now let's add a new column with the feature abundances expressed in area units (i.e.~km\textsuperscript{2}).
@@ -1301,7 +1135,7 @@ Now let's explore the abundance data.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-29-1} \end{center}
+\begin{center}\includegraphics{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-30-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1357,16 +1191,7 @@ After calculating the total amount of each feature in the planning units (i.e.~t
 
 \CommentTok{\# calculate feature representation by protected areas}
 \NormalTok{repr\_data }\OtherTok{\textless{}{-}} \FunctionTok{eval\_feature\_representation\_summary}\NormalTok{(p0, pu\_data[, }\StringTok{"pa\_status"}\NormalTok{])}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Warning: Support for sp package will be deprecated.
-## i Use `sf::st_as_sf()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# print feature representation data}
 \FunctionTok{print}\NormalTok{(repr\_data)}
 \end{Highlighting}
@@ -1469,14 +1294,34 @@ To start things off, let's keep things simple. Let's create a prioritization usi
 \end{Shaded}
 
 \begin{verbatim}
-## class       : SpatialPolygonsDataFrame 
-## features    : 516 
-## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
-## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
-## variables   : 6
-## names       :   id,             cost, status, locked_in, locked_out, pa_status 
-## min values  :  557, 3.59717531470679,      0,         0,          0,         0 
-## max values  : 1130,  47.238336402701,      2,         1,          1,         1
+## Simple feature collection with 516 features and 6 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 348703.2 ymin: 5167775 xmax: 611932.4 ymax: 5344516
+## Projected CRS: WGS 84 / UTM zone 55S
+## First 10 features:
+##     id     cost status locked_in locked_out                       geometry
+## 1  557 29.74225      0     FALSE      FALSE MULTIPOLYGON (((363141.4 53...
+## 2  558 29.87703      0     FALSE      FALSE MULTIPOLYGON (((377633.2 53...
+## 3  574 28.60687      0     FALSE      FALSE MULTIPOLYGON (((356423.1 53...
+## 4  575 30.83416      0     FALSE      FALSE MULTIPOLYGON (((370910.6 53...
+## 5  576 38.75511      0     FALSE      FALSE MULTIPOLYGON (((385400.1 53...
+## 6  577 38.11618      2      TRUE      FALSE MULTIPOLYGON (((399891.6 53...
+## 7  578 33.33462      2      TRUE      FALSE MULTIPOLYGON (((414385.2 53...
+## 8  592 31.67498      0     FALSE      FALSE MULTIPOLYGON (((355774.9 53...
+## 9  593 28.97336      0     FALSE      FALSE MULTIPOLYGON (((361980.2 53...
+## 10 594 31.63435      0     FALSE      FALSE MULTIPOLYGON (((378676.8 53...
+##    pa_status
+## 1          0
+## 2          0
+## 3          0
+## 4          0
+## 5          0
+## 6          1
+## 7          1
+## 8          0
+## 9          0
+## 10         0
 \end{verbatim}
 
 \begin{Shaded}
@@ -1486,22 +1331,8 @@ To start things off, let's keep things simple. Let's create a prioritization usi
       \FunctionTok{add\_min\_set\_objective}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_relative\_targets}\NormalTok{(}\FloatTok{0.05}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# 5\% representation targets}
       \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+      \FunctionTok{add\_highs\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
 
-\begin{verbatim}
-## Warning: Support for sp package will be deprecated.
-## i Use `sf::st_as_sf()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `terra::rast()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# print problem}
 \FunctionTok{print}\NormalTok{(p1)}
 \end{Highlighting}
@@ -1509,73 +1340,22 @@ To start things off, let's keep things simple. Let's create a prioritization usi
 
 \begin{verbatim}
 ## A conservation problem (<ConservationProblem>)
-\end{verbatim}
-
-\begin{verbatim}
 ## +@data
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@planning units:
-\end{verbatim}
-
-\begin{verbatim}
-## | +@data:       <SpatialPolygonsDataFrame> (516 total)
-\end{verbatim}
-
-\begin{verbatim}
+## | +@data:       <sfdata.frame> (516 total)
 ## | +@costs:      continuous values (between 3.5972 and 47.2383)
-\end{verbatim}
-
-\begin{verbatim}
 ## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)
-\end{verbatim}
-
-\begin{verbatim}
 ## | \@CRS:        WGS 84 / UTM zone 55S
-\end{verbatim}
-
-\begin{verbatim}
 ## +@formulation
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@objective:   minimum set objective
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@penalties:   none specified
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@targets:     relative targets (between 0.05 and 0.05)
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@constraints: none specified
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@decisions:   binary decision
-\end{verbatim}
-
-\begin{verbatim}
 ## \@optimization
-\end{verbatim}
-
-\begin{verbatim}
 ##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)
-\end{verbatim}
-
-\begin{verbatim}
-##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)
-\end{verbatim}
-
-\begin{verbatim}
+##  \@solver:      highs solver (`gap` = 0.1, `time_limit` = 2147483647, ...)
 ## # i Use `summary(...)` to see complete formulation.
 \end{verbatim}
 
@@ -1591,14 +1371,26 @@ To start things off, let's keep things simple. Let's create a prioritization usi
 \end{Shaded}
 
 \begin{verbatim}
-## class       : SpatialPolygonsDataFrame 
-## features    : 516 
-## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
-## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
-## variables   : 7
-## names       :   id,             cost, status, locked_in, locked_out, pa_status, solution_1 
-## min values  :  557, 3.59717531470679,      0,         0,          0,         0,          0 
-## max values  : 1130,  47.238336402701,      2,         1,          1,         1,          1
+## Simple feature collection with 516 features and 7 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 348703.2 ymin: 5167775 xmax: 611932.4 ymax: 5344516
+## Projected CRS: WGS 84 / UTM zone 55S
+## # A tibble: 516 x 8
+##       id  cost status locked_in locked_out pa_status solution_1
+##    <int> <dbl>  <int> <lgl>     <lgl>          <dbl>      <dbl>
+##  1   557  29.7      0 FALSE     FALSE              0          0
+##  2   558  29.9      0 FALSE     FALSE              0          0
+##  3   574  28.6      0 FALSE     FALSE              0          0
+##  4   575  30.8      0 FALSE     FALSE              0          0
+##  5   576  38.8      0 FALSE     FALSE              0          0
+##  6   577  38.1      2 TRUE      FALSE              1          0
+##  7   578  33.3      2 TRUE      FALSE              1          0
+##  8   592  31.7      0 FALSE     FALSE              0          0
+##  9   593  29.0      0 FALSE     FALSE              0          0
+## 10   594  31.6      0 FALSE     FALSE              0          0
+## # i 506 more rows
+## # i 1 more variable: geometry <MULTIPOLYGON [m]>
 \end{verbatim}
 
 \begin{Shaded}
@@ -1609,7 +1401,7 @@ To start things off, let's keep things simple. Let's create a prioritization usi
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 17
+## [1] 15
 \end{verbatim}
 
 \begin{Shaded}
@@ -1620,17 +1412,20 @@ To start things off, let's keep things simple. Let's create a prioritization usi
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 394.0452
+## [1] 393.4956
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s1, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s1"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}
+  \FunctionTok{st\_as\_sf}\NormalTok{(s1[, }\StringTok{"solution\_1"}\NormalTok{]), }\AttributeTok{main =} \StringTok{"Prioritization"}\NormalTok{,}
+  \AttributeTok{pal =} \FunctionTok{c}\NormalTok{(}\StringTok{"grey90"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{)}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-34-1} \end{center}
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-35-1} \end{center}
 
 Now let's examine the solution.
 
@@ -1660,22 +1455,8 @@ Our first prioritization suffers many limitations, so let's add additional const
       \FunctionTok{add\_relative\_targets}\NormalTok{(}\FloatTok{0.05}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_locked\_in\_constraints}\NormalTok{(}\StringTok{"locked\_in"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+      \FunctionTok{add\_highs\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
 
-\begin{verbatim}
-## Warning: Support for sp package will be deprecated.
-## i Use `sf::st_as_sf()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `terra::rast()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# print problem}
 \FunctionTok{print}\NormalTok{(p2)}
 \end{Highlighting}
@@ -1683,77 +1464,23 @@ Our first prioritization suffers many limitations, so let's add additional const
 
 \begin{verbatim}
 ## A conservation problem (<ConservationProblem>)
-\end{verbatim}
-
-\begin{verbatim}
 ## +@data
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@planning units:
-\end{verbatim}
-
-\begin{verbatim}
-## | +@data:       <SpatialPolygonsDataFrame> (516 total)
-\end{verbatim}
-
-\begin{verbatim}
+## | +@data:       <sfdata.frame> (516 total)
 ## | +@costs:      continuous values (between 3.5972 and 47.2383)
-\end{verbatim}
-
-\begin{verbatim}
 ## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)
-\end{verbatim}
-
-\begin{verbatim}
 ## | \@CRS:        WGS 84 / UTM zone 55S
-\end{verbatim}
-
-\begin{verbatim}
 ## +@formulation
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@objective:   minimum set objective
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@penalties:   none specified
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@targets:     relative targets (between 0.05 and 0.05)
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@constraints:
-\end{verbatim}
-
-\begin{verbatim}
 ## ||\@1:          locked in constraints (198 planning units)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@decisions:   binary decision
-\end{verbatim}
-
-\begin{verbatim}
 ## \@optimization
-\end{verbatim}
-
-\begin{verbatim}
 ##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)
-\end{verbatim}
-
-\begin{verbatim}
-##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)
-\end{verbatim}
-
-\begin{verbatim}
+##  \@solver:      highs solver (`gap` = 0.1, `time_limit` = 2147483647, ...)
 ## # i Use `summary(...)` to see complete formulation.
 \end{verbatim}
 
@@ -1763,11 +1490,14 @@ Our first prioritization suffers many limitations, so let's add additional const
 \NormalTok{s2 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p2)}
 
 \CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s2, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s2"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}
+  \FunctionTok{st\_as\_sf}\NormalTok{(s2[, }\StringTok{"solution\_1"}\NormalTok{]), }\AttributeTok{main =} \StringTok{"Prioritization"}\NormalTok{,}
+  \AttributeTok{pal =} \FunctionTok{c}\NormalTok{(}\StringTok{"grey90"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{)}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-36-1} \end{center}
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-37-1} \end{center}
 
 Let's pretend that we talked to an expert on the vegetation communities in our study system and they recommended that a 20\% target was needed for each vegetation class. So, armed with this information, let's set the targets to 20\%.
 
@@ -1779,22 +1509,8 @@ Let's pretend that we talked to an expert on the vegetation communities in our s
       \FunctionTok{add\_relative\_targets}\NormalTok{(}\FloatTok{0.2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_locked\_in\_constraints}\NormalTok{(}\StringTok{"locked\_in"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+      \FunctionTok{add\_highs\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
 
-\begin{verbatim}
-## Warning: Support for sp package will be deprecated.
-## i Use `sf::st_as_sf()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `terra::rast()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# print problem}
 \FunctionTok{print}\NormalTok{(p3)}
 \end{Highlighting}
@@ -1802,77 +1518,23 @@ Let's pretend that we talked to an expert on the vegetation communities in our s
 
 \begin{verbatim}
 ## A conservation problem (<ConservationProblem>)
-\end{verbatim}
-
-\begin{verbatim}
 ## +@data
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@planning units:
-\end{verbatim}
-
-\begin{verbatim}
-## | +@data:       <SpatialPolygonsDataFrame> (516 total)
-\end{verbatim}
-
-\begin{verbatim}
+## | +@data:       <sfdata.frame> (516 total)
 ## | +@costs:      continuous values (between 3.5972 and 47.2383)
-\end{verbatim}
-
-\begin{verbatim}
 ## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)
-\end{verbatim}
-
-\begin{verbatim}
 ## | \@CRS:        WGS 84 / UTM zone 55S
-\end{verbatim}
-
-\begin{verbatim}
 ## +@formulation
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@objective:   minimum set objective
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@penalties:   none specified
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@targets:     relative targets (between 0.2 and 0.2)
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@constraints:
-\end{verbatim}
-
-\begin{verbatim}
 ## ||\@1:          locked in constraints (198 planning units)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@decisions:   binary decision
-\end{verbatim}
-
-\begin{verbatim}
 ## \@optimization
-\end{verbatim}
-
-\begin{verbatim}
 ##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)
-\end{verbatim}
-
-\begin{verbatim}
-##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)
-\end{verbatim}
-
-\begin{verbatim}
+##  \@solver:      highs solver (`gap` = 0.1, `time_limit` = 2147483647, ...)
 ## # i Use `summary(...)` to see complete formulation.
 \end{verbatim}
 
@@ -1882,11 +1544,14 @@ Let's pretend that we talked to an expert on the vegetation communities in our s
 \NormalTok{s3 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p3)}
 
 \CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s3, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s3"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}
+  \FunctionTok{st\_as\_sf}\NormalTok{(s3[, }\StringTok{"solution\_1"}\NormalTok{]), }\AttributeTok{main =} \StringTok{"Prioritization"}\NormalTok{,}
+  \AttributeTok{pal =} \FunctionTok{c}\NormalTok{(}\StringTok{"grey90"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{)}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-37-1} \end{center}
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-38-1} \end{center}
 
 Next, let's lock out highly degraded areas. Similar to before, this data is present in our planning unit data so we can use the \texttt{locked\_out} column name to achieve this.
 
@@ -1899,19 +1564,9 @@ Next, let's lock out highly degraded areas. Similar to before, this data is pres
       \FunctionTok{add\_locked\_in\_constraints}\NormalTok{(}\StringTok{"locked\_in"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_locked\_out\_constraints}\NormalTok{(}\StringTok{"locked\_out"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
+      \FunctionTok{add\_highs\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Warning: Support for sp package will be deprecated.
-## i Use `sf::st_as_sf()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `terra::rast()` to convert data for future compatibility.
-\end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1922,81 +1577,24 @@ Next, let's lock out highly degraded areas. Similar to before, this data is pres
 
 \begin{verbatim}
 ## A conservation problem (<ConservationProblem>)
-\end{verbatim}
-
-\begin{verbatim}
 ## +@data
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@planning units:
-\end{verbatim}
-
-\begin{verbatim}
-## | +@data:       <SpatialPolygonsDataFrame> (516 total)
-\end{verbatim}
-
-\begin{verbatim}
+## | +@data:       <sfdata.frame> (516 total)
 ## | +@costs:      continuous values (between 3.5972 and 47.2383)
-\end{verbatim}
-
-\begin{verbatim}
 ## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)
-\end{verbatim}
-
-\begin{verbatim}
 ## | \@CRS:        WGS 84 / UTM zone 55S
-\end{verbatim}
-
-\begin{verbatim}
 ## +@formulation
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@objective:   minimum set objective
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@penalties:   none specified
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@targets:     relative targets (between 0.1 and 0.1)
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@constraints:
-\end{verbatim}
-
-\begin{verbatim}
 ## ||+@1:          locked in constraints (198 planning units)
-\end{verbatim}
-
-\begin{verbatim}
 ## ||\@2:          locked out constraints (6 planning units)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@decisions:   binary decision
-\end{verbatim}
-
-\begin{verbatim}
 ## \@optimization
-\end{verbatim}
-
-\begin{verbatim}
 ##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)
-\end{verbatim}
-
-\begin{verbatim}
-##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)
-\end{verbatim}
-
-\begin{verbatim}
+##  \@solver:      highs solver (`gap` = 0.1, `time_limit` = 2147483647, ...)
 ## # i Use `summary(...)` to see complete formulation.
 \end{verbatim}
 
@@ -2006,11 +1604,14 @@ Next, let's lock out highly degraded areas. Similar to before, this data is pres
 \NormalTok{s4 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p4)}
 
 \CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s4, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s4"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}
+  \FunctionTok{st\_as\_sf}\NormalTok{(s4[, }\StringTok{"solution\_1"}\NormalTok{]), }\AttributeTok{main =} \StringTok{"Prioritization"}\NormalTok{,}
+  \AttributeTok{pal =} \FunctionTok{c}\NormalTok{(}\StringTok{"grey90"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{)}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-39-1} \end{center}
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-40-1} \end{center}
 
 \clearpage
 
@@ -2054,22 +1655,8 @@ Plans for protected area systems should facilitate gene flow and dispersal betwe
       \FunctionTok{add\_locked\_in\_constraints}\NormalTok{(}\StringTok{"locked\_in"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_locked\_out\_constraints}\NormalTok{(}\StringTok{"locked\_out"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+      \FunctionTok{add\_highs\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
 
-\begin{verbatim}
-## Warning: Support for sp package will be deprecated.
-## i Use `sf::st_as_sf()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `terra::rast()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# print problem}
 \FunctionTok{print}\NormalTok{(p5)}
 \end{Highlighting}
@@ -2077,85 +1664,25 @@ Plans for protected area systems should facilitate gene flow and dispersal betwe
 
 \begin{verbatim}
 ## A conservation problem (<ConservationProblem>)
-\end{verbatim}
-
-\begin{verbatim}
 ## +@data
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@planning units:
-\end{verbatim}
-
-\begin{verbatim}
-## | +@data:       <SpatialPolygonsDataFrame> (516 total)
-\end{verbatim}
-
-\begin{verbatim}
+## | +@data:       <sfdata.frame> (516 total)
 ## | +@costs:      continuous values (between 3.5972 and 47.2383)
-\end{verbatim}
-
-\begin{verbatim}
 ## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)
-\end{verbatim}
-
-\begin{verbatim}
 ## | \@CRS:        WGS 84 / UTM zone 55S
-\end{verbatim}
-
-\begin{verbatim}
 ## +@formulation
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@objective:   minimum set objective
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@penalties:
-\end{verbatim}
-
-\begin{verbatim}
 ## ||\@1:          boundary penalties (`penalty` = 0.001, `edge_factor` = 0.5, ...)
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@targets:     relative targets (between 0.1 and 0.1)
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@constraints:
-\end{verbatim}
-
-\begin{verbatim}
 ## ||+@1:          locked in constraints (198 planning units)
-\end{verbatim}
-
-\begin{verbatim}
 ## ||\@2:          locked out constraints (6 planning units)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@decisions:   binary decision
-\end{verbatim}
-
-\begin{verbatim}
 ## \@optimization
-\end{verbatim}
-
-\begin{verbatim}
 ##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)
-\end{verbatim}
-
-\begin{verbatim}
-##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)
-\end{verbatim}
-
-\begin{verbatim}
+##  \@solver:      highs solver (`gap` = 0.1, `time_limit` = 2147483647, ...)
 ## # i Use `summary(...)` to see complete formulation.
 \end{verbatim}
 
@@ -2164,40 +1691,46 @@ Plans for protected area systems should facilitate gene flow and dispersal betwe
 \CommentTok{\# solve problem,}
 \CommentTok{\# note this will take around 30 seconds}
 \NormalTok{s5 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p5)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Warning: Support for sp package will be deprecated.
-## i Use `sf::st_as_sf()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# print solution}
 \FunctionTok{print}\NormalTok{(s5)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## class       : SpatialPolygonsDataFrame 
-## features    : 516 
-## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
-## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
-## variables   : 7
-## names       :   id,             cost, status, locked_in, locked_out, pa_status, solution_1 
-## min values  :  557, 3.59717531470679,      0,         0,          0,         0,          0 
-## max values  : 1130,  47.238336402701,      2,         1,          1,         1,          1
+## Simple feature collection with 516 features and 7 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 348703.2 ymin: 5167775 xmax: 611932.4 ymax: 5344516
+## Projected CRS: WGS 84 / UTM zone 55S
+## # A tibble: 516 x 8
+##       id  cost status locked_in locked_out pa_status solution_1
+##    <int> <dbl>  <int> <lgl>     <lgl>          <dbl>      <dbl>
+##  1   557  29.7      0 FALSE     FALSE              0          0
+##  2   558  29.9      0 FALSE     FALSE              0          0
+##  3   574  28.6      0 FALSE     FALSE              0          0
+##  4   575  30.8      0 FALSE     FALSE              0          0
+##  5   576  38.8      0 FALSE     FALSE              0          0
+##  6   577  38.1      2 TRUE      FALSE              1          1
+##  7   578  33.3      2 TRUE      FALSE              1          1
+##  8   592  31.7      0 FALSE     FALSE              0          0
+##  9   593  29.0      0 FALSE     FALSE              0          0
+## 10   594  31.6      0 FALSE     FALSE              0          0
+## # i 506 more rows
+## # i 1 more variable: geometry <MULTIPOLYGON [m]>
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s5, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s5"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}
+  \FunctionTok{st\_as\_sf}\NormalTok{(s5[, }\StringTok{"solution\_1"}\NormalTok{]), }\AttributeTok{main =} \StringTok{"Prioritization"}\NormalTok{,}
+  \AttributeTok{pal =} \FunctionTok{c}\NormalTok{(}\StringTok{"grey90"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{)}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-41-1} \end{center}
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-42-1} \end{center}
 
 Now let's compare the solutions to the problems with (\texttt{s5}) and without (\texttt{s4}) the boundary length penalties.
 
@@ -2219,7 +1752,7 @@ Now let's compare the solutions to the problems with (\texttt{s5}) and without (
 \hypertarget{budget-limited-prioritizations}{%
 \section{Budget limited prioritizations}\label{budget-limited-prioritizations}}
 
-In the real-world, the funding available for conservation is often very limited. As a consequence, decision makers often need prioritizations where the total cost of priority areas does not exceed a budget. In our fourth prioritization (\texttt{s4}), we found that we would need to spend an additional \$226 million AUD to ensure that each vegetation community is adequately represented in the protected area system. But what if the funds available for establishing new protected areas were limited to \$100 million AUD? In this case, we need a ``budget limited prioritization''. Budget limited prioritizations aim to maximize some measure of conservation benefit subject to a budget (e.g.~\href{https://prioritizr.net/reference/add_max_cover_objective.html}{number of species with at least one occurrence in the protected area system}, or \href{https://prioritizr.net/reference/add_max_phylo_div_objective.html}{phylogenetic diversity}). Let's create a prioritization by maximizing the number of adequately represented features whilst keeping within a pre-specified budget.
+In the real-world, the funding available for conservation is often very limited. As a consequence, decision makers often need prioritizations where the total cost of priority areas does not exceed a budget. In our fourth prioritization (\texttt{s4}), we found that we would need to spend an additional \$247 million AUD to ensure that each vegetation community is adequately represented in the protected area system. But what if the funds available for establishing new protected areas were limited to \$100 million AUD? In this case, we need a ``budget limited prioritization''. Budget limited prioritizations aim to maximize some measure of conservation benefit subject to a budget (e.g.~\href{https://prioritizr.net/reference/add_max_cover_objective.html}{number of species with at least one occurrence in the protected area system}, or \href{https://prioritizr.net/reference/add_max_phylo_div_objective.html}{phylogenetic diversity}). Let's create a prioritization by maximizing the number of adequately represented features whilst keeping within a pre-specified budget.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2245,22 +1778,8 @@ In the real-world, the funding available for conservation is often very limited.
       \FunctionTok{add\_locked\_in\_constraints}\NormalTok{(}\StringTok{"locked\_in"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_locked\_out\_constraints}\NormalTok{(}\StringTok{"locked\_out"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+      \FunctionTok{add\_highs\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
 
-\begin{verbatim}
-## Warning: Support for sp package will be deprecated.
-## i Use `sf::st_as_sf()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `terra::rast()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# print problem}
 \FunctionTok{print}\NormalTok{(p6)}
 \end{Highlighting}
@@ -2268,81 +1787,24 @@ In the real-world, the funding available for conservation is often very limited.
 
 \begin{verbatim}
 ## A conservation problem (<ConservationProblem>)
-\end{verbatim}
-
-\begin{verbatim}
 ## +@data
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@planning units:
-\end{verbatim}
-
-\begin{verbatim}
-## | +@data:       <SpatialPolygonsDataFrame> (516 total)
-\end{verbatim}
-
-\begin{verbatim}
+## | +@data:       <sfdata.frame> (516 total)
 ## | +@costs:      continuous values (between 3.5972 and 47.2383)
-\end{verbatim}
-
-\begin{verbatim}
 ## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)
-\end{verbatim}
-
-\begin{verbatim}
 ## | \@CRS:        WGS 84 / UTM zone 55S
-\end{verbatim}
-
-\begin{verbatim}
 ## +@formulation
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@objective:   maximum representation objective (`budget` = 6580.6397)
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@penalties:   none specified
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@targets:     relative targets (between 0.1 and 0.1)
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@constraints:
-\end{verbatim}
-
-\begin{verbatim}
 ## ||+@1:          locked in constraints (198 planning units)
-\end{verbatim}
-
-\begin{verbatim}
 ## ||\@2:          locked out constraints (6 planning units)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@decisions:   binary decision
-\end{verbatim}
-
-\begin{verbatim}
 ## \@optimization
-\end{verbatim}
-
-\begin{verbatim}
 ##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)
-\end{verbatim}
-
-\begin{verbatim}
-##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)
-\end{verbatim}
-
-\begin{verbatim}
+##  \@solver:      highs solver (`gap` = 0.1, `time_limit` = 2147483647, ...)
 ## # i Use `summary(...)` to see complete formulation.
 \end{verbatim}
 
@@ -2352,7 +1814,10 @@ In the real-world, the funding available for conservation is often very limited.
 \NormalTok{s6 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p6)}
 
 \CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s6, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s6"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}
+  \FunctionTok{st\_as\_sf}\NormalTok{(s6[, }\StringTok{"solution\_1"}\NormalTok{]), }\AttributeTok{main =} \StringTok{"Prioritization"}\NormalTok{,}
+  \AttributeTok{pal =} \FunctionTok{c}\NormalTok{(}\StringTok{"grey90"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{)}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2362,23 +1827,14 @@ In the real-world, the funding available for conservation is often very limited.
 \begin{Highlighting}[]
 \CommentTok{\# calculate feature representation}
 \NormalTok{r6 }\OtherTok{\textless{}{-}} \FunctionTok{eval\_feature\_representation\_summary}\NormalTok{(p6, s6[, }\StringTok{"solution\_1"}\NormalTok{])}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Warning: Support for sp package will be deprecated.
-## i Use `sf::st_as_sf()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# calculate number of features with targets met}
 \FunctionTok{sum}\NormalTok{(r6}\SpecialCharTok{$}\NormalTok{relative\_held }\SpecialCharTok{\textgreater{}=} \FloatTok{0.2}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 18
+## [1] 17
 \end{verbatim}
 
 \begin{Shaded}
@@ -2390,11 +1846,11 @@ In the real-world, the funding available for conservation is often very limited.
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "vegetation_1"  "vegetation_2"  "vegetation_4"  "vegetation_8" 
-##  [5] "vegetation_14" "vegetation_17" "vegetation_18" "vegetation_19"
-##  [9] "vegetation_20" "vegetation_21" "vegetation_22" "vegetation_23"
-## [13] "vegetation_24" "vegetation_25" "vegetation_26" "vegetation_27"
-## [17] "vegetation_28" "vegetation_29"
+##  [1] "vegetation_1"  "vegetation_4"  "vegetation_5"  "vegetation_14"
+##  [5] "vegetation_17" "vegetation_18" "vegetation_19" "vegetation_20"
+##  [9] "vegetation_21" "vegetation_22" "vegetation_23" "vegetation_24"
+## [13] "vegetation_25" "vegetation_26" "vegetation_27" "vegetation_28"
+## [17] "vegetation_29"
 \end{verbatim}
 
 We can also add weights to specify that it is more important to meet the targets for certain features and less important for other features. A common approach for weighting features is to assign a greater importance to features with smaller spatial distributions. The rationale behind this weighting method is that features with smaller spatial distributions are at greater risk of extinction. So, let's calculate some weights for our vegetation communities and see how weighting the features changes our prioritization.
@@ -2403,8 +1859,9 @@ We can also add weights to specify that it is more important to meet the targets
 \begin{Highlighting}[]
 \CommentTok{\# calculate weights as the log inverse number of grid cells that each vegetation}
 \CommentTok{\# class occupies, rescaled between 1 and 100}
-\NormalTok{wts }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{/} \FunctionTok{cellStats}\NormalTok{(veg\_data, }\StringTok{"sum"}\NormalTok{)}
-\NormalTok{wts }\OtherTok{\textless{}{-}} \FunctionTok{rescale}\NormalTok{(wts, }\AttributeTok{to =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{))}
+\NormalTok{wts }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{/} \FunctionTok{global}\NormalTok{(veg\_data, }\StringTok{"sum"}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pull}\NormalTok{(sum)}
+\NormalTok{wts }\OtherTok{\textless{}{-}}\NormalTok{ scales}\SpecialCharTok{::}\FunctionTok{rescale}\NormalTok{(wts, }\AttributeTok{to =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{))}
 
 \CommentTok{\# print the name of the feature with smallest weight}
 \FunctionTok{names}\NormalTok{(veg\_data)[}\FunctionTok{which.min}\NormalTok{(wts)]}
@@ -2430,13 +1887,7 @@ We can also add weights to specify that it is more important to meet the targets
 \begin{Highlighting}[]
 \CommentTok{\# plot histogram of weights}
 \FunctionTok{hist}\NormalTok{(wts, }\AttributeTok{main =} \StringTok{"feature weights"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/budget-weights-1} \end{center}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# make prioritization problem with weights}
 \NormalTok{p7 }\OtherTok{\textless{}{-}} \FunctionTok{problem}\NormalTok{(pu\_data, veg\_data, }\AttributeTok{cost\_column =} \StringTok{"cost"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_max\_features\_objective}\NormalTok{(budget) }\SpecialCharTok{\%\textgreater{}\%}
@@ -2445,108 +1896,36 @@ We can also add weights to specify that it is more important to meet the targets
       \FunctionTok{add\_locked\_in\_constraints}\NormalTok{(}\StringTok{"locked\_in"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_locked\_out\_constraints}\NormalTok{(}\StringTok{"locked\_out"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+      \FunctionTok{add\_highs\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{FALSE}\NormalTok{)}
 
-\begin{verbatim}
-## Warning: Support for sp package will be deprecated.
-## i Use `sf::st_as_sf()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `terra::rast()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# print problem}
 \FunctionTok{print}\NormalTok{(p7)}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/budget-weights-1} \end{center}
+
 \begin{verbatim}
 ## A conservation problem (<ConservationProblem>)
-\end{verbatim}
-
-\begin{verbatim}
 ## +@data
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@planning units:
-\end{verbatim}
-
-\begin{verbatim}
-## | +@data:       <SpatialPolygonsDataFrame> (516 total)
-\end{verbatim}
-
-\begin{verbatim}
+## | +@data:       <sfdata.frame> (516 total)
 ## | +@costs:      continuous values (between 3.5972 and 47.2383)
-\end{verbatim}
-
-\begin{verbatim}
 ## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)
-\end{verbatim}
-
-\begin{verbatim}
 ## | \@CRS:        WGS 84 / UTM zone 55S
-\end{verbatim}
-
-\begin{verbatim}
 ## +@formulation
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@objective:   maximum representation objective (`budget` = 6580.6397)
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@penalties:
-\end{verbatim}
-
-\begin{verbatim}
 ## ||\@1:          feature weights (`weights` = asymmetric continuous values (non-zero values between 1 and 10))
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@targets:     relative targets (between 0.1 and 0.1)
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@constraints:
-\end{verbatim}
-
-\begin{verbatim}
 ## ||+@1:          locked in constraints (198 planning units)
-\end{verbatim}
-
-\begin{verbatim}
 ## ||\@2:          locked out constraints (6 planning units)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@decisions:   binary decision
-\end{verbatim}
-
-\begin{verbatim}
 ## \@optimization
-\end{verbatim}
-
-\begin{verbatim}
 ##  +@portfolio:   shuffle portfolio (`number_solutions` = 1, ...)
-\end{verbatim}
-
-\begin{verbatim}
-##  \@solver:      lpsymphony (`gap` = 0.1, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)
-\end{verbatim}
-
-\begin{verbatim}
+##  \@solver:      highs solver (`gap` = 0.1, `time_limit` = 2147483647, ...)
 ## # i Use `summary(...)` to see complete formulation.
 \end{verbatim}
 
@@ -2556,7 +1935,10 @@ We can also add weights to specify that it is more important to meet the targets
 \NormalTok{s7 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p7)}
 
 \CommentTok{\# plot solution}
-\FunctionTok{spplot}\NormalTok{(s7, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{), }\AttributeTok{main =} \StringTok{"s7"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}
+  \FunctionTok{st\_as\_sf}\NormalTok{(s7[, }\StringTok{"solution\_1"}\NormalTok{]), }\AttributeTok{main =} \StringTok{"Prioritization"}\NormalTok{,}
+  \AttributeTok{pal =} \FunctionTok{c}\NormalTok{(}\StringTok{"grey90"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{)}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2566,23 +1948,14 @@ We can also add weights to specify that it is more important to meet the targets
 \begin{Highlighting}[]
 \CommentTok{\# calculate feature representation}
 \NormalTok{r7 }\OtherTok{\textless{}{-}} \FunctionTok{eval\_feature\_representation\_summary}\NormalTok{(p7, s7[, }\StringTok{"solution\_1"}\NormalTok{])}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Warning: Support for sp package will be deprecated.
-## i Use `sf::st_as_sf()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{\# calculate number of features with targets met}
 \FunctionTok{sum}\NormalTok{(r7}\SpecialCharTok{$}\NormalTok{relative\_held }\SpecialCharTok{\textgreater{}=} \FloatTok{0.2}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 16
+## [1] 18
 \end{verbatim}
 
 \begin{Shaded}
@@ -2594,10 +1967,11 @@ We can also add weights to specify that it is more important to meet the targets
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "vegetation_4"  "vegetation_5"  "vegetation_14" "vegetation_17"
-##  [5] "vegetation_18" "vegetation_19" "vegetation_20" "vegetation_21"
-##  [9] "vegetation_22" "vegetation_23" "vegetation_24" "vegetation_25"
-## [13] "vegetation_26" "vegetation_27" "vegetation_28" "vegetation_29"
+##  [1] "vegetation_1"  "vegetation_2"  "vegetation_4"  "vegetation_9" 
+##  [5] "vegetation_14" "vegetation_17" "vegetation_18" "vegetation_19"
+##  [9] "vegetation_20" "vegetation_21" "vegetation_22" "vegetation_23"
+## [13] "vegetation_24" "vegetation_25" "vegetation_26" "vegetation_27"
+## [17] "vegetation_28" "vegetation_29"
 \end{verbatim}
 
 \begin{rmdquestion}
@@ -2630,19 +2004,9 @@ In systematic conservation planning, only rarely do we have data on all of the s
       \FunctionTok{add\_binary\_decisions}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
       \FunctionTok{add\_shuffle\_portfolio}\NormalTok{(}\AttributeTok{number\_solutions =} \DecValTok{6}\NormalTok{,}
                             \AttributeTok{remove\_duplicates =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-      \FunctionTok{add\_lpsymphony\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{gap =} \DecValTok{10}\NormalTok{)}
+      \FunctionTok{add\_highs\_solver}\NormalTok{(}\AttributeTok{verbose =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{gap =} \DecValTok{10}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Warning: Support for sp package will be deprecated.
-## i Use `sf::st_as_sf()` to convert data for future compatibility.
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Support for raster package will be deprecated.
-## i Use `terra::rast()` to convert data for future compatibility.
-\end{verbatim}
 
 \clearpage
 
@@ -2655,77 +2019,23 @@ In systematic conservation planning, only rarely do we have data on all of the s
 
 \begin{verbatim}
 ## A conservation problem (<ConservationProblem>)
-\end{verbatim}
-
-\begin{verbatim}
 ## +@data
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@features:    "vegetation_1", "vegetation_2", "vegetation_3", "vegetation_4" , ... (32 total)
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@planning units:
-\end{verbatim}
-
-\begin{verbatim}
-## | +@data:       <SpatialPolygonsDataFrame> (516 total)
-\end{verbatim}
-
-\begin{verbatim}
+## | +@data:       <sfdata.frame> (516 total)
 ## | +@costs:      continuous values (between 3.5972 and 47.2383)
-\end{verbatim}
-
-\begin{verbatim}
 ## | +@extent:     348703.1831, 5167774.5993, 611932.4474, 5344516.4109 (xmin, ymin, xmax, ymax)
-\end{verbatim}
-
-\begin{verbatim}
 ## | \@CRS:        WGS 84 / UTM zone 55S
-\end{verbatim}
-
-\begin{verbatim}
 ## +@formulation
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@objective:   maximum representation objective (`budget` = 6580.6397)
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@penalties:
-\end{verbatim}
-
-\begin{verbatim}
 ## ||\@1:          feature weights (`weights` = asymmetric continuous values (non-zero values between 1 and 10))
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@targets:     relative targets (between 0.2 and 0.2)
-\end{verbatim}
-
-\begin{verbatim}
 ## |+@constraints: none specified
-\end{verbatim}
-
-\begin{verbatim}
 ## |\@decisions:   binary decision
-\end{verbatim}
-
-\begin{verbatim}
 ## \@optimization
-\end{verbatim}
-
-\begin{verbatim}
 ##  +@portfolio:   shuffle portfolio (`number_solutions` = 6, ...)
-\end{verbatim}
-
-\begin{verbatim}
-##  \@solver:      lpsymphony (`gap` = 10, `time_limit` = 2147483647, `first_feasible` = FALSE, ...)
-\end{verbatim}
-
-\begin{verbatim}
+##  \@solver:      highs solver (`gap` = 10, `time_limit` = 2147483647, ...)
 ## # i Use `summary(...)` to see complete formulation.
 \end{verbatim}
 
@@ -2734,21 +2044,298 @@ In systematic conservation planning, only rarely do we have data on all of the s
 \CommentTok{\# solve problem}
 \CommentTok{\# note that this will contain six solutions since we added a portfolio}
 \NormalTok{s8 }\OtherTok{\textless{}{-}} \FunctionTok{solve}\NormalTok{(p8)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## Presolving model
+## 
+## 33 rows, 497 cols, 1486 nonzeros
+## 
+## 33 rows, 491 cols, 1467 nonzeros
+## 
+## 
+## Solving MIP model with:
+##    33 rows
+##    491 cols (491 binary, 0 integer, 0 implied int., 0 continuous)
+##    1467 nonzeros
+## 
+## 
+##         Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+##      Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+## 
+## 
+##          0       0         0   0.00%   163.8068955     -inf                 inf        0      0      0         0     0.0s
+## 
+##  R       0       0         0   0.00%   163.8061862     129.5288407       26.46%        0      0      0        56     0.0s
+## 
+## 
+## Solving report
+##   Status            Optimal
+##   Primal bound      129.528840726
+##   Dual bound        163.806186236
+##   Gap               26.46% (tolerance: 1000%)
+##   Solution status   feasible
+## 
+##                     129.528840726 (objective)
+##                     0 (bound viol.)
+##                     0 (int. viol.)
+##                     0 (row viol.)
+## 
+##   Timing            0.01 (total)
+##                     0.00 (presolve)
+##                     0.00 (postsolve)
+##   Nodes             1
+##   LP iterations     56 (total)
+##                     0 (strong br.)
+##                     0 (separation)
+##                     0 (heuristics)
+## 
+## Presolving model
+## 
+## 33 rows, 497 cols, 1486 nonzeros
+## 
+## 33 rows, 491 cols, 1467 nonzeros
+## 
+## 
+## Solving MIP model with:
+##    33 rows
+##    491 cols (491 binary, 0 integer, 0 implied int., 0 continuous)
+##    1467 nonzeros
+## 
+## 
+##         Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+##      Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+## 
+## 
+##          0       0         0   0.00%   163.8068955     -inf                 inf        0      0      0         0     0.0s
+## 
+##  R       0       0         0   0.00%   163.8061862     112.3557655       45.79%        0      0      0        55     0.0s
+## 
+## 
+## Solving report
+##   Status            Optimal
+##   Primal bound      112.355765548
+##   Dual bound        163.806186236
+##   Gap               45.79% (tolerance: 1000%)
+##   Solution status   feasible
+## 
+##                     112.355765548 (objective)
+##                     0 (bound viol.)
+##                     0 (int. viol.)
+##                     0 (row viol.)
+## 
+##   Timing            0.01 (total)
+##                     0.00 (presolve)
+##                     0.00 (postsolve)
+##   Nodes             1
+##   LP iterations     55 (total)
+##                     0 (strong br.)
+##                     0 (separation)
+##                     0 (heuristics)
+## 
+## Presolving model
+## 
+## 33 rows, 497 cols, 1486 nonzeros
+## 
+## 33 rows, 491 cols, 1467 nonzeros
+## 
+## 
+## Solving MIP model with:
+##    33 rows
+##    491 cols (491 binary, 0 integer, 0 implied int., 0 continuous)
+##    1467 nonzeros
+## 
+## 
+##         Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+##      Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+## 
+## 
+##          0       0         0   0.00%   163.8068955     -inf                 inf        0      0      0         0     0.0s
+## 
+##  R       0       0         0   0.00%   163.8061862     101.2388028       61.80%        0      0      0        55     0.0s
+## 
+## 
+## Solving report
+##   Status            Optimal
+##   Primal bound      101.238802824
+##   Dual bound        163.806186236
+##   Gap               61.8% (tolerance: 1000%)
+##   Solution status   feasible
+## 
+##                     101.238802824 (objective)
+##                     0 (bound viol.)
+##                     0 (int. viol.)
+##                     0 (row viol.)
+## 
+##   Timing            0.01 (total)
+##                     0.00 (presolve)
+##                     0.00 (postsolve)
+##   Nodes             1
+##   LP iterations     55 (total)
+##                     0 (strong br.)
+##                     0 (separation)
+##                     0 (heuristics)
+## 
+## Presolving model
+## 
+## 33 rows, 497 cols, 1486 nonzeros
+## 
+## 33 rows, 491 cols, 1467 nonzeros
+## 
+## 
+## Solving MIP model with:
+##    33 rows
+##    491 cols (491 binary, 0 integer, 0 implied int., 0 continuous)
+##    1467 nonzeros
+## 
+## 
+##         Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+##      Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+## 
+## 
+##          0       0         0   0.00%   163.8068955     -inf                 inf        0      0      0         0     0.0s
+## 
+##  R       0       0         0   0.00%   163.8061862     98.40470554       66.46%        0      0      0        56     0.0s
+## 
+## 
+## Solving report
+##   Status            Optimal
+##   Primal bound      98.4047055398
+##   Dual bound        163.806186236
+##   Gap               66.46% (tolerance: 1000%)
+##   Solution status   feasible
+## 
+##                     98.4047055398 (objective)
+##                     0 (bound viol.)
+##                     0 (int. viol.)
+##                     0 (row viol.)
+## 
+##   Timing            0.01 (total)
+##                     0.00 (presolve)
+##                     0.00 (postsolve)
+##   Nodes             1
+##   LP iterations     56 (total)
+##                     0 (strong br.)
+##                     0 (separation)
+##                     0 (heuristics)
+## 
+## Presolving model
+## 
+## 33 rows, 497 cols, 1486 nonzeros
+## 
+## 33 rows, 491 cols, 1467 nonzeros
+## 
+## 
+## Solving MIP model with:
+##    33 rows
+##    491 cols (491 binary, 0 integer, 0 implied int., 0 continuous)
+##    1467 nonzeros
+## 
+## 
+##         Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+##      Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+## 
+## 
+##          0       0         0   0.00%   163.8068955     -inf                 inf        0      0      0         0     0.0s
+## 
+##  R       0       0         0   0.00%   163.8061862     96.98916398       68.89%        0      0      0        55     0.0s
+## 
+## 
+## Solving report
+##   Status            Optimal
+##   Primal bound      96.9891639755
+##   Dual bound        163.806186236
+##   Gap               68.89% (tolerance: 1000%)
+##   Solution status   feasible
+## 
+##                     96.9891639755 (objective)
+##                     0 (bound viol.)
+##                     0 (int. viol.)
+##                     0 (row viol.)
+## 
+##   Timing            0.01 (total)
+##                     0.00 (presolve)
+##                     0.00 (postsolve)
+##   Nodes             1
+##   LP iterations     55 (total)
+##                     0 (strong br.)
+##                     0 (separation)
+##                     0 (heuristics)
+## 
+## Presolving model
+## 
+## 33 rows, 497 cols, 1486 nonzeros
+## 
+## 33 rows, 491 cols, 1467 nonzeros
+## 
+## 
+## Solving MIP model with:
+##    33 rows
+##    491 cols (491 binary, 0 integer, 0 implied int., 0 continuous)
+##    1467 nonzeros
+## 
+## 
+##         Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+##      Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+## 
+## 
+##          0       0         0   0.00%   163.8068955     -inf                 inf        0      0      0         0     0.0s
+## 
+##  R       0       0         0   0.00%   163.8061862     122.9076543       33.28%        0      0      0        55     0.0s
+## 
+## 
+## Solving report
+##   Status            Optimal
+##   Primal bound      122.907654259
+##   Dual bound        163.806186236
+##   Gap               33.28% (tolerance: 1000%)
+##   Solution status   feasible
+## 
+##                     122.907654259 (objective)
+##                     0 (bound viol.)
+##                     0 (int. viol.)
+##                     0 (row viol.)
+## 
+##   Timing            0.01 (total)
+##                     0.00 (presolve)
+##                     0.00 (postsolve)
+##   Nodes             1
+##   LP iterations     55 (total)
+##                     0 (strong br.)
+##                     0 (separation)
+##                     0 (heuristics)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# print solution}
 \FunctionTok{print}\NormalTok{(s8)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## class       : SpatialPolygonsDataFrame 
-## features    : 516 
-## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
-## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
-## variables   : 12
-## names       :   id,             cost, status, locked_in, locked_out, pa_status, solution_1, solution_2, solution_3, solution_4, solution_5, solution_6 
-## min values  :  557, 3.59717531470679,      0,         0,          0,         0,          0,          0,          0,          0,          0,          0 
-## max values  : 1130,  47.238336402701,      2,         1,          1,         1,          1,          1,          1,          1,          1,          1
+## Simple feature collection with 516 features and 12 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: 348703.2 ymin: 5167775 xmax: 611932.4 ymax: 5344516
+## Projected CRS: WGS 84 / UTM zone 55S
+## # A tibble: 516 x 13
+##       id  cost status locked_in locked_out pa_status solution_1 solution_2
+##    <int> <dbl>  <int> <lgl>     <lgl>          <dbl>      <dbl>      <dbl>
+##  1   557  29.7      0 FALSE     FALSE              0          0          0
+##  2   558  29.9      0 FALSE     FALSE              0          0          0
+##  3   574  28.6      0 FALSE     FALSE              0          0          0
+##  4   575  30.8      0 FALSE     FALSE              0          0          0
+##  5   576  38.8      0 FALSE     FALSE              0          0          0
+##  6   577  38.1      2 TRUE      FALSE              1          0          0
+##  7   578  33.3      2 TRUE      FALSE              1          0          0
+##  8   592  31.7      0 FALSE     FALSE              0          0          0
+##  9   593  29.0      0 FALSE     FALSE              0          0          0
+## 10   594  31.6      0 FALSE     FALSE              0          0          0
+## # i 506 more rows
+## # i 5 more variables: solution_3 <dbl>, solution_4 <dbl>, solution_5 <dbl>,
+## #   solution_6 <dbl>, geometry <MULTIPOLYGON [m]>
 \end{verbatim}
 
 \begin{Shaded}
@@ -2759,7 +2346,7 @@ In systematic conservation planning, only rarely do we have data on all of the s
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1200.711
+## [1] 1127.409
 \end{verbatim}
 
 \begin{Shaded}
@@ -2770,7 +2357,7 @@ In systematic conservation planning, only rarely do we have data on all of the s
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1184.733
+## [1] 1019.367
 \end{verbatim}
 
 \begin{Shaded}
@@ -2782,14 +2369,16 @@ In systematic conservation planning, only rarely do we have data on all of the s
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.9786822
+## [1] 0.9864341
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# plot first solution}
-\FunctionTok{spplot}\NormalTok{(s8, }\StringTok{"solution\_1"}\NormalTok{, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{),}
-       \AttributeTok{main =} \StringTok{"s8 (solution 1)"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}
+  \FunctionTok{st\_as\_sf}\NormalTok{(s8[, }\StringTok{"solution\_1"}\NormalTok{]), }\AttributeTok{main =} \StringTok{"Prioritization"}\NormalTok{,}
+  \AttributeTok{pal =} \FunctionTok{c}\NormalTok{(}\StringTok{"grey90"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{)}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2800,14 +2389,12 @@ In systematic conservation planning, only rarely do we have data on all of the s
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# plot all solutions}
-\NormalTok{s8\_plots }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"solution\_"}\NormalTok{, }\FunctionTok{seq\_len}\NormalTok{(}\DecValTok{6}\NormalTok{)), }\ControlFlowTok{function}\NormalTok{(x) \{}
-  \FunctionTok{spplot}\NormalTok{(s8, x, }\AttributeTok{main =}\NormalTok{ x, }\AttributeTok{col.regions =} \FunctionTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{))}
-\NormalTok{\})}
-\FunctionTok{do.call}\NormalTok{(grid.arrange, }\FunctionTok{append}\NormalTok{(s8\_plots, }\FunctionTok{list}\NormalTok{(}\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)))}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{st\_as\_sf}\NormalTok{(s8 }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"solution\_"}\NormalTok{))),}
+     \AttributeTok{pal =} \FunctionTok{c}\NormalTok{(}\StringTok{"grey90"}\NormalTok{, }\StringTok{"darkgreen"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-48-1} \end{center}
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-48-1} \end{center}
 
 \begin{rmdquestion}
 \begin{enumerate}
