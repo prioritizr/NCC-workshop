@@ -6,10 +6,10 @@ biocViews:
 Imports:
   bookdown,
   tidyverse,
-  raster,
+  terra,
   dplyr,
   plyr,
-  sp,
+  sf,
   rgeos,
   rgdal,
   Rsymphony,

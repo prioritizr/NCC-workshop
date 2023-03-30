@@ -37,7 +37,8 @@ Now we will set up our R session for the workshop. Specifically, enter the follo
 library(tidyverse)
 library(prioritizr)
 library(rgdal)
-library(raster)
+library(terra)
+library(sf)
 library(rgeos)
 library(mapview)
 library(units)
@@ -76,14 +77,14 @@ Now that we have downloaded the dataset, we will need to import it into our R se
 
 ```{r}
 # import planning unit data
-pu_data <- readOGR("data/pu.shp")
+pu_data <- st_read("data/pu.shp")
 
 # format columns in planning unit data
 pu_data$locked_in <- as.logical(pu_data$locked_in)
 pu_data$locked_out <- as.logical(pu_data$locked_out)
 
 # import vegetation data
-veg_data <- stack("data/vegetation.tif")
+veg_data <- rast("data/vegetation.tif")
 ```
 
 ```{r, include = FALSE}
@@ -127,16 +128,16 @@ class(pu_data)
 slotNames(pu_data)
 
 # print the geometry for the 80th planning unit
-pu_data@polygons[[80]]
+pu_data$geometry[80]
 
 # print the coordinate reference system
-print(pu_data@proj4string)
+st_crs(pu_data)
 
 # print number of planning units (geometries) in the data
 nrow(pu_data)
 
 # print the first six rows in the attribute data
-head(pu_data@data)
+head(pu_data)
 
 # print the first six values in the cost column of the attribute data
 head(pu_data$cost)
@@ -151,7 +152,7 @@ min(pu_data$cost)
 mean(pu_data$cost)
 
 # plot a map of the planning unit cost data
-spplot(pu_data, "cost")
+plot(pu_data["cost"])
 ```
 
 ```{r, eval = FALSE}
@@ -210,7 +211,7 @@ ncol(veg_data)
 ncell(veg_data)
 
 # print number of layers in the data
-nlayers(veg_data)
+nlyr(veg_data)
 
 # print  resolution on the x-axis
 xres(veg_data)
@@ -219,10 +220,10 @@ xres(veg_data)
 yres(veg_data)
 
 # print spatial extent of the grid, i.e. coordinates for corners
-extent(veg_data)
+ext(veg_data)
 
 # print the coordinate reference system
-print(veg_data@crs)
+print(crs(veg_data))
 
 # print a summary of the first layer in the stack
 print(veg_data[[1]])
