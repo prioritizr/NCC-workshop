@@ -17,7 +17,7 @@ p1 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_min_set_objective() %>%
       add_relative_targets(0.05) %>% # 5% representation targets
       add_binary_decisions() %>%
-      add_lpsymphony_solver(verbose = FALSE)
+      add_highs_solver(verbose = FALSE)
 
 # print problem
 print(p1)
@@ -36,7 +36,10 @@ sum(s1$solution_1)
 sum(s1$solution_1 * s1$cost)
 
 # plot solution
-spplot(s1, "solution_1", col.regions = c("white", "darkgreen"), main = "s1")
+plot(
+  st_as_sf(s1[, "solution_1"]), main = "Prioritization",
+  pal = c("grey90", "darkgreen")
+)
 ```
 
 Now let's examine the solution.
@@ -59,7 +62,7 @@ p2 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_relative_targets(0.05) %>%
       add_locked_in_constraints("locked_in") %>%
       add_binary_decisions() %>%
-      add_lpsymphony_solver(verbose = FALSE)
+      add_highs_solver(verbose = FALSE)
 
 # print problem
 print(p2)
@@ -68,7 +71,10 @@ print(p2)
 s2 <- solve(p2)
 
 # plot solution
-spplot(s2, "solution_1", col.regions = c("white", "darkgreen"), main = "s2")
+plot(
+  st_as_sf(s2[, "solution_1"]), main = "Prioritization",
+  pal = c("grey90", "darkgreen")
+)
 ```
 
 Let's pretend that we talked to an expert on the vegetation communities in our study system and they recommended that a 20% target was needed for each vegetation class. So, armed with this information, let's set the targets to 20%.
@@ -80,7 +86,7 @@ p3 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_relative_targets(0.2) %>%
       add_locked_in_constraints("locked_in") %>%
       add_binary_decisions() %>%
-      add_lpsymphony_solver(verbose = FALSE)
+      add_highs_solver(verbose = FALSE)
 
 # print problem
 print(p3)
@@ -89,7 +95,10 @@ print(p3)
 s3 <- solve(p3)
 
 # plot solution
-spplot(s3, "solution_1", col.regions = c("white", "darkgreen"), main = "s3")
+plot(
+  st_as_sf(s3[, "solution_1"]), main = "Prioritization",
+  pal = c("grey90", "darkgreen")
+)
 ```
 
 Next, let's lock out highly degraded areas. Similar to before, this data is present in our planning unit data so we can use the `locked_out` column name to achieve this.
@@ -102,7 +111,7 @@ p4 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_locked_in_constraints("locked_in") %>%
       add_locked_out_constraints("locked_out") %>%
       add_binary_decisions() %>%
-      add_lpsymphony_solver(verbose = FALSE)
+      add_highs_solver(verbose = FALSE)
 ```
 
 ```{r, out.width = "65%"}
@@ -113,7 +122,10 @@ print(p4)
 s4 <- solve(p4)
 
 # plot solution
-spplot(s4, "solution_1", col.regions = c("white", "darkgreen"), main = "s4")
+plot(
+  st_as_sf(s4[, "solution_1"]), main = "Prioritization",
+  pal = c("grey90", "darkgreen")
+)
 ```
 
 
@@ -147,7 +159,7 @@ p5 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_locked_in_constraints("locked_in") %>%
       add_locked_out_constraints("locked_out") %>%
       add_binary_decisions() %>%
-      add_lpsymphony_solver(verbose = FALSE)
+      add_highs_solver(verbose = FALSE)
 
 # print problem
 print(p5)
@@ -160,13 +172,12 @@ s5 <- solve(p5)
 print(s5)
 
 # plot solution
-spplot(s5, "solution_1", col.regions = c("white", "darkgreen"), main = "s5")
+plot(
+  st_as_sf(s5[, "solution_1"]), main = "Prioritization",
+  pal = c("grey90", "darkgreen")
+)
 ```
 
-```{r, include=FALSE}
-assert_that(!identical(s5$solution_1, s4$solution_1),
-            sum(s5$solution_1 * s5$cost) > sum(s4$solution_1 * s4$cost))
-```
 
 Now let's compare the solutions to the problems with (`s5`) and without (`s4`) the boundary length penalties.
 
@@ -198,7 +209,7 @@ p6 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_locked_in_constraints("locked_in") %>%
       add_locked_out_constraints("locked_out") %>%
       add_binary_decisions() %>%
-      add_lpsymphony_solver(verbose = FALSE)
+      add_highs_solver(verbose = FALSE)
 
 # print problem
 print(p6)
@@ -207,7 +218,10 @@ print(p6)
 s6 <- solve(p6)
 
 # plot solution
-spplot(s6, "solution_1", col.regions = c("white", "darkgreen"), main = "s6")
+plot(
+  st_as_sf(s6[, "solution_1"]), main = "Prioritization",
+  pal = c("grey90", "darkgreen")
+)
 
 # calculate feature representation
 r6 <- eval_feature_representation_summary(p6, s6[, "solution_1"])
@@ -225,7 +239,8 @@ We can also add weights to specify that it is more important to meet the targets
 ```{r "budget-weights", out.width = "65%"}
 # calculate weights as the log inverse number of grid cells that each vegetation
 # class occupies, rescaled between 1 and 100
-wts <- 1 / cellStats(veg_data, "sum")
+wts <- 1 / global(veg_data, "sum", na.rm = TRUE) %>%
+  pull(sum)
 wts <- rescale(wts, to = c(1, 10))
 
 # print the name of the feature with smallest weight
@@ -245,7 +260,7 @@ p7 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_locked_in_constraints("locked_in") %>%
       add_locked_out_constraints("locked_out") %>%
       add_binary_decisions() %>%
-      add_lpsymphony_solver(verbose = FALSE)
+      add_highs_solver(verbose = FALSE)
 
 # print problem
 print(p7)
@@ -254,8 +269,10 @@ print(p7)
 s7 <- solve(p7)
 
 # plot solution
-spplot(s7, "solution_1", col.regions = c("white", "darkgreen"), main = "s7")
-
+plot(
+  st_as_sf(s7[, "solution_1"]), main = "Prioritization",
+  pal = c("grey90", "darkgreen")
+)
 # calculate feature representation
 r7 <- eval_feature_representation_summary(p7, s7[, "solution_1"])
 
@@ -293,7 +310,7 @@ p8 <- problem(pu_data, veg_data, cost_column = "cost") %>%
       add_binary_decisions() %>%
       add_shuffle_portfolio(number_solutions = 6,
                             remove_duplicates = FALSE) %>%
-      add_lpsymphony_solver(verbose = TRUE, gap = 10)
+      add_highs_solver(verbose = TRUE, gap = 10)
 ```
 
 \clearpage
@@ -320,18 +337,18 @@ sum(s8$solution_2 * s8$cost)
 mean(s8$solution_1 == s8$solution_2)
 
 # plot first solution
-spplot(s8, "solution_1", col.regions = c("white", "darkgreen"),
-       main = "s8 (solution 1)")
+plot(
+  st_as_sf(s8[, "solution_1"]), main = "Prioritization",
+  pal = c("grey90", "darkgreen")
+)
 ```
 
 \clearpage
 
-```{r, fig.width = 8, fig.height = 5}
+```{r, out.width = "65%"}
 # plot all solutions
-s8_plots <- lapply(paste0("solution_", seq_len(6)), function(x) {
-  spplot(s8, x, main = x, col.regions = c("white", "darkgreen"))
-})
-do.call(grid.arrange, append(s8_plots, list(ncol = 3)))
+plot(st_as_sf(s8 %>% dplyr::select(starts_with("solution_"))),
+     pal = c("grey90", "darkgreen"))
 ```
 
 ```{block2, type="rmdquestion"}

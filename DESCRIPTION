@@ -12,12 +12,11 @@ Imports:
   sf,
   rgeos,
   rgdal,
-  Rsymphony,
+  highs,
   prioritizr,
   prioritizrdata,
   mapview,
   units,
-  lpsymphony,
   gridExtra
 Remotes:
   rstudio/bookdown,

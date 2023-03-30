@@ -35,6 +35,7 @@ Now we will set up our R session for the workshop. Specifically, enter the follo
 ```{r, message = FALSE}
 # load packages
 library(tidyverse)
+library(highs)
 library(prioritizr)
 library(rgdal)
 library(terra)
@@ -197,7 +198,7 @@ plot(veg_data[[32]])
 
 ```{r, eval = FALSE}
 # plot an interactive map of the 36th vegetation class
-mapview(veg_data[[32]])
+# 1mapview(veg_data[[32]])
 ```
 
 ```{r}
@@ -236,23 +237,23 @@ print(veg_data[[1]][800])
 print(veg_data[[1]][30, 60])
 
 # calculate the sum of all the cell values in the first layer
-cellStats(veg_data[[1]], "sum")
+global(veg_data[[1]], "sum", na.rm = TRUE)
 
 # calculate the maximum value of all the cell values in the first layer
-cellStats(veg_data[[1]], "max")
+global(veg_data[[1]], "max", na.rm = TRUE)
 
 # calculate the minimum value of all the cell values in the first layer
-cellStats(veg_data[[1]], "min")
+global(veg_data[[1]], "min", na.rm = TRUE)
 
 # calculate the mean value of all the cell values in the first layer
-cellStats(veg_data[[1]], "mean")
+global(veg_data[[1]], "mean", na.rm = TRUE)
 ```
 
 \clearpage
 
 ```{r}
 # calculate the maximum value in each layer
-as_tibble(data.frame(max = cellStats(veg_data, "max")))
+as_tibble(data.frame(max = global(veg_data, "max", na.rm = TRUE)))
 ```
 
 Now, you can try and answer some questions about the vegetation data.
