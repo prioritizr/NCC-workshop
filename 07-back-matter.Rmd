@@ -4,9 +4,7 @@ Many thanks to [Icons8](https://icons8.com) for providing the icons used in this
 
 # Session information
 
-```{r}
+```{r "session-info"}
 # print session information
 sessionInfo()
 ```
-
-# References
