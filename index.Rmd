@@ -35,12 +35,6 @@ print <- function(x, ...) {
     base::print(x)
   }
 }
-pretty_number <- function(x) {
-  assertthat::assert_that(assertthat::is.scalar(x))
-  if (is.na(x)) return ("NA")
-  assertthat::assert_that(assertthat::is.number(x))
-  formatC(x, big.mark = ",", digits = 2, format = "f", drop0trailing = TRUE)
-}
 ```
 
 ```{r, include = FALSE}
