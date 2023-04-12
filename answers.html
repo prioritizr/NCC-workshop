@@ -4,33 +4,33 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Answers | PRIORITIZR WORKSHOP MANUAL</title>
-  <meta name="description" content="Manual for the prioritizr module of the Spatial Conservation Prioritization: Concepts, Methods and Application workshop held at CIBIO-InBIO, Vairão, Portugal." />
+  <title>Chapter 7 Answers | PRIORITIZR WORKSHOP MANUAL</title>
+  <meta name="description" content="Manual for the prioritizr module for the Automation &amp; Technical Skills GIS Group Meeting held held by the Nature Conservancy of Canada." />
   <meta name="generator" content="bookdown 0.33.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Answers | PRIORITIZR WORKSHOP MANUAL" />
+  <meta property="og:title" content="Chapter 7 Answers | PRIORITIZR WORKSHOP MANUAL" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://prioritizr.github.io/NCC-workshop/images/cover.png" />
-  <meta property="og:description" content="Manual for the prioritizr module of the Spatial Conservation Prioritization: Concepts, Methods and Application workshop held at CIBIO-InBIO, Vairão, Portugal." />
+  <meta property="og:description" content="Manual for the prioritizr module for the Automation &amp; Technical Skills GIS Group Meeting held held by the Nature Conservancy of Canada." />
   <meta name="github-repo" content="prioritizr/NCC-workshop" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Answers | PRIORITIZR WORKSHOP MANUAL" />
+  <meta name="twitter:title" content="Chapter 7 Answers | PRIORITIZR WORKSHOP MANUAL" />
   
-  <meta name="twitter:description" content="Manual for the prioritizr module of the Spatial Conservation Prioritization: Concepts, Methods and Application workshop held at CIBIO-InBIO, Vairão, Portugal." />
+  <meta name="twitter:description" content="Manual for the prioritizr module for the Automation &amp; Technical Skills GIS Group Meeting held held by the Nature Conservancy of Canada." />
   <meta name="twitter:image" content="https://prioritizr.github.io/NCC-workshop/images/cover.png" />
 
-<meta name="author" content="Jeffrey O. Hanson" />
+<meta name="author" content="Jeffrey Hanson and Richard Schuster" />
 
 
-<meta name="date" content="2023-03-30" />
+<meta name="date" content="2023-04-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="spatial-prioritizations.html"/>
+<link rel="prev" href="importance.html"/>
 <link rel="next" href="acknowledgements.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -52,6 +52,25 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.2/leaflet-providers-plugin.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+<script src="libs/raster::raster(veg_data[[30]])_4e520c-1/data_stars_rasterrasterveg_data30bd4f5e.txt"></script>
+<script src="libs/joda-0.0.1/joda.js"></script>
+<script src="libs/joda-0.0.1/addImageQuery-bindings.js"></script>
 
 
 <style type="text/css">
@@ -173,7 +192,7 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#starting-out"><i class="fa fa-check"></i><b>3.1</b> Starting out</a></li>
-<li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#attaching-packages"><i class="fa fa-check"></i><b>3.2</b> Attaching packages</a></li>
+<li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#setting-up-the-r-session"><i class="fa fa-check"></i><b>3.2</b> Setting up the R session</a></li>
 <li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#data-import"><i class="fa fa-check"></i><b>3.3</b> Data import</a></li>
 <li class="chapter" data-level="3.4" data-path="data.html"><a href="data.html#planning-unit-data"><i class="fa fa-check"></i><b>3.4</b> Planning unit data</a></li>
 <li class="chapter" data-level="3.5" data-path="data.html"><a href="data.html#vegetation-data"><i class="fa fa-check"></i><b>3.5</b> Vegetation data</a></li>
@@ -191,32 +210,38 @@ div.csl-indent {
 <li class="chapter" data-level="5.3" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html#adding-complexity"><i class="fa fa-check"></i><b>5.3</b> Adding complexity</a></li>
 <li class="chapter" data-level="5.4" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html#penalizing-fragmentation"><i class="fa fa-check"></i><b>5.4</b> Penalizing fragmentation</a></li>
 <li class="chapter" data-level="5.5" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html#budget-limited-prioritizations"><i class="fa fa-check"></i><b>5.5</b> Budget limited prioritizations</a></li>
-<li class="chapter" data-level="5.6" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html#solution-portfolios"><i class="fa fa-check"></i><b>5.6</b> Solution portfolios</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>6</b> Answers</a>
+<li class="chapter" data-level="6" data-path="importance.html"><a href="importance.html"><i class="fa fa-check"></i><b>6</b> Importance</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="answers.html"><a href="answers.html#data-1"><i class="fa fa-check"></i><b>6.1</b> Data</a>
+<li class="chapter" data-level="6.1" data-path="importance.html"><a href="importance.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="importance.html"><a href="importance.html#quantifying-irreplaceability"><i class="fa fa-check"></i><b>6.2</b> Quantifying irreplaceability</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="answers.html"><a href="answers.html"><i class="fa fa-check"></i><b>7</b> Answers</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="answers.html"><a href="answers.html#planning-unit-data-1"><i class="fa fa-check"></i><b>6.1.1</b> Planning unit data</a></li>
-<li class="chapter" data-level="6.1.2" data-path="answers.html"><a href="answers.html#vegetation-data-1"><i class="fa fa-check"></i><b>6.1.2</b> Vegetation data</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="answers.html"><a href="answers.html#gap-analysis-1"><i class="fa fa-check"></i><b>6.2</b> Gap analysis</a>
+<li class="chapter" data-level="7.1" data-path="answers.html"><a href="answers.html#data-1"><i class="fa fa-check"></i><b>7.1</b> Data</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="answers.html"><a href="answers.html#feature-abundance-1"><i class="fa fa-check"></i><b>6.2.1</b> Feature abundance</a></li>
-<li class="chapter" data-level="6.2.2" data-path="answers.html"><a href="answers.html#feature-representation-by-protected-areas-1"><i class="fa fa-check"></i><b>6.2.2</b> Feature representation by protected areas</a></li>
+<li class="chapter" data-level="7.1.1" data-path="answers.html"><a href="answers.html#planning-unit-data-1"><i class="fa fa-check"></i><b>7.1.1</b> Planning unit data</a></li>
+<li class="chapter" data-level="7.1.2" data-path="answers.html"><a href="answers.html#vegetation-data-1"><i class="fa fa-check"></i><b>7.1.2</b> Vegetation data</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="answers.html"><a href="answers.html#spatial-prioritizations-1"><i class="fa fa-check"></i><b>6.3</b> Spatial prioritizations</a>
+<li class="chapter" data-level="7.2" data-path="answers.html"><a href="answers.html#gap-analysis-1"><i class="fa fa-check"></i><b>7.2</b> Gap analysis</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="answers.html"><a href="answers.html#starting-out-simple-1"><i class="fa fa-check"></i><b>6.3.1</b> Starting out simple</a></li>
-<li class="chapter" data-level="6.3.2" data-path="answers.html"><a href="answers.html#adding-complexity-1"><i class="fa fa-check"></i><b>6.3.2</b> Adding complexity</a></li>
-<li class="chapter" data-level="6.3.3" data-path="answers.html"><a href="answers.html#penalizing-fragmentation-1"><i class="fa fa-check"></i><b>6.3.3</b> Penalizing fragmentation</a></li>
-<li class="chapter" data-level="6.3.4" data-path="answers.html"><a href="answers.html#budget-limited-prioritizations-1"><i class="fa fa-check"></i><b>6.3.4</b> Budget limited prioritizations</a></li>
-<li class="chapter" data-level="6.3.5" data-path="answers.html"><a href="answers.html#solution-portfolios-1"><i class="fa fa-check"></i><b>6.3.5</b> Solution portfolios</a></li>
+<li class="chapter" data-level="7.2.1" data-path="answers.html"><a href="answers.html#feature-abundance-1"><i class="fa fa-check"></i><b>7.2.1</b> Feature abundance</a></li>
+<li class="chapter" data-level="7.2.2" data-path="answers.html"><a href="answers.html#feature-representation-by-protected-areas-1"><i class="fa fa-check"></i><b>7.2.2</b> Feature representation by protected areas</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="answers.html"><a href="answers.html#spatial-prioritizations-1"><i class="fa fa-check"></i><b>7.3</b> Spatial prioritizations</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="answers.html"><a href="answers.html#starting-out-simple-1"><i class="fa fa-check"></i><b>7.3.1</b> Starting out simple</a></li>
+<li class="chapter" data-level="7.3.2" data-path="answers.html"><a href="answers.html#adding-complexity-1"><i class="fa fa-check"></i><b>7.3.2</b> Adding complexity</a></li>
+<li class="chapter" data-level="7.3.3" data-path="answers.html"><a href="answers.html#penalizing-fragmentation-1"><i class="fa fa-check"></i><b>7.3.3</b> Penalizing fragmentation</a></li>
+<li class="chapter" data-level="7.3.4" data-path="answers.html"><a href="answers.html#budget-limited-prioritizations-1"><i class="fa fa-check"></i><b>7.3.4</b> Budget limited prioritizations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="answers.html"><a href="answers.html#importance-1"><i class="fa fa-check"></i><b>7.4</b> Importance</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="answers.html"><a href="answers.html#quantifying-irreplaceability-1"><i class="fa fa-check"></i><b>7.4.1</b> Quantifying irreplaceability</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>7</b> Acknowledgements</a></li>
-<li class="chapter" data-level="8" data-path="session-information.html"><a href="session-information.html"><i class="fa fa-check"></i><b>8</b> Session information</a></li>
-<li class="chapter" data-level="9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>9</b> References</a></li>
+<li class="chapter" data-level="8" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>8</b> Acknowledgements</a></li>
+<li class="chapter" data-level="9" data-path="session-information.html"><a href="session-information.html"><i class="fa fa-check"></i><b>9</b> Session information</a></li>
 </ul>
 
       </nav>
@@ -234,13 +259,13 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="answers" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Answers<a href="answers.html#answers" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="answers" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Answers<a href="answers.html#answers" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This chapter contains the answers to the questions presented in the earlier chapters. The answers are provided here so you can check if your answers are correct.</p>
-<div id="data-1" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Data<a href="answers.html#data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="planning-unit-data-1" class="section level3 hasAnchor" number="6.1.1">
-<h3><span class="header-section-number">6.1.1</span> Planning unit data<a href="answers.html#planning-unit-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="data-1" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Data<a href="answers.html#data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="planning-unit-data-1" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Planning unit data<a href="answers.html#planning-unit-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 <div class="rmdanswer">
 <ol style="list-style-type: decimal">
@@ -259,23 +284,23 @@ div.csl-indent {
 </ol>
 </div>
 </div>
-<div id="vegetation-data-1" class="section level3 hasAnchor" number="6.1.2">
-<h3><span class="header-section-number">6.1.2</span> Vegetation data<a href="answers.html#vegetation-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="vegetation-data-1" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Vegetation data<a href="answers.html#vegetation-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 <div class="rmdanswer">
 <ol style="list-style-type: decimal">
-<li>Central-north Tasmania</li>
-<li><code>cellStats(veg_data[[12]], "mean")</code></li>
-<li><code>names(veg_data)[which.max(cellStats(veg_data, "sum"))]</code></li>
+<li>North-eastern quarter of Tasmania</li>
+<li><code>cellStats(veg_data[["Heathland"]], "mean")</code></li>
+<li><code>names(veg_data)[which.max(global(veg_data, "sum", na.rm = TRUE)[[1]])]</code></li>
 <li>Yes, they are the same.</li>
 </ol>
 </div>
 </div>
 </div>
-<div id="gap-analysis-1" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Gap analysis<a href="answers.html#gap-analysis-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="feature-abundance-1" class="section level3 hasAnchor" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> Feature abundance<a href="answers.html#feature-abundance-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="gap-analysis-1" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Gap analysis<a href="answers.html#gap-analysis-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="feature-abundance-1" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Feature abundance<a href="answers.html#feature-abundance-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 <div class="rmdanswer">
 <ol style="list-style-type: decimal">
@@ -287,8 +312,8 @@ div.csl-indent {
 </ol>
 </div>
 </div>
-<div id="feature-representation-by-protected-areas-1" class="section level3 hasAnchor" number="6.2.2">
-<h3><span class="header-section-number">6.2.2</span> Feature representation by protected areas<a href="answers.html#feature-representation-by-protected-areas-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="feature-representation-by-protected-areas-1" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Feature representation by protected areas<a href="answers.html#feature-representation-by-protected-areas-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 <div class="rmdanswer">
 <ol style="list-style-type: decimal">
@@ -297,50 +322,51 @@ div.csl-indent {
 <li><code>repr_data$feature[which.max(repr_data$relative_held)]</code></li>
 <li><code>repr_data$feature[which.max(repr_data$absolute_held)]</code></li>
 <li>No, just because a vegetation class is widespread does not necessarily mean that it has the greatest overlap with protected areas. In fact, due to biases in the establishment of protected areas this can often be the case.</li>
-<li>Yes, the largest protected areas tend to have the great representation (broadly speaking).
+<li>Yes, the largest protected areas tend to have the great representation (broadly speaking).<br />
 <code>plot(abundance_data$absolute_abundance, repr_data$relative_held)</code></li>
-<li><code>sum(repr_data$absolute_held &lt; 1e-10)</code> (floating point errors)</li>
+<li><code>sum(repr_data$absolute_held == 0)</code></li>
 <li><code>sum(repr_data$relative_held &gt; 0.1, na.rm = TRUE)</code></li>
-<li><code>sum(repr_data$relative_held &gt; 0.2, na.rm = TRUE)</code></li>
+<li><code>sum(repr_data$relative_held &gt; 0.3, na.rm = TRUE)</code></li>
 </ol>
 </div>
 </div>
 </div>
-<div id="spatial-prioritizations-1" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Spatial prioritizations<a href="answers.html#spatial-prioritizations-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="starting-out-simple-1" class="section level3 hasAnchor" number="6.3.1">
-<h3><span class="header-section-number">6.3.1</span> Starting out simple<a href="answers.html#starting-out-simple-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="spatial-prioritizations-1" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Spatial prioritizations<a href="answers.html#spatial-prioritizations-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="starting-out-simple-1" class="section level3 hasAnchor" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> Starting out simple<a href="answers.html#starting-out-simple-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 <div class="rmdanswer">
 <ol style="list-style-type: decimal">
-<li><code>sum(s1$solution_1)</code>
-<code>mean(s1$solution_1)</code></li>
+<li><code>sum(s1$solution_1)</code></li>
+<li><code>mean(s1$solution_1)</code></li>
 <li>Yes, the planning units are generally spread out across most of the study area and they are not biased towards specific areas.</li>
-<li><code>all(feature_representation(p1, s1[, "solution_1"])$relative_held &gt;= 0.2)</code></li>
+<li><code>all(feature_representation(p1, s1[, "solution_1"])$relative_held &gt;= 0.3)</code></li>
 </ol>
 </div>
 </div>
-<div id="adding-complexity-1" class="section level3 hasAnchor" number="6.3.2">
-<h3><span class="header-section-number">6.3.2</span> Adding complexity<a href="answers.html#adding-complexity-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="adding-complexity-1" class="section level3 hasAnchor" number="7.3.2">
+<h3><span class="header-section-number">7.3.2</span> Adding complexity<a href="answers.html#adding-complexity-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 <div class="rmdanswer">
 <ol style="list-style-type: decimal">
-<li><code>sum(s2$cost * s2$solution_1)</code>
-<code>sum(s3$cost * s3$solution_1)</code>
-<code>sum(s4$cost * s4$solution_1)</code></li>
-<li><code>sum(s2$solution_1)</code>
-<code>sum(s3$solution_1)</code>
+<li><code>sum(s2$cost * s2$solution_1)</code>,<br />
+<code>sum(s3$cost * s3$solution_1)</code>,<br />
+<code>sum(s4$cost * s4$solution_1)</code><br />
+</li>
+<li><code>sum(s2$solution_1)</code>,<br />
+<code>sum(s3$solution_1)</code>,<br />
 <code>sum(s4$solution_1)</code></li>
 <li>No, just because a solution a solution has more planning units does not mean that it will cost less.</li>
 <li>This is because the planning units covered by existing protected areas have a non-zero cost and locking in these planning units introduces inefficiencies into the solution. This is very common in real-world conservation prioritizations because existing protected areas are often in places that do little to benefit biodiversity <span class="citation">(<a href="#ref-r3" role="doc-biblioref">Fuller <em>et al.</em> 2010</a>)</span>.</li>
-<li>This is because some of the planning units that are highly degraded—based on just the planning unit costs and vegetation data—provide cost-efficient opportunities for meeting the targets and excluding them from the reserve selection process means that other more costly planning units are needed to meet the targets.</li>
+<li>This is because some of the planning units that are highly degraded – based on just the planning unit costs and vegetation data – provide cost-efficient opportunities for meeting the targets and excluding them from the reserve selection process means that other more costly planning units are needed to meet the targets.</li>
 <li><code>sum(s4$cost * s4$solution_1) - sum(s4$cost * s4$locked_in)</code></li>
 <li>We get an error message stating the the problem is infeasible because there is no valid solution—even if we selected all the planning units the study area we would still not meet the targets.</li>
 </ol>
 </div>
 </div>
-<div id="penalizing-fragmentation-1" class="section level3 hasAnchor" number="6.3.3">
-<h3><span class="header-section-number">6.3.3</span> Penalizing fragmentation<a href="answers.html#penalizing-fragmentation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="penalizing-fragmentation-1" class="section level3 hasAnchor" number="7.3.3">
+<h3><span class="header-section-number">7.3.3</span> Penalizing fragmentation<a href="answers.html#penalizing-fragmentation-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 <div class="rmdanswer">
 <ol style="list-style-type: decimal">
@@ -350,46 +376,41 @@ div.csl-indent {
 </ol>
 </div>
 </div>
-<div id="budget-limited-prioritizations-1" class="section level3 hasAnchor" number="6.3.4">
-<h3><span class="header-section-number">6.3.4</span> Budget limited prioritizations<a href="answers.html#budget-limited-prioritizations-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="budget-limited-prioritizations-1" class="section level3 hasAnchor" number="7.3.4">
+<h3><span class="header-section-number">7.3.4</span> Budget limited prioritizations<a href="answers.html#budget-limited-prioritizations-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 <div class="rmdanswer">
 <ol style="list-style-type: decimal">
 <li><code>names(veg_data)[which.min(wts)]</code></li>
-<li><code>sum(s6$cost * s6$solution_1)</code>
+<li><code>sum(s6$cost * s6$solution_1)</code>,<br />
 <code>sum(s7$cost * s7$solution_1)</code></li>
 <li>No, the sixth (<code>s6</code>) and seventh (<code>s7</code>) solutions both share many of the same selected planning units and there does not appear to be an obvious difference in the spatial location of the planning units which they do not share.</li>
-<li>Yes. Both solutions contain adequately represent these features:
-<code>r6$feature[r6$relative_held &gt; 0.2 &amp; r7$relative_held &gt; 0.2]</code>
-The sixth (<code>s6</code>) is adequately represents these features too:
-<code>r6$feature[r6$relative_held &gt; 0.2 &amp; !r7$relative_held &gt; 0.2]</code>
-The seventh (<code>s7</code>) is adequately represents these features too:
-<code>r7$feature[r7$relative_held &gt; 0.2 &amp; !r6$relative_held &gt; 0.2]</code></li>
+<li>Yes. Both solutions contain adequately represent these features:<br />
+<code>r6$feature[r6$relative_held &gt; 0.3 &amp; r7$relative_held &gt; 0.3]</code>.<br />
+The sixth (<code>s6</code>) adequately represents these features too:<br />
+<code>r6$feature[r6$relative_held &gt; 0.3 &amp; !r7$relative_held &gt; 0.3]</code>.<br />
+The seventh (<code>s7</code>) adequately represents these features too:<br />
+<code>r7$feature[r7$relative_held &gt; 0.3 &amp; !r6$relative_held &gt; 0.3]</code></li>
 </ol>
 </div>
 </div>
-<div id="solution-portfolios-1" class="section level3 hasAnchor" number="6.3.5">
-<h3><span class="header-section-number">6.3.5</span> Solution portfolios<a href="answers.html#solution-portfolios-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="importance-1" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Importance<a href="answers.html#importance-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="quantifying-irreplaceability-1" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> Quantifying irreplaceability<a href="answers.html#quantifying-irreplaceability-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 <div class="rmdanswer">
 <ol style="list-style-type: decimal">
-<li>No the cost are very similar.
-<code>sum(s8$solution_1 * s8$cost)</code>
-<code>sum(s8$solution_2 * s8$cost)</code>
-<code>sum(s8$solution_3 * s8$cost)</code>
-<code>sum(s8$solution_4 * s8$cost)</code>
-<code>sum(s8$solution_5 * s8$cost)</code>
-<code>sum(s8$solution_6 * s8$cost)</code></li>
-<li>No the status of the planning units are very similar in the all of the solutions in the portfolio.
-<code>mean((s8$solution_1 == s8$solution_2) &amp; (s8$solution_1 == s8$solution_3) &amp;     (s8$solution_1 == s8$solution_4) &amp; (s8$solution_1 == s8$solution_5) &amp;     (s8$solution_1 == s8$solution_6))</code></li>
-<li>We should increase the number of the solutions in the portfolio.</li>
+<li>There are 3 planning units with much higher irreplaceability values than the other planning units. These are found in the north-west, north-east, and south-east parts of Tasmania.</li>
+<li>There are fewer planning units with high irreplaceability values, because the targets are lower, there are less irreplaceable planning units. In other words, there are more possible combinations of planning units available for meeting the targets.</li>
 </ol>
 </div>
 
 </div>
 </div>
 </div>
-<h3> References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-r3" class="csl-entry">
 Fuller, R.A., McDonald-Madden, E., Wilson, K.A., Carwardine, J., Grantham, H.S., Watson, J.E., Klein, C.J., Green, D.C. &amp; Possingham, H.P. (2010). Replacing underperforming protected areas achieves better conservation outcomes. <em>Nature</em>, <em>466</em>, 365.
@@ -400,7 +421,7 @@ Fuller, R.A., McDonald-Madden, E., Wilson, K.A., Carwardine, J., Grantham, H.S.,
           </div>
         </div>
       </div>
-<a href="spatial-prioritizations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="importance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="acknowledgements.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -432,7 +453,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/prioritizr/cibio-workshop/edit/master/05-answers.Rmd",
+"link": "https://github.com/prioritizr/NCC-workshop/edit/master/06-answers.Rmd",
 "text": "Edit"
 },
 "history": {
